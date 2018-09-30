@@ -1,10 +1,10 @@
 # Team13
 
-TA: \
+TA:
 
-Ben Cooper          ben.cooper@mail.utoronto.ca\
+Ben Cooper          ben.cooper@mail.utoronto.ca
 
-Group Members:\
+Group Members:
 
 Alexandru Andros    alexandru.andros@mail.utoronto.ca\
 Suxin Hong          suxin.hong@mail.utoronto.ca\
