@@ -1,0 +1,85 @@
+Summary of Thursday Meeting with Management COOPS
+
+- screenshot of the whiteboard contains some of the info included in the database
+- multiple agencies want to add users to a central database
+- want data anonymized, this will lead to overlap if people go to more than one agency
+- x different reports for x different agencies
+- what if an immigrant goes to more than one agency?
+- potential separate class to anonomize
+- they dont want anyone to be able to view data and figure out who the people
+- reports are assumed to be aggregate reports based on numbers
+
+- agencies can view their own users to update/modify information
+- agencies can add users
+- agencies CANNOT view OTHER AGENCIES DATA
+
+- general report generation
+- want amount of people
+- amount of kids
+
+current process:
+	- agencies collect data manually (excel sheets)
+	- send the excel sheets to the business
+
+Managing automatic conflict resolution
+
+- frontend feedback to agencies when they try to push invalid data
+
+
+--------------------------------------------
+
+Meeting with the client
+
+Tuesday 1-2 Jamie and Ray
+	- questions about user interface
+
+Wednesday meeting after TA meeting to discuss personas
+	- each bring 2 personas
+	- brainstorm some user stories
+
+Wednesday meeting to discuss answers from the client meeting and additional questions for thursday if needed
+
+reading week we are not expecting much progress
+
+
+--------------------------------------------
+
+monday-monday sprints
+
+wednesday friday (maybe) - messanger
+
+Working Days
+
+Jamie - Mon-Fri 				(6 hours)		(frontend/backend)
+Jacqueline - Mon-Fri (Sat-Sun) 	(6 hours)		(frontend/backend)
+Ray - Mon-Mon					(6 hours)		(back end/database)
+Sean - Mon-Fri (Sat-Sun) 		(6 hours)		(back end preferred)
+Alex - Fri-Sun (Mon-Fri) 		(6 hours)		(frontend/backend)
+
+--------------------------------------------
+
+Software
+
+FrontEnd - Java Swing
+Backend - Java
+Database - SQLite
+
+JRE 8 or less
+
+---------------------------------------------
+
+Other
+
+Github Branches (1 for each person, will revisit if needed)
+Pull request on merge to master (needs to be reviewed by at least one other member of team)
+using issues tab
+using Github Project to visualize user stories
+
+coding reviews are ad hoc
+unit testing for backend/database
+
+only committing .java .sql files
+
+update .gitignore for SQLite
+
+
