@@ -1,0 +1,34 @@
+-Our system is not anonymized any more
+-Orgianztion upload data each month and generate reports twice a year
+-Want report shows lifecycle of a client(does this client go to all the services)
+-Want graphics, bars show on the reports, the more the better
+-We receive iCare templates(probably clean data) and the orange colmuns are mandatory
+
+
+Three Type of Users:
+1. Partcipation Organizations:
+   -Upload their data
+
+2. TEQ LIP Project Staff:
+   -Upload data (this might be different from part. org's data, like the union of all datas)
+   -Generate reports
+   -Run queries on all collectd data
+   -Build & save queries on dashboard from a drop down menu
+   -Add datafields(new iCare templates, new data fields)
+   -Create new log-in accounts(for project staff & part. org)
+   -Adjust access limitation for existing users
+
+   There are three level users in TEQ:
+   A) Low level user:
+      -only have one button to generate base-line report with pre-set queries
+   B) Mid level user:
+      -query data based on a list of customizable variables(ex. gendar, language etc)
+   C) High level user:
+      -use code to add more variables & dimensions that the program could use to query the data(like person with High tech background)
+
+   Also there is a Talker who is in charge of talking to orgs and get clients info from orgs
+
+3. UTSC Project Staff:
+   -Access data for analysis
+   -Access platform infrastructure for maintenance & adoptions
+
