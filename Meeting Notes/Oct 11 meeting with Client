@@ -1,4 +1,4 @@
--Our system is not anonymized any more
+-******************Our system is not anonymized any more************************
 -Orgianztion upload data each month and generate reports twice a year
 -Want report shows lifecycle of a client(does this client go to all the services)
 -Want graphics, bars show on the reports, the more the better
@@ -24,9 +24,11 @@ Three Type of Users:
    B) Mid level user:
       -query data based on a list of customizable variables(ex. gendar, language etc)
    C) High level user:
-      -use code to add more variables & dimensions that the program could use to query the data(like person with High tech background)
+      -use code to add more variables & dimensions that the program could use to query the data(like person with High tech background, 
+       but no need to worry about the code thing, we only need to let them have the ability to add fields)
 
-   Also there is a Talker who is in charge of talking to orgs and get clients info from orgs
+   Also there is a Talker who is in charge of talking to orgs and get clients info from orgs (mid level user), the only one can 
+   adjust access limitation for users.
 
 3. UTSC Project Staff:
    -Access data for analysis
