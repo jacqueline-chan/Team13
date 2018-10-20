@@ -1,6 +1,5 @@
 package group13.cscc01.sqlite;
 
-<<<<<<< HEAD
 import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -31,7 +30,5 @@ public class SqlConnect {
             }
         }
     }
-=======
-public class SqlConnect {
->>>>>>> 6ddd23f... setup basic sql and structure
+
 }
