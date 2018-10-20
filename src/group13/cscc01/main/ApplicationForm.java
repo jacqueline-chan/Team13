@@ -19,7 +19,7 @@ import java.util.LinkedList;
 
 public class ApplicationForm extends JPanel{
 
-	InfoForm record = new InfoForm();
+	//InfoForm record = new InfoForm();
     
 	JLabel[] labels = new JLabel[100];
 	JFormattedTextField[] fields = new JFormattedTextField[100];
@@ -149,9 +149,9 @@ public class ApplicationForm extends JPanel{
 		// will need to loop this until everything is satisfied
 		checkformat();
 		System.out.println("The Button was pressed");
-		for (int i=0; i<fieldNames.length; i++){
-			record.updateInfoMap(labels[i].getText(),fields[i].getText());
-		}
+		//for (int i=0; i<fieldNames.length; i++){
+		//	record.updateInfoMap(labels[i].getText(),fields[i].getText());
+		//}
 		System.out.println(labels[1].getText() +":"+ fields[1].getText());
 	}
 	
@@ -212,9 +212,9 @@ public class ApplicationForm extends JPanel{
     }
 
     
-    public InfoForm returnSubmission() {
-    	return record;
-    }
+    //public InfoForm returnSubmission() {
+    //	return record;
+    //}
     
     
     
