@@ -1,4 +1,4 @@
-package group13.cscc01.parser;
+package group13.adam.parser;
 
 import com.opencsv.*;
 
@@ -144,8 +144,10 @@ public class CSVParser {
     }
     
     
+    /**
 	public static void main(String[] args) throws IOException {
         CSVParser csv = new CSVParser();
         csv.parseFile(SAMPLE_CSV_FILE_PATH);
     }
+    */
 }

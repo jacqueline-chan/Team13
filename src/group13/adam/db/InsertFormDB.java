@@ -1,4 +1,4 @@
-package group13.cscc01.db;
+package group13.adam.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.HashMap;
 
-import group13.cscc01.parser.CSVParser;
+import group13.adam.parser.CSVParser;
  
 /**
  *

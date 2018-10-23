@@ -1,4 +1,4 @@
-package group13.cscc01.main;
+package group13.adam.gui;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -217,7 +217,7 @@ public class ApplicationForm extends JPanel{
     //}
     
     
-    
+    /**
     public static void main(String[] args) {
         //Schedule a job for the event dispatch thread:
         //creating and showing this application's GUI.
@@ -229,5 +229,6 @@ public class ApplicationForm extends JPanel{
             }
         });
     }
+    */
 	
 }
