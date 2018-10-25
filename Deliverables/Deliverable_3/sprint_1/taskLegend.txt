@@ -1,18 +1,18 @@
-As Adam, an Agency Clerk, I would like to use an intuitive template form submission, just like excel, to fill out my client's information so that it is not any more time consuming than the current process of filling out the iCare excel template.
+User Story 1: As Adam, an Agency Clerk, I would like to use an intuitive template form submission, just like excel, to fill out my client's information so that it is not any more time consuming than the current process of filling out the iCare excel template.
 Frontend
 * Task 1: Application with working buttons and forum submission 4 story points (Jacq)
 Backend
 * Task 2: Upload submitted data to sqlite 3 story point (Jamie)
 
 
-As Adam, an Agency Clerk, I would like my form submission to have error prevention (needing valid postal code, names can not be empty, etc...)
+User Story 2: As Adam, an Agency Clerk, I would like my form submission to have error prevention (needing valid postal code, names can not be empty, etc...)
 Frontend
 * Task 3: Calls CheckIfFieldsAreValid and if not display which fields are not valid 2 story point (Go to specific spot and highlight it) (Jacq)
 Backend
 * Task 4: Check if all fields are valid and output invalid fields if any, 5 story points (Alex)
 
 
-As Bob, a TEQ Data Analyst, I would like to be able to view the aggregated information submitted by the agencies, displayed similar to an excel document with categories
+User Story 3: As Bob, a TEQ Data Analyst, I would like to be able to view the aggregated information submitted by the agencies, displayed similar to an excel document with categories
 Backend
 * Task 5: Create new table and fake data 1 story point (Ray)
 * Task 6: Output query database into java object 2 + 1 story points (Ray)
@@ -21,15 +21,15 @@ Frontend
 * Task 8: Calls function getData to return data object and populate table with data 2 story points (Sean)
 
 
-As Bob, a TEQ Data Analyst, I would like to sort information submitted by the agencies based on their respective category by clicking the category, sorting linearly for numbers and alphabetical for strings
+User Story 4: As Bob, a TEQ Data Analyst, I would like to sort information submitted by the agencies based on their respective category by clicking the category, sorting linearly for numbers and alphabetical for strings
 Frontend
 * Task 9: When button is clicked update specific column in table 1 story point  (Sean)
 Backend
 * Task 10: Create function update column when clicked to be sorted 1 story point (Jamie)
 
 
-As Adam, an Agency Clerk, I would like the current excel templates that my agency currently use to be still compatible with the centralizing data platform
+User Story 5: As Adam, an Agency Clerk, I would like the current excel templates that my agency currently use to be still compatible with the centralizing data platform
 Frontend
 * Task 11: Create menu that navigates to manual submission or upload existing file 2 story point
 Backend
-* Task 12: Parse cvs file into data object 2 story points  (Jamie)
+* Task 12: Parse cvs file into data object 2 story points (Jamie)
