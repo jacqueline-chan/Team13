@@ -177,7 +177,7 @@ public class ApplicationForm extends JPanel {
     for (int i = 0; i < fieldNames.length; i++) {
       record.updateInfoMap(labels[i].getText(), fields[i].getText());
     }
-    System.out.println(labels[1].getText() + ":" + fields[1].getText());
+    // System.out.println(labels[1].getText() + ":" + fields[1].getText());
   }
 
   private void checkformat() {
@@ -216,15 +216,23 @@ public class ApplicationForm extends JPanel {
     Arrays.asList(fields).indexOf(invalidField);
   }
 
-  // dummy function - Alex is to implement
   private JFormattedTextField CheckIfFieldsAreValid() {
     HashMap<String, Pattern> regex = new HashMap<String, Pattern>();
+    /*regex.put(Pattern.compile("\\d*"), new String[]{"Unique Identifier"});
+    regex.put(Pattern.compile("(19|20)[0-9]{2}-((0[1-9])|(1[1-2]))-((0[1-9])|(1[0-9])|(3[0-1]))"),
+        new String[]{"Date of Birth (YYYY-MM-DD)", "Start Date of Service (YYYY-MM-DD)",
+            "End Date of Service (YYYY-MM-DD)"});
+    regex.put(Pattern.compile("[(A-Z)|(a-z)]+"), new String[] {"Language of Service",
+        "Official Language of Preference", "Official Language of Preference",
+        "Type of Institution/Organization Where Client Received Services",
+        "Referred By", "Services Received"});
+    regex.put("[0-9]* hours [0-9]* minutes", new String[] {"Total Length of Orientation"});*/
     regex.put("Unique Identifier", Pattern.compile("\\d*"));
     regex.put("Date of Birth (YYYY-MM-DD)",
-        Pattern.compile("(19|20)[0-9]{2}-((0[1-9])|(1[1-2]))-((0[1-9])|(1[0-9])|(3[0-1]))"));
+        Pattern.compile("(19|20)[0-9]{2}-((0[1-9])|(1[0-2]))-((0[1-9])|([1-2][0-9])|(3[0-1]))"));
     regex.put("Postal Code where the service was received", Pattern.compile("([A-Z][0-9]){3}"));
     regex.put("Start Date of Service (YYYY-MM-DD)",
-        Pattern.compile("(19|20)[0-9]{2}-((0[1-9])|(1[1-2]))-((0[1-9])|(1[0-9])|(3[0-1]))"));
+        Pattern.compile("(19|20)[0-9]{2}-((0[1-9])|(1[0-2]))-((0[1-9])|([1-2][0-9])|(3[0-1]))"));
     regex.put("Language of Service", Pattern.compile("[(A-Z)|(a-z)]+"));
     regex.put("Official Language of Preference", Pattern.compile("[(A-Z)|(a-z)]+"));
     regex.put("Type of Institution/Organization Where Client Received Services",
@@ -323,7 +331,7 @@ public class ApplicationForm extends JPanel {
     regex.put("Between 1", Pattern.compile(".*"));
     regex.put("And 2", Pattern.compile(".*"));
     regex.put("Crisis Counselling", Pattern.compile(".*"));
-    regex.put("End Date of Service (YYYY-MM-DD)", Pattern.compile("(19|20)[0-9]{2}-((0[1-9])|(1[1-2]))-((0[1-9])|(1[0-9])|(3[0-1]))"));
+    regex.put("End Date of Service (YYYY-MM-DD)", Pattern.compile("(19|20)[0-9]{2}-((0[1-9])|(1[0-2]))-((0[1-9])|([1-2][0-9])|(3[0-1]))"));
     regex.put("Reason for update", Pattern.compile(".*"));
     int i = 0;
     boolean noMistakes = true;
@@ -334,7 +342,7 @@ public class ApplicationForm extends JPanel {
           noMistakes = false;
         }
         else {
-          System.out.println("True");
+          // System.out.println("True");
           i++;
         }
     }
