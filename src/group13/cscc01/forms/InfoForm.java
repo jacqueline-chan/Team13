@@ -1,8 +1,10 @@
-package group13.cscc01.main;
-import java.util.HashMap;
+package group13.cscc01.forms;
+
+import java.util.LinkedHashMap;
 import java.util.Map;
+
 public class InfoForm {
-    private Map<String, String> infoMap;
+    protected Map<String, String> infoMap;
 
 
     public Map<String, String> getInfoMap() {
@@ -18,7 +20,7 @@ public class InfoForm {
     }
 
     public InfoForm() {
-        infoMap = new HashMap<String, String>();
+    	infoMap = new LinkedHashMap<String, String>();
         this.infoMap.put("Unique Identifier", "");
         this.infoMap.put("Date of Birth (YYYY-MM-DD)", "");
         this.infoMap.put("Postal Code where the service was received", "");
