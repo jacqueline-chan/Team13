@@ -15,6 +15,7 @@ import java.beans.PropertyChangeEvent;
 import java.text.*;
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,7 +23,7 @@ import java.util.regex.Pattern;
 public class ApplicationForm extends JPanel {
 
   InfoForm record = new InfoForm();
-
+  InfoForm last_saved_record = new InfoForm();
   JLabel[] labels = new JLabel[100];
   JFormattedTextField[] fields = new JFormattedTextField[100];
 
@@ -144,13 +145,47 @@ public class ApplicationForm extends JPanel {
         submitForm();
       }
     });
+    
+    //save button
+    
+    JButton saveButton = new JButton("Save");
+    saveButton.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        saveForm();
+      }
+    });
+    
+    //clear button
+    
+    JButton clearButton = new JButton("Clear");
+    clearButton.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        clearForm();
+      }
+    });
+    
+    //save button
+    
+    JButton savedChanges = new JButton("Load Saved Changes");
+    savedChanges.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+    	 populateSavedChanges();
+      }
+    });
+    
+    selectFiles.add(savedChanges);
+    
+    selectFiles.add(saveButton);
+    
+    selectFiles.add(clearButton);
+
 
     submitPane.add(submitButton); // add the button to the submit pane
 
     // border colour
 
     javax.swing.border.Border blackline;
-    blackline = BorderFactory.createLineBorder(Color.green);
+    blackline = BorderFactory.createLineBorder(Color.blue);
 
 
     combinePanel.setBorder(blackline);
@@ -171,49 +206,86 @@ public class ApplicationForm extends JPanel {
 
 
   }
+  
+    public void populateSavedChanges(){
+	  System.out.println("The Save Changes Button was pressed");
+	  InfoForm form = returnLastSavedSubmission();
+	  Map formMap = form.getInfoMap();
+	  for (int i = 0; i < fieldNames.length; i++) {
+		  String value = (String) formMap.get(fieldNames[i]);
+		  if ((value) != null && (formMap.get(fieldNames[i])!="")){
+			  fields[i].setText(value);
+		  }
+	  }
+
+  }
+  
+  
+  public void saveForm(){
+	  System.out.println("The save Button was pressed");
+	  for (int i = 0; i < fieldNames.length; i++) {
+	       last_saved_record.updateInfoMap(labels[i].getText(), fields[i].getText());
+	  } 
+  }
+  
+  public void clearForm() {
+	  System.out.println("The clear Button was pressed");
+	  for (int i = 0; i < fieldNames.length; i++) {
+		  fields[i].setText("");
+	  }
+
+
+	}
 
   public void submitForm() {
     // will need to loop this until everything is satisfied
     checkformat();
-    System.out.println("The Button was pressed");
+    System.out.println("The Submit Button was pressed");
     for (int i = 0; i < fieldNames.length; i++) {
       record.updateInfoMap(labels[i].getText(), fields[i].getText());
     }
-    System.out.println(labels[1].getText() + ":" + fields[1].getText());
+    //System.out.println(labels[1].getText() + ":" + fields[1].getText());
   }
 
-  private void checkformat() {
-	  ErrorPrevention error = new ErrorPrevention();
+  private boolean checkformat() {
+	ErrorPrevention error = new ErrorPrevention();
     JFormattedTextField invalidField = error.CheckIfFieldsAreValid(fieldNames, fields); // returns a
                                                                 // field that
                                                                 // are not valid
     // if true, display a single message
     if (invalidField != null) { // based on whatever Alex will return
-      System.out.println("Something's wrong "+ invalidField.getText());
+      int i = Arrays.asList(fields).indexOf(invalidField);
+      System.out.println("Invalid field input for field: " + labels[i].getText() + ":" + invalidField.getText());
       errorMessagePanel.setVisible(true);
+      
+      // not a complete implmentation
+      highlightField(invalidField); // highlight every field
+      
+      if (invalidField.getText().isEmpty()){
+    	  JOptionPane.showMessageDialog(this, "A field that is mandatory is blank!");
+    	  System.out.println("A field that is mandatory is blank!");
+      }
+
+      goToField(invalidField); // go to the first field thats invalid
+      return false;
     } else {
       // if false,
       errorMessagePanel.setVisible(false);
+      return true;
     }
-    // not a complete implmentation
-    highlightField(invalidField); // highlight every field
-    // JLabel errorMessageLabel = new JLabel("<html><span
-    // bgcolor=\"yellow\">This is the label text</span></html>");
-    // make a highlight string and then do setText with new string
-    // clear the highlights when u hit submit initially , then checkformat
-    goToField(invalidField); // go to the first field thats invalid
+
 
 
   }
 
-  // not a complete implementation
   private void goToField(JFormattedTextField invalidField) {
     // test button
-    labels[31].scrollRectToVisible(labels[31].getBounds());
-    fields[31].requestFocusInWindow(); // moves the cursor to the field
+	int i = Arrays.asList(fields).indexOf(invalidField);
+    labels[i].scrollRectToVisible(labels[i].getBounds());
+    fields[i].requestFocusInWindow(); // moves the cursor to the field
   }
 
-  // not a complete implementation
+  // not a complete implementation yet
   private void highlightField(JFormattedTextField invalidField) {
     Arrays.asList(fields).indexOf(invalidField);
   }
@@ -248,7 +320,10 @@ public class ApplicationForm extends JPanel {
   public JFormattedTextField[] getfields(){
 	  return fields;
   }
-
+  
+  public InfoForm returnLastSavedSubmission() {
+	    return last_saved_record;
+	  }
 
   public static void launchGui() {
     // Schedule a job for the event dispatch thread:
