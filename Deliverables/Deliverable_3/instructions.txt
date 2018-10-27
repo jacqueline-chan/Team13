@@ -1,0 +1,2 @@
+##Instructions for the GUI for Adam (the client GUI application)
+Run the main class in the directory src/group13/adam/main/main.java
