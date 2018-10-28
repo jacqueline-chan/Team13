@@ -7,6 +7,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.*;
 import javax.swing.text.*;
 
+import group13.adam.db.InsertFormDB;
 import group13.adam.validation.ErrorPrevention;
 import group13.cscc01.forms.InfoForm;
 import javafx.scene.layout.Border;
@@ -174,16 +175,18 @@ public class ApplicationForm extends JPanel {
 
   public void submitForm() {
     // will need to loop this until everything is satisfied
-    checkformat();
+    //checkformat();
     System.out.println("The Button was pressed");
     for (int i = 0; i < fieldNames.length; i++) {
       record.updateInfoMap(labels[i].getText(), fields[i].getText());
     }
-    System.out.println(labels[1].getText() + ":" + fields[1].getText());
+	submittodb();
+
+    //System.out.println(labels[1].getText() + ":" + fields[1].getText());
   }
 
   private void checkformat() {
-	  ErrorPrevention error = new ErrorPrevention();
+	ErrorPrevention error = new ErrorPrevention();
     JFormattedTextField invalidField = error.CheckIfFieldsAreValid(fieldNames, fields); // returns a
                                                                 // field that
                                                                 // are not valid
@@ -191,17 +194,14 @@ public class ApplicationForm extends JPanel {
     if (invalidField != null) { // based on whatever Alex will return
       System.out.println("Something's wrong "+ invalidField.getText());
       errorMessagePanel.setVisible(true);
+      //highlightField(invalidField); // highlight every field
+      //goToField(invalidField); // go to the first field thats invalid
     } else {
       // if false,
       errorMessagePanel.setVisible(false);
+      submittodb();
+      
     }
-    // not a complete implmentation
-    highlightField(invalidField); // highlight every field
-    // JLabel errorMessageLabel = new JLabel("<html><span
-    // bgcolor=\"yellow\">This is the label text</span></html>");
-    // make a highlight string and then do setText with new string
-    // clear the highlights when u hit submit initially , then checkformat
-    goToField(invalidField); // go to the first field thats invalid
 
 
   }
@@ -247,6 +247,18 @@ public class ApplicationForm extends JPanel {
   
   public JFormattedTextField[] getfields(){
 	  return fields;
+  }
+  
+  public InfoForm submittodb() {
+	  String [] fieldsString = new String [fieldNames.length];
+	  for (int i = 0; i < fieldNames.length; i++) {
+		  String value = record.getInfoMap().get(fieldNames[i]);
+		  fieldsString[i] = value ;
+	  }
+	  InsertFormDB insertform = new InsertFormDB();
+	  insertform.insert(fieldsString);
+	  
+	return record;
   }
 
 
