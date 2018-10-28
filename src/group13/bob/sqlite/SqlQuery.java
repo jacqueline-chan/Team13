@@ -1,46 +1,54 @@
 package group13.bob.sqlite;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class SqlQuery {
 
-    public static String[][] selectAll(Connection conn, String formName){
-        ArrayList<String[]> table = new ArrayList();
-        String sql = "SELECT * FROM "+formName;
+    private static final String DEFAULTSTARTDATE = "2018-1-20";
+    private static final String DEFAULTENDDATE = "2018-10-11";
 
-        try (
-             Statement stmt  = conn.createStatement();
-             ResultSet rs    = stmt.executeQuery(sql)){
-            // loop through the result set
+    public static String[][] selectAll(Connection conn, String formName) {
+
+        ArrayList<String[]> table = new ArrayList();
+        String sql = "SELECT * FROM " + formName + " WHERE Start_Date_of_Service BETWEEN \'" + DEFAULTSTARTDATE +
+                "\' AND \'" + DEFAULTENDDATE + "\'";
+
+        try (Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)
+        ) {
             ResultSetMetaData rsmd;
             while (rs.next()) {
                 rsmd = rs.getMetaData();
-
-                int NumOfCol = rsmd.getColumnCount();
-
-                while (rs.next()) {
+                int numOfCol = rsmd.getColumnCount();
+                do {
                     ArrayList<String> currentRow = new ArrayList();
 
-                    for (int i = 1; i <= NumOfCol; i++) {
-                        String columnData= (String)rs.getObject(i);
+                    for (int columnNum = 1; columnNum <= numOfCol; columnNum++) {
+                        String columnData = (String) rs.getObject(columnNum);
                         currentRow.add(columnData);
                     }
-                    String[] rowArray = new String[currentRow.size()];
-                    rowArray = currentRow.toArray(rowArray);
-                    table.add(rowArray);
-                }
+                    table.add(toStringArray(currentRow));
+
+                } while (rs.next());
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        //Convert and return String[][]
-        String[][] tableArray = new String[table.size()][];
-        tableArray = table.toArray(tableArray);
-        return tableArray;
+        return toStringArray2D(table);
+    }
+
+    private static String[][] toStringArray2D(ArrayList<String[]> arrayListStringArray) {
+
+        String[][] stringArray2D = new String[arrayListStringArray.size()][];
+        stringArray2D = arrayListStringArray.toArray(stringArray2D);
+
+        return stringArray2D;
+    }
+
+    private static String[] toStringArray(ArrayList<String> arrayListString) {
+        String[] stringArray = new String[arrayListString.size()];
+        stringArray = arrayListString.toArray(stringArray);
+        return stringArray;
     }
 }

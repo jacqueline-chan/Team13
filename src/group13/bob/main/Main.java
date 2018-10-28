@@ -1,11 +1,8 @@
 package group13.bob.main;
 
-
 import group13.bob.table.Table;
 
 import java.awt.*;
-
-import static group13.bob.sqlite.SqlConnect.connect;
 
 public class Main {
 
@@ -20,6 +17,5 @@ public class Main {
                 }
             }
         });
-	    connect();
     }
 }
