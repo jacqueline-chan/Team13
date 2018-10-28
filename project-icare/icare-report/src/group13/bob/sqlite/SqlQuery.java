@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 public class SqlQuery {
 
-    private static final String DEFAULTSTARTDATE = "2018-1-20";
-    private static final String DEFAULTENDDATE = "2018-10-11";
+    private static final String DEFAULTSTARTDATE = "1000-1-20";
+    private static final String DEFAULTENDDATE = "2099-10-11";
 
     public static String[][] selectAll(Connection conn, String formName) {
 
