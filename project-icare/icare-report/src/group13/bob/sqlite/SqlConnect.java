@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class SqlConnect {
 
-    private static final String DBLOCATION = "C://sqlite/db/test.db";
+    private static final String DBLOCATION = "./project-icare/icare-client/src/group13/adam/db/test.db";
 
     public static Connection connect() {
         // SQLite connection string
