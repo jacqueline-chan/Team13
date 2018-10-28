@@ -21,7 +21,8 @@ public class InsertFormDB {
      */
     private Connection connect() {
         // SQLite connection string
-        String url = "jdbc:sqlite:C://sqlite/db/test.db";
+        //String url = "jdbc:sqlite:C://sqlite/db/test.db";
+        String url = "jdbc:sqlite:/home/jamie/Desktop/CSCC01/sqlite/db/test.db";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url);
@@ -37,7 +38,7 @@ public class InsertFormDB {
      * @param fields from Application Form
      */
     public void insert(String[] fields) {
-        String sql = "INSERT INTO DATABASENAME(unique_identifier,date_of_birth,postal_code,start_date_of_service,"
+        String sql = "INSERT INTO InfoForum(unique_identifier,date_of_birth,postal_code,start_date_of_service,"
         		+ "language_of_service,official_language_of_preference,type_of_institution,referred_by,"
         		+ "services_received,total_length_of_orientation_hours,total_length_of_orientation_minutes,"
         		+ "number_of_clients_in_group,directed_at_a_specific,children,youth,seniors,gender_specific,"
@@ -59,7 +60,9 @@ public class InsertFormDB {
         		+ "support_services_received,care_for_newcomer_children,child_1_age,child_1_type_of_care,child_2_age,"
         		+ "child_2_type_of_care,child_3_age,child_3_type_of_care,child_4_age,child_4_type_of_care,child_5_age,"
         		+ "child_5_type_of_care,transportation_2,provisions_for_disabilities,translation,between_1,and_1,"
-        		+ "interpretation,between_2,and_2,crisis_counselling,end_date_of_service,reason_for_update) VALUES(?,?)";
+        		+ "interpretation,between_2,and_2,crisis_counselling,end_date_of_service,reason_for_update) "
+        		+ "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,"
+        		+ "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
  
         try (Connection conn = this.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -73,18 +76,4 @@ public class InsertFormDB {
             System.out.println(e.getMessage());
         }
     }
- 
-    /**
-     * @param args the command line arguments
-     
-    public static void main(String[] args) {
- 
-        InsertFormDB app = new InsertFormDB();
-        // insert three new rows
-        app.insert("Raw Materials", 3000);
-        app.insert("Semifinished Goods", 4000);
-        app.insert("Finished Goods", 5000);
-    }
-    */
- 
 }
