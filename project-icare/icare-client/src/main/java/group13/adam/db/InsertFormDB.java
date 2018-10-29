@@ -23,7 +23,7 @@ public class InsertFormDB {
      */
     private Connection connect() {
         // SQLite connection string
-    	String url = "jdbc:sqlite:./project-icare/icare-client/src/group13/adam/db/test.db";
+    	String url = "jdbc:sqlite:../icare-db/test.db";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url);

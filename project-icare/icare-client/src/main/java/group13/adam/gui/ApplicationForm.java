@@ -10,7 +10,7 @@ import javax.swing.text.*;
 import group13.adam.db.InsertFormDB;
 import group13.adam.validation.ErrorPrevention;
 import group13.cscc01.forms.InfoForm;
-import javafx.scene.layout.Border;
+//import javafx.scene.layout.Border;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
 import java.text.*;
