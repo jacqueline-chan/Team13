@@ -17,10 +17,10 @@ public class ReportTab extends JFrame{
 
 	public ReportTab() {
 		
-    	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    	setTitle("Report Tabs");
-    	setBounds(0, 0, (int) screenSize.getWidth(), (int) screenSize.getHeight());
-    	setBounds(200, 100, 1518, 878);
+    		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    		setTitle("Report Tabs");
+    		setBounds(0, 0, (int) screenSize.getWidth(), (int)screenSize.getHeight());
+    		setBounds(200, 100, 1518, 878);
 		setLayout(null);
 		
 		JPanel report1 = new JPanel();
@@ -31,9 +31,9 @@ public class ReportTab extends JFrame{
 		cancel1.setBounds(300, 450, 100, 50);
 		report1.add(submit1);
 		report1.add(cancel1);
-        JLabel label = new JLabel("This is Report1");
-        label.setHorizontalAlignment(SwingConstants.CENTER);
-        report1.add(new Table());
+            JLabel label = new JLabel("This is Report1");
+            label.setHorizontalAlignment(SwingConstants.CENTER);
+            report1.add(new Table());
 		report1.add(label);
 		
 		JPanel report2 = new JPanel();
