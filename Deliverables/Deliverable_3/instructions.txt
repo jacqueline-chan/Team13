@@ -1,2 +1,22 @@
-##Instructions for the GUI for Adam (the client GUI application)
-Run the main class in the directory src/group13/adam/main/main.java
+To setup the Database (RAY TO COMPLETE)
+
+
+
+To run the client GUI (for submitting info to the DB)
+
+1. clone the git repository
+2. navigate to /Team13/project-icare/icare-client
+3. run "mvn package"
+4. run "mvn exec:java"
+
+The Application should now run and display text fields to fill in, a submit button which pushes info to the database, and a file select button which does not currently work.
+Please note that incomplete or incorrect data will not be pushed to the database, and by looking at the terminal after clicking the submit button with incorrect information you will see error prompts.
+
+To run the report GUI (for running and reviewing reports from data from the DB)
+
+1. clone the git repository
+2. navigate to /Team13/project-icare/icare-report
+3. run "mvn package"
+4. run "mvn exec:java"
+
+The Application should now run and display a table with some sample data from the database filled in
