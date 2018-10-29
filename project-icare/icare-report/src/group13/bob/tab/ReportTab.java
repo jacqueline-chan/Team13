@@ -33,6 +33,7 @@ public class ReportTab extends JFrame{
 		report1.add(cancel1);
         JLabel label = new JLabel("This is Report1");
         label.setHorizontalAlignment(SwingConstants.CENTER);
+        report1.add(new Table());
 		report1.add(label);
 		
 		JPanel report2 = new JPanel();
@@ -49,8 +50,16 @@ public class ReportTab extends JFrame{
 		report3.add(submit3);
 		report3.add(cancel3);
 		
+		JPanel plus = new JPanel();
+		tab.addTab("+", null, plus, "plus");
+		
 		tab.setSelectedIndex(0);
 		setLayout(new GridLayout(1, 1));
 		add(tab);
 	}
+	
+    public static void main(String[] args) {
+        ReportTab frame = new ReportTab();
+        frame.setVisible(true);
+    }
 }
