@@ -1,6 +1,10 @@
-To setup the Database (RAY TO COMPLETE)
+To setup the demo Database
+1. navigate to ~/Team13/project-icare/icare-db
+2. run sqlite3 test.db < sql/SetupTable.sql
 
-
+To setup the empty Database
+1. navigate to ~/Team13/project-icare/icare-db
+2. run sqlite3 test.db < sql/SetupTableBlank.sql
 
 To run the client GUI (for submitting info to the DB)
 
