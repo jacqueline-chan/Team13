@@ -180,7 +180,7 @@ public class ApplicationForm extends JPanel {
     for (int i = 0; i < fieldNames.length; i++) {
       record.updateInfoMap(labels[i].getText(), fields[i].getText());
     }
-	submittodb();
+	// submittodb();
 
     //System.out.println(labels[1].getText() + ":" + fields[1].getText());
   }
@@ -250,6 +250,7 @@ public class ApplicationForm extends JPanel {
   }
   
   public InfoForm submittodb() {
+      System.out.println("Something");
 	  String [] fieldsString = new String [fieldNames.length];
 	  for (int i = 0; i < fieldNames.length; i++) {
 		  String value = record.getInfoMap().get(fieldNames[i]);

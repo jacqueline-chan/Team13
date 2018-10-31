@@ -29,7 +29,7 @@ public class ErrorPrevention {
                   i++;
 		        }
 		        else {
-		          System.out.println(fieldNames[i]);
+		          // System.out.println(fieldNames[i]);
 		          noMistakes = false;
 
 		        }
