@@ -175,7 +175,7 @@ public class ApplicationForm extends JPanel {
 
   public void submitForm() {
     // will need to loop this until everything is satisfied
-    //checkformat();
+    checkformat();
     System.out.println("The Button was pressed");
     for (int i = 0; i < fieldNames.length; i++) {
       record.updateInfoMap(labels[i].getText(), fields[i].getText());
