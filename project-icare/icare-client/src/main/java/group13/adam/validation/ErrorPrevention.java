@@ -8,7 +8,7 @@ import group13.adam.gui.ApplicationForm;
 import group13.cscc01.forms.*;
 public class ErrorPrevention {
 	
-	  public JFormattedTextField CheckIfFieldsAreValid(String [] fieldNames, JFormattedTextField[] fields) {
+	  public int CheckIfFieldsAreValid(String [] fieldNames, JFormattedTextField[] fields) {
 		    HashMap<String, Pattern> mandatoryFields = ErrorForms.getCompulsoryParam();
 		    HashMap<String, Pattern> optionalFields = ErrorForms.getOptionalParam();
 		    int i = 0;
@@ -35,9 +35,9 @@ public class ErrorPrevention {
 		        }
 		    }
 		    if (noMistakes) {
-		      return null;
+		      return -1;
 		    } else {
-		      return fields[i];
+		      return i;
 		    }
 		  }
 
