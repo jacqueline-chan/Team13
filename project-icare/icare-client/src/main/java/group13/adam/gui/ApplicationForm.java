@@ -175,27 +175,27 @@ public class ApplicationForm extends JPanel {
 
   public void submitForm() {
     // will need to loop this until everything is satisfied
-    //checkformat();
+    checkformat();
     System.out.println("The Button was pressed");
     for (int i = 0; i < fieldNames.length; i++) {
       record.updateInfoMap(labels[i].getText(), fields[i].getText());
     }
-	submittodb();
+	// submittodb();
 
     //System.out.println(labels[1].getText() + ":" + fields[1].getText());
   }
 
   private void checkformat() {
 	ErrorPrevention error = new ErrorPrevention();
-    JFormattedTextField invalidField = error.CheckIfFieldsAreValid(fieldNames, fields); // returns a
+    int fieldIndex = error.CheckIfFieldsAreValid(fieldNames, fields); // returns a
                                                                 // field that
                                                                 // are not valid
     // if true, display a single message
-    if (invalidField != null) { // based on whatever Alex will return
-      System.out.println("Something's wrong "+ invalidField.getText());
+    if (fieldIndex > -1) { // based on whatever Alex will return
+      // System.out.println("Something's wrong "+ invalidField.getText());
       errorMessagePanel.setVisible(true);
       //highlightField(invalidField); // highlight every field
-      //goToField(invalidField); // go to the first field thats invalid
+      goToField(fieldIndex); // go to the first field thats invalid
     } else {
       // if false,
       errorMessagePanel.setVisible(false);
@@ -207,10 +207,10 @@ public class ApplicationForm extends JPanel {
   }
 
   // not a complete implementation
-  private void goToField(JFormattedTextField invalidField) {
+  private void goToField(int index) {
     // test button
-    labels[31].scrollRectToVisible(labels[31].getBounds());
-    fields[31].requestFocusInWindow(); // moves the cursor to the field
+    labels[index].scrollRectToVisible(labels[index].getBounds());
+    fields[index].requestFocusInWindow(); // moves the cursor to the field
   }
 
   // not a complete implementation
@@ -250,6 +250,7 @@ public class ApplicationForm extends JPanel {
   }
   
   public InfoForm submittodb() {
+      System.out.println("Something");
 	  String [] fieldsString = new String [fieldNames.length];
 	  for (int i = 0; i < fieldNames.length; i++) {
 		  String value = record.getInfoMap().get(fieldNames[i]);
