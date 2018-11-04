@@ -191,7 +191,7 @@ public class ApplicationForm extends JPanel {
                                                                 // field that
                                                                 // are not valid
     // if true, display a single message
-    if (fieldIndex > -1) { // based on whatever Alex will return
+    if (fieldIndex > -1) {
       // System.out.println("Something's wrong "+ invalidField.getText());
       errorMessagePanel.setVisible(true);
       //highlightField(invalidField); // highlight every field
@@ -206,7 +206,7 @@ public class ApplicationForm extends JPanel {
 
   }
 
-  // not a complete implementation
+  // not a complete implementation (Implementation fixed)
   private void goToField(int index) {
     // test button
     labels[index].scrollRectToVisible(labels[index].getBounds());
@@ -250,7 +250,6 @@ public class ApplicationForm extends JPanel {
   }
   
   public InfoForm submittodb() {
-      System.out.println("Something");
 	  String [] fieldsString = new String [fieldNames.length];
 	  for (int i = 0; i < fieldNames.length; i++) {
 		  String value = record.getInfoMap().get(fieldNames[i]);
