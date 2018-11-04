@@ -7,6 +7,7 @@ public class HeaderMap {
 	private HashMap<String, String> map;
 	
     public HeaderMap(){
+    	this.map = new HashMap<String, String>();
 		initializeHeaderMap();
 	}
     

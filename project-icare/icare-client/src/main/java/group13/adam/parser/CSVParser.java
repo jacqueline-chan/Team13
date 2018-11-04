@@ -2,6 +2,7 @@ package group13.adam.parser;
 
 import com.opencsv.*;
 
+import group13.adam.db.InsertFormDB;
 import group13.adam.headermap.HeaderMap;
 import group13.cscc01.forms.InfoForm;
 
@@ -10,7 +11,6 @@ import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 
 public class CSVParser {
 	
@@ -18,9 +18,10 @@ public class CSVParser {
 	
 	HashMap<String, String> headerMap = hm.getHeaderMap();
 	
-	private final static String SAMPLE_CSV_FILE_PATH = "/home/jamie/Desktop/infoforum.csv";
+	private final static String SAMPLECSVFILEPATH = "/home/jamie/Desktop/infoforum.csv";
 
 	public void parseFile(String fileName){
+		InsertFormDB test = new InsertFormDB();
 		try {
 			Reader reader;
 			reader = Files.newBufferedReader(Paths.get(fileName));
@@ -29,6 +30,9 @@ public class CSVParser {
 			CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build();
 	        String[] nextRecord;
 	        while((nextRecord = csvReader.readNext()) != null){
+	        	// insert into DB
+	        	test.insert(nextRecord);
+	        	//
 	        	InfoForm form = new InfoForm();
 	        	for (int i = 0; i < nextRecord.length; i++){
 	        		form.updateInfoMap(headerMap.get(headers[i]), nextRecord[i]);
@@ -45,6 +49,7 @@ public class CSVParser {
 
     }
     
+	// probably useless
     public void submitToDB(InfoForm form){
     	System.out.println(form.getInfoMap());
     }
