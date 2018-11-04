@@ -1,14 +1,9 @@
 package group13.adam.db;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.HashMap;
-
-import group13.adam.parser.CSVParser;
  
 /**
  *
@@ -61,32 +56,18 @@ public class InsertFormDB {
         		+ "support_services_received,care_for_newcomer_children,child_1_age,child_1_type_of_care,child_2_age,"
         		+ "child_2_type_of_care,child_3_age,child_3_type_of_care,child_4_age,child_4_type_of_care,child_5_age,"
         		+ "child_5_type_of_care,transportation_2,provisions_for_disabilities,translation,between_1,and_1,"
-        		+ "interpretation,between_2,and_2,crisis_counselling,end_date_of_service,reason_for_update) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        		+ "interpretation,between_2,and_2,crisis_counselling,end_date_of_service,reason_for_update) "
+        		+ "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,"
+        		+ "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
  
-        try (Connection conn = this.connect();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = this.connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
         	for (int i = 0; i < fields.length; i++){
         		pstmt.setString(i+1, fields[i]);
         	}
-//            pstmt.setString(1, "name");
-//            pstmt.setDouble(2, 0.9);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
- 
-    /**
-     * @param args the command line arguments
-     
-    public static void main(String[] args) {
- 
-        InsertFormDB app = new InsertFormDB();
-        // insert three new rows
-        app.insert("Raw Materials", 3000);
-        app.insert("Semifinished Goods", 4000);
-        app.insert("Finished Goods", 5000);
-    }
-    */
  
 }
