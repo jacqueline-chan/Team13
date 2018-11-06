@@ -18,10 +18,9 @@ public class InsertFormDB {
      */
     private Connection connect() {
         // SQLite connection string
-    	// this db is malformed, giving errors
-    	//String url = "jdbc:sqlite:../icare-db/test.db";
+    	String url = "jdbc:sqlite:../icare-db/test.db";
     	// testing this DB on my system
-    	String url = "jdbc:sqlite:/home/jamie/Desktop/sqlite/db/test.db";
+    	//String url = "jdbc:sqlite:/home/jamie/Desktop/sqlite/db/test.db";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url);

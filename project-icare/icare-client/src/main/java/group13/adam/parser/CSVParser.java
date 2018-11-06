@@ -3,6 +3,7 @@ package group13.adam.parser;
 import com.opencsv.*;
 
 import group13.adam.db.InsertFormDB;
+import group13.adam.gui.ApplicationForm;
 import group13.adam.headermap.HeaderMap;
 import group13.cscc01.forms.InfoForm;
 
@@ -21,7 +22,7 @@ public class CSVParser {
 	private final static String SAMPLECSVFILEPATH = "/home/jamie/Desktop/infoforum.csv";
 
 	public void parseFile(String fileName){
-		InsertFormDB test = new InsertFormDB();
+		InsertFormDB db = new InsertFormDB();
 		try {
 			Reader reader;
 			reader = Files.newBufferedReader(Paths.get(fileName));
@@ -31,13 +32,15 @@ public class CSVParser {
 	        String[] nextRecord;
 	        while((nextRecord = csvReader.readNext()) != null){
 	        	// insert into DB
-	        	test.insert(nextRecord);
+	        	db.insert(nextRecord);
 	        	//
+	        	/**
 	        	InfoForm form = new InfoForm();
 	        	for (int i = 0; i < nextRecord.length; i++){
 	        		form.updateInfoMap(headerMap.get(headers[i]), nextRecord[i]);
 	        	}
 	        	submitToDB(form);
+	        	*/
 	        }
 	        csvReader.close();
 	        headerReader.close();
@@ -48,9 +51,10 @@ public class CSVParser {
 
 
     }
-    
-	// probably useless
+    /**
+	// print out the csv contents, does not actually insert to db
     public void submitToDB(InfoForm form){
     	System.out.println(form.getInfoMap());
     }
+    */
 }
