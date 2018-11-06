@@ -7,15 +7,50 @@ public class SqlQuery {
 
     private static final String DEFAULTSTARTDATE = "1000-1-20";
     private static final String DEFAULTENDDATE = "2099-10-11";
+    private static final String[] DEFAULTGROUPBY = new String[]{
+            "language_of_service", "official_language_of_preference", "referred_by"
+    };
 
     public static String[][] selectAll(Connection conn, String formName) {
 
-        ArrayList<String[]> table = new ArrayList();
-        String sql = "SELECT * FROM " + formName + " WHERE Start_Date_of_Service BETWEEN \'" + DEFAULTSTARTDATE +
-                "\' AND \'" + DEFAULTENDDATE + "\'";
+        String[][] selectAllTable2D;
 
+        String sqlQuery = "SELECT * FROM " + formName + " WHERE Start_Date_of_Service BETWEEN \'" + DEFAULTSTARTDATE +
+                "\' AND \'" + DEFAULTENDDATE + "\'";
+        selectAllTable2D = queryStatement(conn, sqlQuery);
+
+        return selectAllTable2D;
+    }
+
+    public static ArrayList<String[][]> defaultTemplate(Connection conn, String formName) {
+        ArrayList<String[][]> groupByTables = new ArrayList();
+
+        groupByTables = queryTemplate(conn, formName, DEFAULTGROUPBY, DEFAULTSTARTDATE, DEFAULTENDDATE);
+
+        return groupByTables;
+    }
+
+    public static ArrayList<String[][]> queryTemplate(Connection conn, String formName, String[] selectedTables,
+            String startDate, String endDate) {
+        ArrayList<String[][]> groupByTables = new ArrayList();
+
+        for (String groupByTable : selectedTables) {
+            String sqlQuery = "SELECT COUNT(unique_identifier), " + groupByTable +
+                    "  FROM " + formName +
+                    " WHERE Start_Date_of_Service BETWEEN \'" + startDate +
+                    "\' AND \'" + endDate + "\'" +
+                    " GROUP BY" + groupByTable +
+                    " ORDER BY COUNT(unique_identifier) DESC";
+            groupByTables.add(queryStatement(conn, sqlQuery));
+        }
+
+        return groupByTables;
+    }
+
+    private static String[][] queryStatement(Connection conn, String sqlQuery) {
+        ArrayList<String[]> table = new ArrayList();
         try (Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)
+             ResultSet rs = stmt.executeQuery(sqlQuery)
         ) {
             ResultSetMetaData rsmd;
             while (rs.next()) {
