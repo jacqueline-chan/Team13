@@ -13,6 +13,7 @@ public class ReportTemplates {
   private static String[] columns = FormArray.getColumnNames();
   private static boolean[] includedInTemplate;
   private static JFrame templateFrame;
+  // A counter that keeps track of the amount of fields selected.
   private static int templateColumnNum;
   
   public static void CreateTemplatePopUp() {
@@ -25,12 +26,13 @@ public class ReportTemplates {
     templateFrame.setVisible(true);
     
     JPanel combinePanel = new JPanel(new GridLayout(columns.length, 1));
+    // Create an array of buttons that switch the color upon click.
     JButton[] buttons = new JButton[columns.length];
     for(int i = 0; i < columns.length; i++ ) {
       final int index = i;
       buttons[i] = new JButton(columns[i]);
       buttons[i].setBackground(Color.RED);
-      buttons[i].setPreferredSize(new Dimension(10, 100));
+      buttons[i].setPreferredSize(new Dimension(40, 40));
       buttons[i].addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         switchButton(buttons[index], index);
@@ -38,11 +40,25 @@ public class ReportTemplates {
     });
       combinePanel.add(buttons[i]);
     }
+    
+    JPanel submitPanel = new JPanel(new GridLayout(0, 1));
     JScrollPane scrollPane = new JScrollPane(combinePanel);
     scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
     templateFrame.add(scrollPane, BorderLayout.CENTER);
+    
+    // A check box that selects all the fields.
+    JCheckBox selectAll = new JCheckBox("Select all fields");
+    selectAll.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        for (int i = 0; i < columns.length; i++) {
+            switchButton(buttons[i], i);
+        }
+        
+      }
+      });
+    submitPanel.add(selectAll);
+    
     // Add the button for submit.
-    JPanel submitPanel = new JPanel(new GridLayout(0, 1));
     JButton submitButton = new JButton("Submit the template");
     submitButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
@@ -57,10 +73,7 @@ public class ReportTemplates {
   private static void switchButton(JButton button, int index) {
     includedInTemplate[index] = !(includedInTemplate[index]);
     if (includedInTemplate[index]) {
-      //System.out.println(columns[index]);
       button.setBackground(Color.GREEN);
-      //button.repaint();
-      //button.setContentAreaFilled(false);
       templateColumnNum++;
     } else {
       button.setBackground(Color.RED);
@@ -79,8 +92,6 @@ public class ReportTemplates {
       }
     }
     for(int i = 0; i < templateNames.length; i++) {
-      
-      System.out.println(templateNames[i]);
       temp.write(templateNames[i]+"\n");
     }
     temp.flush();
