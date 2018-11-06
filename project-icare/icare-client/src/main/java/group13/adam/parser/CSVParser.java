@@ -21,7 +21,7 @@ public class CSVParser {
 	
 	private final static String SAMPLECSVFILEPATH = "/home/jamie/Desktop/infoforum.csv";
 
-	public void parseFile(String fileName){
+	public void parseFile(String fileName) throws IOException{
 		InsertFormDB db = new InsertFormDB();
 		try {
 			Reader reader;
@@ -34,27 +34,29 @@ public class CSVParser {
 	        	// insert into DB
 	        	db.insert(nextRecord);
 	        	//
-	        	/**
 	        	InfoForm form = new InfoForm();
 	        	for (int i = 0; i < nextRecord.length; i++){
 	        		form.updateInfoMap(headerMap.get(headers[i]), nextRecord[i]);
 	        	}
-	        	submitToDB(form);
-	        	*/
+	        	//printInfoMap(form);
 	        }
 	        csvReader.close();
 	        headerReader.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new IOException("Error parsing file: " + fileName);
 		}
 
 
     }
-    /**
-	// print out the csv contents, does not actually insert to db
-    public void submitToDB(InfoForm form){
+	// print out the csv contents
+    public void printInfoMap(InfoForm form){
     	System.out.println(form.getInfoMap());
+    }
+    
+    /**
+    public static void main(String[] args) throws IOException{
+    	CSVParser test = new CSVParser();
+    	test.parseFile("test.txt");
     }
     */
 }
