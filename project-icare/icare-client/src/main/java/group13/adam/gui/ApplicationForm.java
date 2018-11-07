@@ -47,32 +47,17 @@ public class ApplicationForm extends JPanel {
     Strings StringsObject = new Strings();
     Buttons ButtonsObject = new Buttons();
     Labels LabelsObject = new Labels();
-    
+   
     fieldNames = StringsObject.headerstring();
-
-    for (int i = 0; i < fieldNames.length; i++) {
-      JLabel newLabel = new JLabel();
-      JFormattedTextField newField = new JFormattedTextField();
-
-      labels[i] = newLabel;
-      fields[i] = newField;
-      labels[i].setText(fieldNames[i]);
-      fields[i].setColumns(10);
-      // fields[i].setValue("");
-      labels[i].setLabelFor(fields[i]);
-      labelPane.add(labels[i]);
-      fieldPane.add(fields[i]);
-
-    }
-    //fields = LabelsObject.initializeJFormattedTextField(fieldNames, fieldPane);
-    //labels = LabelsObject.initializeJLabels(fieldNames, labelPane, fields);
     
-
+    fields = LabelsObject.initializeJFormattedTextField(fieldNames, fieldPane, combinePanel);
+    labels = LabelsObject.initializeJLabels(fieldNames, labelPane, fields, combinePanel);
+    
     // create error message and its panel
-    
     LabelsObject.createErrorLabel(errorMessagePanel);
 
     // create buttons
+    
     // select button, JPanel selectFiles
     ButtonsObject.selectButton(selectFiles);
     
@@ -84,11 +69,6 @@ public class ApplicationForm extends JPanel {
         submitForm();
       }
     });
-
-    combinePanel.add(labelPane);
-    combinePanel.add(fieldPane);
-
-    // JScrollPane scrollPane = new JScrollPane(combinePanel);
 
     // Put the panels in this panel, labels on left,
     // text fields on right.
@@ -103,15 +83,16 @@ public class ApplicationForm extends JPanel {
 
   public void submitForm() {
     // will need to loop this until everything is satisfied
-	submittodb();
+	//submittodb();
     //checkformat();
     System.out.println("The Submit Button was pressed");
     for (int i = 0; i < fieldNames.length; i++) {
       record.updateInfoMap(labels[i].getText(), fields[i].getText());
+     //System.out.println(labels[i].getText() + ":" + fields[i].getText());
+     //System.out.println(record.getInfoMap().get(fieldNames[i]));
     }
-	// submittodb();
+	submittodb();
 
-    //System.out.println(labels[1].getText() + ":" + fields[1].getText());
   }
 
   private void checkformat() {
@@ -182,8 +163,13 @@ public class ApplicationForm extends JPanel {
 	  String [] fieldsString = new String [fieldNames.length];
 	  for (int i = 0; i < fieldNames.length; i++) {
 		  String value = record.getInfoMap().get(fieldNames[i]);
+		  System.out.println(fieldNames[i] + ":" + value);
 		  fieldsString[i] = value ;
 	  }
+	  //System.out.println(fieldsString.toString());
+	  System.out.println(Arrays.toString(fieldsString));
+	  
+	  //bug?
 	  InsertFormDB insertform = new InsertFormDB();
 	  insertform.insert(fieldsString);
 	  
