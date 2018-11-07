@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 public class Labels {
 	
 	
-	public JLabel[] initializeJLabels(String[] fieldNames, JPanel labelPane, JFormattedTextField[] fields){
+	public JLabel[] initializeJLabels(String[] fieldNames, JPanel labelPane, JFormattedTextField[] fields, JPanel combinePanel){
 		JLabel[] labels = new JLabel[100];
 		for (int i = 0; i < fieldNames.length; i++) {
 			  JLabel newLabel = new JLabel();
@@ -19,10 +19,11 @@ public class Labels {
 			  labelPane.add(labels[i]);
 
 		}
+		combinePanel.add(labelPane);
 		return labels;	
 	}
 	
-	public JFormattedTextField[] initializeJFormattedTextField(String[] fieldNames, JPanel fieldPane ){
+	public JFormattedTextField[] initializeJFormattedTextField(String[] fieldNames, JPanel fieldPane , JPanel combinePanel){
 		JFormattedTextField[] fields = new JFormattedTextField[100];
 	    for (int i = 0; i < fieldNames.length; i++) {
 	        JFormattedTextField newField = new JFormattedTextField();
@@ -32,8 +33,7 @@ public class Labels {
 
 	    }
 	    
-	    
-	    
+        combinePanel.add(fieldPane);
 	    return fields;
 		
 	}
