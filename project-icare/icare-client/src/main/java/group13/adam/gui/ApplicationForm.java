@@ -8,6 +8,9 @@ import javax.swing.event.*;
 import javax.swing.text.*;
 
 import group13.adam.db.InsertFormDB;
+import group13.adam.gui.components.Buttons;
+import group13.adam.gui.components.Labels;
+import group13.adam.gui.components.Strings;
 import group13.adam.validation.ErrorPrevention;
 import group13.cscc01.forms.InfoForm;
 //import javafx.scene.layout.Border;
@@ -23,91 +26,29 @@ import java.util.regex.Pattern;
 public class ApplicationForm extends JPanel {
 
   InfoForm record = new InfoForm();
-
   JLabel[] labels = new JLabel[100];
   JFormattedTextField[] fields = new JFormattedTextField[100];
-
-  String[] fieldNames = new String[] {"Unique Identifier",
-      "Date of Birth (YYYY-MM-DD)",
-      "Postal Code where the service was received",
-      "Start Date of Service (YYYY-MM-DD)", "Language of Service",
-      "Official Language of Preference",
-      "Type of Institution/Organization Where Client Received Services",
-      "Referred By", "Services Received", "Total Length of Orientation",
-      "Total Length of Orientation: Hours",
-      "Total Length of Orientation: Minutes", "Number of Clients in Group",
-      "Directed at a specific Target Group ",
-      "Target Group: Children (0-14 yrs)", "Target Group: Youth (15-24 yrs",
-      "Target Group: Seniors", "Target Group: Gender-specific",
-      "Target Group: Refugees",
-      "Target Group: Ethnic/cultural/linguistic group",
-      "Target Group: Deaf or Hard of Hearing",
-      "Target Group: Blind or Partially Sighted",
-      "Target Group: Lesbian, Gay, Bisexual, Transgender, Queer (LGBTQ)",
-      "Target Group: Families/Parents",
-      "Target Group: Clients with other impairments (physical, mental)",
-      "Target Group: Clients with international training in a regulated profession",
-      "Target Group: Clients with international training in a regulated trade",
-      "Target Group: Official Language minorities", "Overview of Canada",
-      "Overview of Canada Referrals", "Sources of Information",
-      "Sources of Information Referrals", "Rights and Freedoms",
-      "Rights and Freedoms Referrals", "Canadian Law and Justice",
-      "Important Documents", "Important Documents Referrals",
-      "Improving English or French", "Improving English or French Referrals",
-      "Employment and Income", "Employment and Income Referrals", "Education",
-      "Education Referrals", "Housing", "Housing Referrals", "Health",
-      "Health Referrals", "Money and Finances", "Money and Finances Referrals",
-      "Transportation", "Transportation Referrals", "Communications and Media",
-      "Communications and Media Referrals", "Community Engagement",
-      "Community Engagement Referrals", "Becoming a Canadian Citizen",
-      "Becoming a Canadian Citizen Referrals", "Interpersonal Conflict",
-      "Interpersonal Conflict Referrals",
-      "Was Essential Skills and Aptitude Training Received as Part of this Service?",
-      "Computer skills", "Document Use",
-      "Interpersonal Skills and Workplace Culture", "Leadership Training",
-      "Numeracy",
-      "Was Life Skills or Responsibilities of Citizenship Information Received as Part of this Service?",
-      "Life Skills",
-      "Rights and Responsibilities of Citizenship (based on discover Canada)",
-      "Support Services Received", "Care for Newcomer Children", "Child 1: Age",
-      "Child 1: Type of Care", "Child 2: Age", "Child 2: Type of Care",
-      "Child 3: Age", "Child 3: Type of Care", "Child 4: Age",
-      "Child 4: Type of Care", "Child 5: Age", "Child 5: Type of Care",
-      "Transportation 2", "Provisions for Disabilities", "Translation",
-      "Between", "And", "Interpretation", "Between 1", "And 2",
-      "Crisis Counselling", "End Date of Service (YYYY-MM-DD)",
-      "Reason for update"};
-
-
-
+  String[] fieldNames = new String[200];
   // Lay out the labels in a panel.
   JPanel labelPane = new JPanel(new GridLayout(0, 1));
-
-
   // Layout the text fields in a panel.
   JPanel fieldPane = new JPanel(new GridLayout(0, 1));
-
-
   JPanel selectFiles = new JPanel(new GridLayout(0, 1));
-
-
   JPanel submitPane = new JPanel(new GridLayout(0, 1));
-
-
   JPanel errorMessagePanel = new JPanel();
-
   // static JButton submitButton = new JButton("Submit");
-
   JPanel combinePanel = new JPanel(new GridLayout(1, 3));
-
   JScrollPane scrollPane = new JScrollPane(combinePanel);
 
 
   public ApplicationForm() {
     super(new BorderLayout());
-
-    System.out.println("The number of fields:");
-    System.out.println(fieldNames.length);
+    
+    Strings StringsObject = new Strings();
+    Buttons ButtonsObject = new Buttons();
+    Labels LabelsObject = new Labels();
+    
+    fieldNames = StringsObject.headerstring();
 
     for (int i = 0; i < fieldNames.length; i++) {
       JLabel newLabel = new JLabel();
@@ -123,40 +64,27 @@ public class ApplicationForm extends JPanel {
       fieldPane.add(fields[i]);
 
     }
+    //fields = LabelsObject.initializeJFormattedTextField(fieldNames, fieldPane);
+    //labels = LabelsObject.initializeJLabels(fieldNames, labelPane, fields);
+    
 
     // create error message and its panel
-
-    JLabel errorMessageLabel = new JLabel();
-    errorMessageLabel.setForeground(Color.red);
-    errorMessageLabel.setText(
-        "There was an error with your submission. Please review the highlighted fields.");
-    errorMessagePanel.add(errorMessageLabel);
-    errorMessagePanel.setVisible(false);
+    
+    LabelsObject.createErrorLabel(errorMessagePanel);
 
     // create buttons
-    // select button
-    JButton selectButton = new JButton("Select File...");
-    setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-    selectFiles.add(selectButton);
+    // select button, JPanel selectFiles
+    ButtonsObject.selectButton(selectFiles);
+    
     // submit button
-    JButton submitButton = new JButton("Submit");
+    JButton submitButton = ButtonsObject.submitButton(submitPane);
+    
     submitButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         submitForm();
       }
     });
 
-    submitPane.add(submitButton); // add the button to the submit pane
-
-    // border colour
-
-    javax.swing.border.Border blackline;
-    blackline = BorderFactory.createLineBorder(Color.green);
-
-
-    combinePanel.setBorder(blackline);
-    labelPane.setBorder(blackline);
-    fieldPane.setBorder(blackline);
     combinePanel.add(labelPane);
     combinePanel.add(fieldPane);
 
@@ -175,8 +103,9 @@ public class ApplicationForm extends JPanel {
 
   public void submitForm() {
     // will need to loop this until everything is satisfied
-    checkformat();
-    System.out.println("The Button was pressed");
+	submittodb();
+    //checkformat();
+    System.out.println("The Submit Button was pressed");
     for (int i = 0; i < fieldNames.length; i++) {
       record.updateInfoMap(labels[i].getText(), fields[i].getText());
     }
