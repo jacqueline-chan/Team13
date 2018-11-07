@@ -5,7 +5,9 @@ import java.awt.*;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import javax.swing.*;
@@ -13,12 +15,14 @@ public class ReportTemplates {
   private static String[] columns = FormArray.getColumnNames();
   private static boolean[] includedInTemplate;
   private static JFrame templateFrame;
+  private static boolean fieldsSelected;
   // A counter that keeps track of the amount of fields selected.
   private static int templateColumnNum;
   
   public static void CreateTemplatePopUp() {
     includedInTemplate = new boolean[columns.length];
     templateColumnNum = 0;
+    fieldsSelected = false;
     templateFrame = new JFrame("Create new Template");
     templateFrame.setPreferredSize(new Dimension(500, 500));
     templateFrame.pack();
@@ -51,9 +55,11 @@ public class ReportTemplates {
     selectAll.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         for (int i = 0; i < columns.length; i++) {
+          if (!((fieldsSelected)^(includedInTemplate[i]))) {
             switchButton(buttons[i], i);
+          }
         }
-        
+        fieldsSelected = !(fieldsSelected);
       }
       });
     submitPanel.add(selectAll);
@@ -84,13 +90,13 @@ public class ReportTemplates {
     BufferedWriter temp = new BufferedWriter(new FileWriter(name));
     String[] templateNames = new String[templateColumnNum];
     int index = 0;
-    System.out.println("Name: "+name);
     for (int i = 0; i < columns.length; i++) {
       if (includedInTemplate[i]) {
         templateNames[index] = columns[i];
         index++;
       }
     }
+    temp.write(templateColumnNum + "\n");
     for(int i = 0; i < templateNames.length; i++) {
       temp.write(templateNames[i]+"\n");
     }
@@ -99,7 +105,22 @@ public class ReportTemplates {
     templateFrame.dispose();
   }
   
-  
+  private static String[] retrieveTemplate(String name) throws IOException {
+    try {
+      FileReader fr = new FileReader(name);
+      BufferedReader br = new BufferedReader(fr);
+      int numFields = Integer.parseInt(br.readLine());
+      String[] fields = new String[numFields];
+      for(int i = 0; i < numFields; i++) {
+        fields[i] = br.readLine();
+      }
+      fr.close();
+      br.close();
+      return fields;
+    } catch (IOException e) {
+      return new String[1];
+    }
+  }
   private static void createNamePopUp() {
     JFrame nameFrame = new JFrame("Type in the name of the file");
     nameFrame.setPreferredSize(new Dimension(400, 200));
