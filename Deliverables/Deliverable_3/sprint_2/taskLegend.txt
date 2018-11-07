@@ -1,0 +1,44 @@
+﻿Backlog
+* Task 2: Upload submitted data to sqlite 2 story point (Jamie)
+* Task 3: Calls CheckIfFieldsAreValid and if not display which fields are not valid 2 story point (Go to specific spot and highlight it) 2  - (Jacq)
+* Task 6: Output query database into table object 2 story points  (Ray)
+* Task 13: Aggregate query based on date 2 story points (Ray)
+
+
+User Story 6: As Adam, an Agency Clerk, I would like the ability to drag-and-drop forms as a submission method so that I can easily submit to the central data collection platform
+Frontend
+* Task 14: Navigate and select to csv file (Sean)
+Backend
+* Task 15: Upload whole CSV to SQL server
+
+
+User Story 7: As Adam, an Agency Clerk, I would like the feature of a cancel and submit button near the bottom of the submission page so data submission to TEQ is easy and intuitive
+Frontend
+* Task 16: Cancel button offers option to save unfinished templates for later 4 story points (Jacq)
+Backend
+* Task 17: Store unfinished template 2 story points (Alex)
+
+
+User Story 8: As Bob, a TEQ Data Analyst, I would like to be able to filter information based on a set date range so I can analyze trends and patterns
+Frontend
+* Task 18: Popup that lets you select date range and returns in format "YYYY-MM-DD" in function 1 (Sean)
+
+
+User Story 9: As Bob, a TEQ Data Analyst, I want to be able to generate a report with default categories and date range and save it as a PDF or CSV
+Frontend
+* Task 19: Generate report tab 1 (Sean)
+* Task 20: Add two buttons that select one or two default templates and an "add more" btn that currently does nothing 3 (Jamie)
+
+
+User Story 10: As Adam, an Agency Clerk, I would like to get a notification that I am missing information if I try to submit my excel form without mandatory fields filled in so that I do not make the mistake of not submitting important values.
+Frontend
+* Task 21: Only applies when using drag and drop feature, will show any errors and have popup correction suggesting 2 (Sean)
+Backend
+* Task 22: Will actually override the the csv file with the correct fields
+
+
+User Story 11: As Bob, a TEQ Data Analyst, I would like to have the ability to create/save new report templates that will display selected categories and is compatible with the data collection software so that we can customize reports for certain agencies
+Front end
+* Task 23: Popup to select fields relevant and date range based on daily, weekly, and which date field to consider save it as a file 3 story points (Alex)
+* Task 24: On template tab parse the custom template file and generate appropriate amount of buttons or drop down 2 story points (Alex)
+* Task 25: Parse date field and pass it to backend
