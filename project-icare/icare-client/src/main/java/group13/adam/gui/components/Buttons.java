@@ -6,7 +6,6 @@ import javax.swing.JPanel;
 
 public class Buttons {
 	
-	
 	public JButton selectButton(JPanel selectFiles){
 		JButton selectButton = new JButton("Select File...");
 		selectFiles.add(selectButton);

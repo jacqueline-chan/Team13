@@ -8,7 +8,6 @@ import javax.swing.JPanel;
 
 public class Labels {
 	
-	
 	public JLabel[] initializeJLabels(String[] fieldNames, JPanel labelPane, JFormattedTextField[] fields, JPanel combinePanel){
 		JLabel[] labels = new JLabel[100];
 		for (int i = 0; i < fieldNames.length; i++) {
@@ -21,6 +20,10 @@ public class Labels {
 		}
 		combinePanel.add(labelPane);
 		return labels;	
+	}
+	
+	public void highlightMandatoryFields(){
+		
 	}
 	
 	public JFormattedTextField[] initializeJFormattedTextField(String[] fieldNames, JPanel fieldPane , JPanel combinePanel){

@@ -39,6 +39,7 @@ public class ApplicationForm extends JPanel {
   // static JButton submitButton = new JButton("Submit");
   JPanel combinePanel = new JPanel(new GridLayout(1, 3));
   JScrollPane scrollPane = new JScrollPane(combinePanel);
+  int highlightedField = -1;
 
 
   public ApplicationForm() {
@@ -49,14 +50,11 @@ public class ApplicationForm extends JPanel {
     Labels LabelsObject = new Labels();
    
     fieldNames = StringsObject.headerstring();
-    
     fields = LabelsObject.initializeJFormattedTextField(fieldNames, fieldPane, combinePanel);
     labels = LabelsObject.initializeJLabels(fieldNames, labelPane, fields, combinePanel);
     
     // create error message and its panel
     LabelsObject.createErrorLabel(errorMessagePanel);
-
-    // create buttons
     
     // select button, JPanel selectFiles
     ButtonsObject.selectButton(selectFiles);
@@ -77,57 +75,51 @@ public class ApplicationForm extends JPanel {
     add(scrollPane, BorderLayout.CENTER);
     add(selectFiles, BorderLayout.LINE_END);
     add(submitPane, BorderLayout.PAGE_END);
-
-
   }
 
-  public void submitForm() {
-    // will need to loop this until everything is satisfied
-	//submittodb();
-    //checkformat();
-    System.out.println("The Submit Button was pressed");
-    for (int i = 0; i < fieldNames.length; i++) {
-      record.updateInfoMap(labels[i].getText(), fields[i].getText());
-     //System.out.println(labels[i].getText() + ":" + fields[i].getText());
-     //System.out.println(record.getInfoMap().get(fieldNames[i]));
-    }
-	submittodb();
-
-  }
-
-  private void checkformat() {
+  private void submitForm() {
 	ErrorPrevention error = new ErrorPrevention();
-    int fieldIndex = error.CheckIfFieldsAreValid(fieldNames, fields); // returns a
-                                                                // field that
-                                                                // are not valid
+    int fieldIndex = error.CheckIfFieldsAreValid(fieldNames, fields);
     // if true, display a single message
+    //System.out.println("The Submit Button was pressed");
     if (fieldIndex > -1) {
-      // System.out.println("Something's wrong "+ invalidField.getText());
+      //System.out.println("Something's wrong "+ fields[fieldIndex].getText());
       errorMessagePanel.setVisible(true);
       //highlightField(invalidField); // highlight every field
       goToField(fieldIndex); // go to the first field thats invalid
     } else {
       // if false,
       errorMessagePanel.setVisible(false);
+      storeInfoForm();
       submittodb();
-      
     }
 
-
+  }
+  
+  private void storeInfoForm(){
+     for (int i = 0; i < fieldNames.length; i++) {
+	 record.updateInfoMap(labels[i].getText(), fields[i].getText());
+     }
   }
 
-  // not a complete implementation (Implementation fixed)
   private void goToField(int index) {
-    // test button
     labels[index].scrollRectToVisible(labels[index].getBounds());
     fields[index].requestFocusInWindow(); // moves the cursor to the field
+    highlightField(index);
   }
 
   // not a complete implementation
-  private void highlightField(JFormattedTextField invalidField) {
-    Arrays.asList(fields).indexOf(invalidField);
+  private void highlightField(int index) {
+	unhighlightField();
+	labels[index].setForeground(Color.red);
+	highlightedField=index;
   }
-
+  
+  private void unhighlightField() {
+	if (highlightedField != -1){
+		  labels[highlightedField].setForeground(Color.black);
+	}
+  }
 
   /**
    * Create the GUI and show it. For thread safety, this method should be
@@ -137,10 +129,8 @@ public class ApplicationForm extends JPanel {
     // Create and set up the window.
     JFrame frame = new JFrame("ApplicationForm");
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
     // Add contents to the window.
     frame.add(new ApplicationForm());
-
     // Display the window.
     frame.pack();
     frame.setVisible(true);
@@ -163,16 +153,15 @@ public class ApplicationForm extends JPanel {
 	  String [] fieldsString = new String [fieldNames.length];
 	  for (int i = 0; i < fieldNames.length; i++) {
 		  String value = record.getInfoMap().get(fieldNames[i]);
-		  System.out.println(fieldNames[i] + ":" + value);
+		  //System.out.println(fieldNames[i] + ":" + value);
 		  fieldsString[i] = value ;
 	  }
 	  //System.out.println(fieldsString.toString());
-	  System.out.println(Arrays.toString(fieldsString));
-	  
-	  //bug?
+	  //System.out.println(Arrays.toString(fieldsString));
 	  InsertFormDB insertform = new InsertFormDB();
 	  insertform.insert(fieldsString);
-	  
+	  unhighlightField();
+	  highlightedField=-1;
 	return record;
   }
 
