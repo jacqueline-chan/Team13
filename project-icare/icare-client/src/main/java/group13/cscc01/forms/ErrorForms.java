@@ -6,50 +6,6 @@ import java.util.regex.Pattern;
 public class ErrorForms {
   public static HashMap<String, Pattern> getOptionalParam() {
     HashMap<String, Pattern> regex = new HashMap<String, Pattern>();
-    /*regex.put(Pattern.compile("[0-9]* hours [0-9]* minutes"), new String[]
-        {"of the following format: \"number\" hours \"number\" minutes",
-            "Total Length of Orientation"});
-    regex.put(Pattern.compile("[0-9]*"), new String[] {"a number", "Total Length of Orientation: Hours",
-        "Total Length of Orientation: Minutes", "Number of Clients in Group"});
-    regex.put(Pattern.compile("(Yes)|(No)"), new String[] {"Yes or No",
-        "Directed at a specific Target Group ", "Target Group: Children (0-14 yrs)",
-        "Target Group: Youth (15-24 yrs", "Target Group: Seniors", "Target Group: Gender-specific", 
-        "Target Group: Refugees", "Target Group: Ethnic/cultural/linguistic group",
-        "Target Group: Deaf or Hard of Hearing", "Target Group: Blind or Partially Sighted",
-        "Target Group: Lesbian, Gay, Bisexual, Transgender, Queer (LGBTQ)",
-        "Target Group: Families/Parents", "Target Group: Clients with other impairments (physical, mental)",
-        "Target Group: Clients with international training in a regulated profession",
-        "Target Group: Families/Parents", "Target Group: Clients with other impairments (physical, mental)",
-        "Target Group: Clients with international training in a regulated trade",
-        "Target Group: Official Language minorities", "Care for Newcomer Children"});
-    regex.put(Pattern.compile(".+"), new String[] {"Any character", "Overview of Canada",
-        "Overview of Canada Referrals","Sources of Information",
-        "Sources of Information Referrals", "Rights and Freedoms",
-        "Rights and Freedoms Referrals", "Canadian Law and Justice",
-        "Important Documents", "Important Documents Referrals",
-        "Improving English or French", "Improving English or French Referrals",
-        "Employment and Income", "Employment and Income Referrals", "Education",
-        "Education Referrals", "Housing", "Housing Referrals", "Health",
-        "Health Referrals", "Money and Finances", "Money and Finances Referrals",
-        "Transportation", "Transportation Referrals", "Communications and Media",
-        "Communications and Media Referrals", "Community Engagement",
-        "Community Engagement Referrals", "Becoming a Canadian Citizen",
-        "Becoming a Canadian Citizen Referrals", "Interpersonal Conflict",
-        "Interpersonal Conflict Referrals",
-        "Computer skills", "Document Use",
-        "Interpersonal Skills and Workplace Culture", "Leadership Training",
-        "Numeracy",
-        "Life Skills",
-        "Rights and Responsibilities of Citizenship (based on discover Canada)",
-        "Transportation 2", "Provisions for Disabilities",
-        "Translation", "Between", "And", "Interpretation", "Between 1", "And 2",
-        "Crisis Counselling","Child 1: Type of Care", "Child 2: Type of Care",
-        "Child 3: Type of Care", "Child 4: Type of Care", 
-        "Child 5: Type of Care", "Reason for update"});
-    regex.put(Pattern.compile("[0-9]{1,2}"), new String[] {"Child 1: Age",
-        "Child 2: Age", 
-        "Child 3: Age", "Child 4: Age",
-        "Child 5: Age"});*/
     regex.put("Total Length of Orientation",
         Pattern.compile("[0-9]* hours [0-9]* minutes"));
     regex.put("Total Length of Orientation: Hours", Pattern.compile("[0-9]*"));
@@ -151,21 +107,6 @@ public class ErrorForms {
 
   public static HashMap<String, Pattern> getCompulsoryParam() {
     HashMap<String, Pattern> regex = new HashMap<String, Pattern>();
-    /*regex.put(Pattern.compile("\\d*"), new String[] {"a number","Unique Identifier"});
-    regex.put(Pattern.compile("(19|20)[0-9]{2}-((0[1-9])|(1[0-2]))-((0[1-9])|([1-2][0-9])|(3[0-1]))"),
-        new String[] {"YYYY-MM-DD", "Date of Birth (YYYY-MM-DD)", "Start Date of Service (YYYY-MM-DD)",
-            "End Date of Service (YYYY-MM-DD)"});
-    regex.put(Pattern.compile("([A-Z][0-9]){3}"), new String[] {"of the form LetterNumberLetterNumberLetterNumber",
-        "Postal Code where the service was received"});
-    regex.put(Pattern.compile("[(A-Z)|(a-z)]+"), new String[] {"any letters", "Language of Service",
-        "Official Language of Preference"});
-    regex.put(Pattern.compile("[(A-Z)|(a-z)| ]+"), new String[] {"letters and spaces",
-        "Type of Institution/Organization Where Client Received Services",
-        "Referred By", "Services Received"});
-    regex.put(Pattern.compile("(Yes)|(No)"), new String[] {"Yes or No",
-        "Was Life Skills or Responsibilities of Citizenship Information Received as Part of this Service?",
-        "Was Essential Skills and Aptitude Training Received as Part of this Service?",
-        "Support Services Received"});*/
     regex.put("Unique Identifier", Pattern.compile("\\d+"));
     regex.put("Date of Birth (YYYY-MM-DD)", Pattern.compile(
         "(19|20)[0-9]{2}-((0[1-9])|(1[0-2]))-((0[1-9])|([1-2][0-9])|(3[0-1]))"));
