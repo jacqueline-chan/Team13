@@ -21,11 +21,7 @@ public class Labels {
 		combinePanel.add(labelPane);
 		return labels;	
 	}
-	
-	public void highlightMandatoryFields(){
-		
-	}
-	
+
 	public JFormattedTextField[] initializeJFormattedTextField(String[] fieldNames, JPanel fieldPane , JPanel combinePanel){
 		JFormattedTextField[] fields = new JFormattedTextField[100];
 	    for (int i = 0; i < fieldNames.length; i++) {
@@ -33,28 +29,18 @@ public class Labels {
 	    	fields[i] = newField;
 	        fields[i].setColumns(10);
 	        fieldPane.add(fields[i]);
-
 	    }
-	    
         combinePanel.add(fieldPane);
 	    return fields;
-		
 	}
-
-	
-	
-	
-	
-	
 	
 	public JLabel createErrorLabel(JPanel errorMessagePanel){
-	JLabel errorMessageLabel = new JLabel();
-    errorMessageLabel.setForeground(Color.red);
-    errorMessageLabel.setText(
-        "There was an error with your submission. Please review the highlighted fields.");
-    errorMessagePanel.add(errorMessageLabel);
-    errorMessagePanel.setVisible(false);
-	return errorMessageLabel;
+		JLabel errorMessageLabel = new JLabel();
+		errorMessageLabel.setForeground(Color.red);
+		errorMessageLabel.setText("There was an error with your submission. Please review the highlighted fields.");
+		errorMessagePanel.add(errorMessageLabel);
+		errorMessagePanel.setVisible(false);
+		return errorMessageLabel;
     
 	}
 
