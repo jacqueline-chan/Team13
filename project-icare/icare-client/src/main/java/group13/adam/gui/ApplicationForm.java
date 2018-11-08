@@ -3,9 +3,6 @@ package group13.adam.gui;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
-import javax.swing.event.*;
-import javax.swing.text.*;
 
 import group13.adam.db.InsertFormDB;
 import group13.adam.gui.components.Buttons;
@@ -13,15 +10,6 @@ import group13.adam.gui.components.Labels;
 import group13.adam.gui.components.Strings;
 import group13.adam.validation.ErrorPrevention;
 import group13.cscc01.forms.InfoForm;
-//import javafx.scene.layout.Border;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeEvent;
-import java.text.*;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.HashMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class ApplicationForm extends JPanel {
 
@@ -55,13 +43,10 @@ public class ApplicationForm extends JPanel {
     
     // create error message and its panel
     LabelsObject.createErrorLabel(errorMessagePanel);
-    
     // select button, JPanel selectFiles
     ButtonsObject.selectButton(selectFiles);
-    
     // submit button
     JButton submitButton = ButtonsObject.submitButton(submitPane);
-    
     submitButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         submitForm();
@@ -81,14 +66,10 @@ public class ApplicationForm extends JPanel {
 	ErrorPrevention error = new ErrorPrevention();
     int fieldIndex = error.CheckIfFieldsAreValid(fieldNames, fields);
     // if true, display a single message
-    //System.out.println("The Submit Button was pressed");
     if (fieldIndex > -1) {
-      //System.out.println("Something's wrong "+ fields[fieldIndex].getText());
       errorMessagePanel.setVisible(true);
-      //highlightField(invalidField); // highlight every field
       goToField(fieldIndex); // go to the first field thats invalid
     } else {
-      // if false,
       errorMessagePanel.setVisible(false);
       storeInfoForm();
       submittodb();
@@ -153,11 +134,8 @@ public class ApplicationForm extends JPanel {
 	  String [] fieldsString = new String [fieldNames.length];
 	  for (int i = 0; i < fieldNames.length; i++) {
 		  String value = record.getInfoMap().get(fieldNames[i]);
-		  //System.out.println(fieldNames[i] + ":" + value);
 		  fieldsString[i] = value ;
 	  }
-	  //System.out.println(fieldsString.toString());
-	  //System.out.println(Arrays.toString(fieldsString));
 	  InsertFormDB insertform = new InsertFormDB();
 	  insertform.insert(fieldsString);
 	  unhighlightField();
