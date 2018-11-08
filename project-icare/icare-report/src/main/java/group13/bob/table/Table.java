@@ -101,7 +101,7 @@ public class Table extends JFrame {
 
     // Set width of each column
     table.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
-    for (int i = 0; i < 91; i++) {
+    for (int i = 0; i < columnNames.length ; i++) {
       column = table.getColumnModel().getColumn(i);
       column.setPreferredWidth(150);
     }
