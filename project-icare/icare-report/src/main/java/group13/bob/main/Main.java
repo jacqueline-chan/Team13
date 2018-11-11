@@ -1,5 +1,6 @@
 package group13.bob.main;
 
+import group13.bob.table.Login;
 import group13.bob.table.Table;
 
 import java.awt.*;
@@ -10,7 +11,7 @@ public class Main {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    Table frame = new Table();
+                	Login frame = new Login();
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
