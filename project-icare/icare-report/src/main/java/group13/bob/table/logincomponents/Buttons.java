@@ -21,5 +21,13 @@ public class Buttons {
 	    return cancelButton;
 
 	}
+	
+	public JButton createSignUpButton(JPanel container){
+	    JButton cancelButton=new JButton("SIGN UP");
+	    cancelButton.setBounds(200,450,100,30);
+	    container.add(cancelButton);
+	    return cancelButton;
+
+	}
 
 }
