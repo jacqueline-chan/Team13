@@ -1,13 +1,14 @@
 package group13.adam.headermap;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class HeaderMap {
 	
-	private HashMap<String, String> map;
+	private LinkedHashMap<String, String> map;
 	
     public HeaderMap(){
-    	this.map = new HashMap<String, String>();
+    	this.map = new LinkedHashMap<String, String>();
 		initializeHeaderMap();
 	}
     
