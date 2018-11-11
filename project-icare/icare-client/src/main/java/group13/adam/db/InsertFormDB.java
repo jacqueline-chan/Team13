@@ -67,6 +67,12 @@ public class InsertFormDB {
         		pstmt.setString(i+1, fields[i]);
         	}
             pstmt.executeUpdate();
+            
+            
+            //pstmt.close();
+            //conn.close();
+            
+            
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
