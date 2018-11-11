@@ -3,7 +3,6 @@ package group13.adam.parser;
 import com.opencsv.*;
 
 import group13.adam.db.InsertFormDB;
-import group13.adam.gui.ApplicationForm;
 import group13.adam.headermap.HeaderMap;
 import group13.cscc01.forms.InfoForm;
 
@@ -20,7 +19,7 @@ public class CSVParser {
 	
 	HashMap<String, String> headerMap = hm.getHeaderMap();
 	
-	private final static String SAMPLECSVFILEPATH = "/home/jamie/Desktop/infoforum.csv";
+	//private final static String SAMPLECSVFILEPATH = "/home/jamie/Desktop/infoforum.csv";
 
 	public InfoForm parseFile(String fileName) throws IOException, SQLException{
 		InsertFormDB db = new InsertFormDB();
@@ -40,7 +39,6 @@ public class CSVParser {
 	        	for (int i = 0; i < nextRecord.length; i++){
 	        		form.updateInfoMap(headerMap.get(headers[i]), nextRecord[i]);
 	        	}
-	        	//printInfoMap(form);
 	        }
 	        csvReader.close();
 	        headerReader.close();
@@ -50,20 +48,6 @@ public class CSVParser {
 		
 		return form;
     }
-	// print out the csv contents
-	/**
-    public void printInfoMap(InfoForm form){
-    	System.out.println(form.getInfoMap());
-    }
-    */
-    
-    /**
-    public static void main(String[] args) throws IOException{
-    	CSVParser test = new CSVParser();
-    	//test.parseFile(SAMPLECSVFILEPATH);
-    	test.parseFile("/home/jamie/Desktop/CSCC01/Project/Team13/project-icare/icare-client/src/test/java/group13/adam/parser/Test1User.csv");
-    }
-    */
     
     
 }
