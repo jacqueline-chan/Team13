@@ -1,5 +1,6 @@
 package group13.adam.db;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -34,8 +35,9 @@ public class InsertFormDB {
      * Insert a new row into the warehouses table
      *
      * @param fields from Application Form
+     * @throws SQLException 
      */
-    public void insert(String[] fields) {
+    public void insert(String[] fields) throws SQLException {
         String sql = "INSERT INTO InfoForum(unique_identifier,date_of_birth,postal_code,start_date_of_service,"
         		+ "language_of_service,official_language_of_preference,type_of_institution,referred_by,"
         		+ "services_received,total_length_of_orientation_hours,"
@@ -74,7 +76,7 @@ public class InsertFormDB {
             
             
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+        	throw new SQLException("SQL ERROR INSERTING: " + e);
         }
     }
  

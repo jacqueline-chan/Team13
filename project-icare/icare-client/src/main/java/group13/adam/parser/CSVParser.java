@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.util.HashMap;
 
 public class CSVParser {
@@ -21,7 +22,7 @@ public class CSVParser {
 	
 	private final static String SAMPLECSVFILEPATH = "/home/jamie/Desktop/infoforum.csv";
 
-	public InfoForm parseFile(String fileName) throws IOException{
+	public InfoForm parseFile(String fileName) throws IOException, SQLException{
 		InsertFormDB db = new InsertFormDB();
     	InfoForm form = new InfoForm();
     	
