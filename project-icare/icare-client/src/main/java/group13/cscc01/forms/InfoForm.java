@@ -30,7 +30,7 @@ public class InfoForm {
         this.infoMap.put("Type of Institution/Organization Where Client Received Services", "");
         this.infoMap.put("Referred By", "");
         this.infoMap.put("Services Received", "");
-        this.infoMap.put("Total Length of Orientation", "");
+        //this.infoMap.put("Total Length of Orientation", "");
         this.infoMap.put("Total Length of Orientation: Hours", "");
         this.infoMap.put("Total Length of Orientation: Minutes", "");
         this.infoMap.put("Number of Clients in Group", "");

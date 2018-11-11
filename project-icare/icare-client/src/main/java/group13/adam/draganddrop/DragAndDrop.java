@@ -10,7 +10,9 @@ import java.util.List;
 public class DragAndDrop implements DropTargetListener {
 	
 		private JTextArea textArea;
-	
+		
+		private boolean status = false;
+		
 		public DragAndDrop(JTextArea textArea) {
 			this.textArea = textArea;
 		}
@@ -50,9 +52,6 @@ public class DragAndDrop implements DropTargetListener {
 						StringBuilder filePaths = new StringBuilder();
 						for (File file : files) {
 							filePaths.append("file: " + file.getAbsolutePath() + "\n");
-							// get the full path of the file
-							System.out.println("file: " + file.getAbsolutePath() + "\n");
-							
 						}
 						
 						textArea.append(filePaths.toString());
@@ -66,10 +65,10 @@ public class DragAndDrop implements DropTargetListener {
 				dtde.dropComplete(true);
 			}
 		}
-
+		
 	public static void ShowDragAndDrop() {
-		JFrame f = new JFrame("Drag and Drop");
-		f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		JFrame jf = new JFrame("Drag and Drop");
+		jf.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
 		
@@ -81,10 +80,10 @@ public class DragAndDrop implements DropTargetListener {
 
         DropTarget dropTarget = new DropTarget(textArea, DnDConstants.ACTION_COPY_OR_MOVE, listener, true);
         
-        f.setContentPane(panel);
-        f.pack();
-        f.setLocationRelativeTo(null);
-        f.setVisible(true);
+        jf.setContentPane(panel);
+        jf.pack();
+        jf.setLocationRelativeTo(null);
+        jf.setVisible(true);
         
 	}
 	

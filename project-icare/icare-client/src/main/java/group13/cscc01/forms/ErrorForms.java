@@ -6,8 +6,8 @@ import java.util.regex.Pattern;
 public class ErrorForms {
   public static HashMap<String, Pattern> getOptionalParam() {
     HashMap<String, Pattern> regex = new HashMap<String, Pattern>();
-    regex.put("Total Length of Orientation",
-        Pattern.compile("[0-9]* hours [0-9]* minutes"));
+    //regex.put("Total Length of Orientation",
+    //    Pattern.compile("[0-9]* hours [0-9]* minutes"));
     regex.put("Total Length of Orientation: Hours", Pattern.compile("[0-9]*"));
     regex.put("Total Length of Orientation: Minutes",
         Pattern.compile("[0-9]*"));
@@ -107,7 +107,7 @@ public class ErrorForms {
 
   public static HashMap<String, Pattern> getCompulsoryParam() {
     HashMap<String, Pattern> regex = new HashMap<String, Pattern>();
-    regex.put("Unique Identifier", Pattern.compile("\\d*"));
+    regex.put("Unique Identifier", Pattern.compile("\\d+"));
     regex.put("Date of Birth (YYYY-MM-DD)", Pattern.compile(
         "(19|20)[0-9]{2}-((0[1-9])|(1[0-2]))-((0[1-9])|([1-2][0-9])|(3[0-1]))"));
     regex.put("Postal Code where the service was received",
