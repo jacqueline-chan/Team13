@@ -8,6 +8,7 @@ import javax.swing.event.*;
 import javax.swing.text.*;
 
 import group13.adam.db.InsertFormDB;
+import group13.adam.draganddrop.DragAndDrop;
 import group13.adam.validation.ErrorPrevention;
 import group13.cscc01.forms.InfoForm;
 //import javafx.scene.layout.Border;
@@ -137,6 +138,15 @@ public class ApplicationForm extends JPanel {
     // select button
     JButton selectButton = new JButton("Select File...");
     setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+    selectButton.addActionListener(new ActionListener() {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			DragAndDrop.ShowDragAndDrop();
+		}
+    	
+    });
     selectFiles.add(selectButton);
     // submit button
     JButton submitButton = new JButton("Submit");

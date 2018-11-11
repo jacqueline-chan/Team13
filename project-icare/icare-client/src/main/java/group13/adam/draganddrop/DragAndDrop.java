@@ -52,6 +52,7 @@ public class DragAndDrop implements DropTargetListener {
 							filePaths.append("file: " + file.getAbsolutePath() + "\n");
 							// get the full path of the file
 							System.out.println("file: " + file.getAbsolutePath() + "\n");
+							
 						}
 						
 						textArea.append(filePaths.toString());
@@ -86,11 +87,5 @@ public class DragAndDrop implements DropTargetListener {
         f.setVisible(true);
         
 	}
-
-    public static void main(String[] args) {
-    	ShowDragAndDrop();     
-    }
-
-
 	
 }
