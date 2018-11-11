@@ -1,5 +1,6 @@
 package group13.bob.table;
 
+import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -7,18 +8,20 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import group13.bob.table.logincomponents.Buttons;
 import group13.bob.table.logincomponents.Labels;
 
 public class Login extends JFrame{
-	
-    Container container=getContentPane();
+	JPanel panel;
+    //Container container=getContentPane();
     JLabel userLabel=new JLabel("USERNAME");
     JLabel passwordLabel=new JLabel("PASSWORD");
     JTextField logintextfield;
@@ -27,7 +30,8 @@ public class Login extends JFrame{
     String username;
     
 	public Login(){
-		container.setLayout(null);
+		panel = new JPanel();
+		panel.setLayout(null);
 	    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	    setBounds(0, 0, (int) screenSize.getWidth(), (int) screenSize.getHeight());
 	    setBounds(500, 100, 370, 600);
@@ -37,19 +41,20 @@ public class Login extends JFrame{
 		Buttons button = new Buttons();
 		Labels labels = new Labels();
 		
-		labels.usernameLabel(container);
-		labels.passwordLabel(container);
-		logintextfield = labels.usernameLabeTextfield(container);
-		passwordtextfield = labels.passwordLabelTextfield(container);
+		labels.loginpictureLabel(panel);
+		labels.usernameLabel(panel);
+		labels.passwordLabel(panel);
+		logintextfield = labels.usernameLabeTextfield(panel);
+		passwordtextfield = labels.passwordLabelTextfield(panel);
 		
-		JButton cancelButton = button.createCancelButton(container);
+		JButton cancelButton = button.createCancelButton(panel);
 		cancelButton.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
 	        	logintextfield.setText("");
 	        	passwordtextfield.setText("");
 	        }
 	      });
-		JButton loginButton = button.createLoginButton(container);
+		JButton loginButton = button.createLoginButton(panel);
 		loginButton.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
 	        	getCredentials();
@@ -58,7 +63,7 @@ public class Login extends JFrame{
 	        }
 	      });
 		
-		
+		setContentPane(panel);
 	}
 	
 	protected void getCredentials(){
@@ -80,7 +85,7 @@ public class Login extends JFrame{
 	}
 	
 	protected void unsuccessfulDialog(){
-		JOptionPane.showMessageDialog(container, "login Not Successful");
+		JOptionPane.showMessageDialog(panel, "login Not Successful");
 		
 	}
 	
