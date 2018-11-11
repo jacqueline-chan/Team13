@@ -1,12 +1,11 @@
-package group13.adam.parser;
+package group13.adam.db;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -16,11 +15,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import group13.adam.headermap.HeaderMap;
-import group13.cscc01.forms.InfoForm;
 
-public class CSVParserTest {
-
-	CSVParser testParser = new CSVParser();
+public class InsertDBTest {
+	
+	InsertFormDB insert = new InsertFormDB();
 	HeaderMap hm = new HeaderMap();
 	
 	// clear test DB before each test
@@ -33,43 +31,65 @@ public class CSVParserTest {
 		st.close();
 		conn.close();
 	}
-    
-	@Test
-	@DisplayName("testing a CSV file that does not exist")
-	void testNoMessage() {
-		assertThrows(IOException.class, ()->{
-			testParser.parseFile("doesnotexist.txt");
-		}, "exception was thrown for a non-existant CSV file");
-	}
 	
 	@Test
-	@DisplayName("test Insert 1 line")
-	void test1Line() throws SQLException, IOException{
-		InfoForm form = testParser.parseFile("./src/test/java/group13/adam/parser/Test1User.csv");
+	@DisplayName("Test inserting one row")
+	void test1Row() throws SQLException{
+		String[] test = new String[90];
+		for (int i = 0; i < test.length; i++)
+			test[i] = "test" + i;
+		insert.insert(test);
+		
 		String url = "jdbc:sqlite:../icare-db/test.db";
         Connection conn = DriverManager.getConnection(url);
 		Statement st = conn.createStatement();
 		ResultSet rs = st.executeQuery("select * from InfoForum");
-		// compare the info form to the db row
+		
+		// compare the list of strings to the db row
+		int count = 0;
 		for(String s: hm.getHeaderMap().keySet()){
-			assertEquals(rs.getString(s), form.getInfoMap().get(hm.getHeaderMap().get(s)));
+			assertEquals(rs.getString(s), test[count]);
+			count++;
 		}
 		rs.close();
 		st.close();
 		conn.close();
-		
 	}
 	
 	@Test
-	@DisplayName("test Insert 50 lines")
-	void testMultipleLines() throws SQLException, IOException{
-		testParser.parseFile("./src/test/java/group13/adam/parser/infoforum.csv");
+	@DisplayName("Test inserting two rows")
+	void test2Rows() throws SQLException{
+		String[] test = new String[90];
+		for (int i = 0; i < test.length; i++)
+			test[i] = "test" + i;
+		insert.insert(test);
+		
+		for (int i = 0; i < test.length; i++)
+			test[i] = "bleh" + i;
+		insert.insert(test);
+		
 		String url = "jdbc:sqlite:../icare-db/test.db";
         Connection conn = DriverManager.getConnection(url);
 		Statement st = conn.createStatement();
-		// want to make sure that we have 50 rows in db now
-		ResultSet rs = st.executeQuery("select COUNT(*) from InfoForum");
-		assertEquals(rs.getInt(1), 50);
+		ResultSet rs = st.executeQuery("select * from InfoForum");
+		
+		// compare the list of strings to the db row
+		int count = 0;
+		for(String s: hm.getHeaderMap().keySet()){
+			assertEquals(rs.getString(s), "test" + count);
+			count++;
+		}
+		
+		// move to next row
+		rs.next();	// moves to the first row of db
+		rs.next();	// moves to the second row of db
+		count = 0;
+		for(String s: hm.getHeaderMap().keySet()){
+			assertEquals(rs.getString(s), "bleh" + count);
+			count++;
+		}
+		
+		
 		rs.close();
 		st.close();
 		conn.close();

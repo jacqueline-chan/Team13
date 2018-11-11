@@ -2,6 +2,8 @@ package group13.adam.gui;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.SQLException;
+
 import javax.swing.*;
 
 import group13.adam.db.InsertFormDB;
@@ -137,7 +139,12 @@ public class ApplicationForm extends JPanel {
 		  fieldsString[i] = value ;
 	  }
 	  InsertFormDB insertform = new InsertFormDB();
-	  insertform.insert(fieldsString);
+	  try {
+		insertform.insert(fieldsString);
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 	  unhighlightField();
 	  highlightedField=-1;
 	return record;
