@@ -6,8 +6,8 @@ import java.util.regex.Pattern;
 public class ErrorForms {
   public static HashMap<String, Pattern> getOptionalParam() {
     HashMap<String, Pattern> regex = new HashMap<String, Pattern>();
-    regex.put("Total Length of Orientation",
-        Pattern.compile("[0-9]* hours [0-9]* minutes"));
+    //regex.put("Total Length of Orientation",
+    //    Pattern.compile("[0-9]* hours [0-9]* minutes"));
     regex.put("Total Length of Orientation: Hours", Pattern.compile("[0-9]*"));
     regex.put("Total Length of Orientation: Minutes",
         Pattern.compile("[0-9]*"));
