@@ -30,4 +30,4 @@ Sprint progress and backlogs have been posted to the Deliverable 3 folder. Sourc
 
 Deliverable #4:
 
-Sprint progress and backlogs have been posted to the Deliverable 4 folder. Source code can be found on the master branch and is merged from task branches. Instructions for running the code are the same as from Deliverable 3 and can still be found in the Deliverable 3 folder. Testing Documentation, including planning and unit/acceptance test confirmation can be found in the Deliverable 4 folder.
+Sprint progress and backlogs have been posted to the Deliverable 4 folder. Source code can be found on the master branch and is merged from task branches. Instructions for running the code are the same as from Deliverable 3 and can still be found in the Deliverable 3 folder. Testing Documentation can be found in the Deliverable 4 folder. Code review documentation can be found in the Deliverable 4 folder.
