@@ -21,11 +21,13 @@ public class CSVParser {
 	
 	//private final static String SAMPLECSVFILEPATH = "/home/jamie/Desktop/infoforum.csv";
 
+	// returns the last infoForm to be inserted from the file (1 per row)
 	public InfoForm parseFile(String fileName) throws IOException, SQLException{
 		InsertFormDB db = new InsertFormDB();
     	InfoForm form = new InfoForm();
     	
 		try {
+			// open the csv file
 			Reader reader;
 			reader = Files.newBufferedReader(Paths.get(fileName));
 			CSVReader headerReader = new CSVReader(reader);
@@ -35,7 +37,7 @@ public class CSVParser {
 	        while((nextRecord = csvReader.readNext()) != null){
 	        	// insert into DB
 	        	db.insert(nextRecord);
-	        	//
+	        	// update the info form
 	        	for (int i = 0; i < nextRecord.length; i++){
 	        		form.updateInfoMap(headerMap.get(headers[i]), nextRecord[i]);
 	        	}
