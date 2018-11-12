@@ -1,0 +1,35 @@
+Backlog
+* Task 3: Calls CheckIfFieldsAreValid and if not display which fields are not valid (Go to specific spot and highlight it) 2 story point (Jacq)
+
+User Story 6: As Adam, an Agency Clerk, I would like the ability to drag-and-drop forms as a submission method so that I can easily submit to the central data collection platform
+Backend
+* Task 15: Upload whole CSV to SQL server 3 story points (Jamie)
+
+Backlog (Shelfed)
+User Story 7: As Adam, an Agency Clerk, I would like the feature of a cancel and submit button near the bottom of the submission page so data submission to TEQ is easy and intuitive
+Frontend
+* Task 16: Cancel button offers option to save unfinished templates for later 4 story points (Jacq)
+Backend
+* Task 17: Store unfinished template 2 story points (Alex)
+
+
+User Story 8: As Bob, a TEQ Data Analyst, I would like to be able to filter information based on a set date range so I can analyze trends and patterns
+Frontend
+* Task 18: Popup that lets you select date range and returns in format "YYYY-MM-DD" in function 3 story points
+
+User Story 10: As Adam, an Agency Clerk, I would like to get a notification that I am missing information if I try to submit my excel form without mandatory fields filled in so that I do not make the mistake of not submitting important values.
+Frontend
+* Task 21: Only applies when using drag and drop feature, will show any errors and have popup correction suggesting 4 story points (Sean)
+Backend
+* Task 22: Will actually override the csv file with the correct fields 6 story points (Jamie)
+
+
+User Story 11: As Bob, a TEQ Data Analyst, I would like to have the ability to create/save new report templates that will display selected categories and is compatible with the data collection software so that we can customize reports for certain agencies
+Front end
+* Task 23: Popup to select fields relevant and date range field to consider 6 story points (Alex)
+Backend
+* Task 24:  Saving task 23 as a file and retrieve it 3 story points (Alex)
+
+User Story 12: As Bob, a TEQ Data Analyst, I would like to be able to generate a report based on the aggregated submitted data from the agencies by selecting premade template or custom templates.
+* Task 25: After clicking the custom or premade template it should output the data with appropriate column and date range 3 story points
+* Task 26: Aggregating the information and outputting the data for each possible field based on frontend call using SQLite aggregation queries 8 story points (Ray) 

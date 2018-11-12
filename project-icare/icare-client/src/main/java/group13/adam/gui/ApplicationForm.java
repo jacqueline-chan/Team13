@@ -7,9 +7,11 @@ import java.sql.SQLException;
 import javax.swing.*;
 
 import group13.adam.db.InsertFormDB;
+import group13.adam.draganddrop.DragAndDrop;
 import group13.adam.gui.components.Buttons;
 import group13.adam.gui.components.Labels;
 import group13.adam.gui.components.Strings;
+
 import group13.adam.validation.ErrorPrevention;
 import group13.cscc01.forms.InfoForm;
 
@@ -47,6 +49,7 @@ public class ApplicationForm extends JPanel {
     LabelsObject.createErrorLabel(errorMessagePanel);
     // select button, JPanel selectFiles
     ButtonsObject.selectButton(selectFiles);
+
     // submit button
     JButton submitButton = ButtonsObject.submitButton(submitPane);
     submitButton.addActionListener(new ActionListener() {
