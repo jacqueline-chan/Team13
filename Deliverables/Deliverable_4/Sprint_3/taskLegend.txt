@@ -5,7 +5,7 @@ User Story 6: As Adam, an Agency Clerk, I would like the ability to drag-and-dro
 Backend
 * Task 15: Upload whole CSV to SQL server 3 story points (Jamie)
 
-Backlog (Shelfed)
+Backlog (Shelved)
 User Story 7: As Adam, an Agency Clerk, I would like the feature of a cancel and submit button near the bottom of the submission page so data submission to TEQ is easy and intuitive
 Frontend
 * Task 16: Cancel button offers option to save unfinished templates for later 4 story points (Jacq)
@@ -33,3 +33,7 @@ Backend
 User Story 12: As Bob, a TEQ Data Analyst, I would like to be able to generate a report based on the aggregated submitted data from the agencies by selecting premade template or custom templates.
 * Task 25: After clicking the custom or premade template it should output the data with appropriate column and date range 3 story points
 * Task 26: Aggregating the information and outputting the data for each possible field based on frontend call using SQLite aggregation queries 8 story points (Ray) 
+
+Important Notes:
+Jacqueline wasn't assigned a large amount of story points due to her commitments with midterms and the such.
+Alex was assigned extra story points due to lack of story points during sprint 2.
