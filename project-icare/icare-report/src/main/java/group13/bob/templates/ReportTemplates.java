@@ -84,10 +84,7 @@ public class ReportTemplates {
             }
           }
           FileManager.saveFile(fields);
-          String[] test = FileManager.getFile();
-          for (int i = 0; i < test.length; i++) {
-            System.out.println("Gucci" + test[i]);
-          }
+          FileManager.getFile(true);
         }
         templateFrame.dispose();
       }

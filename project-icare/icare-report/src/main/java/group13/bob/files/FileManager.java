@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -18,11 +20,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class FileManager {
-  private static FilePopUp genPopUp = new FilePopUp();
-  private static JFrame genFrame = genPopUp.getJFrame();
-  private static String[] fields = new String[] {"Ya dun goofed"};
+  private static String[] fields;
   
   private static String[] getFromFile(String name) throws IOException {
+    System.out.println(name);
     try {
       FileReader fr = new FileReader(name);
       BufferedReader br = new BufferedReader(fr);
@@ -35,11 +36,26 @@ public class FileManager {
       br.close();
       return fields;
     } catch (IOException e) {
-      return new String[1];
+      return new String[] {"Something is wrong"};
     }
   }
+  
+  private static void createFile(String name, String[] fields) throws IOException {
+    BufferedWriter temp = new BufferedWriter(new FileWriter(name));
+    temp.write(fields.length + "\n");
+    for(int i = 0; i < fields.length; i++) {
+      temp.write(fields[i]+"\n");
+    }
+    temp.flush();
+    temp.close();
+  }
+  
+
+  //Methods for the pop-up windows
+  
   public static void saveFile(String[] fields) {
-    
+    FilePopUp genPopUp = new FilePopUp();
+    JFrame genFrame = genPopUp.getJFrame();
     JPanel savePanel = new JPanel(new GridLayout(0, 1));
     JButton saveButton = new JButton("Confirm name");
     saveButton.addActionListener(new ActionListener() {
@@ -55,30 +71,33 @@ public class FileManager {
     savePanel.add(saveButton);
     genFrame.add(savePanel, BorderLayout.PAGE_END);
   }
-  public static String[] getFile() {
+  
+  
+  public static void getFile(boolean isTemplate) {
+    FilePopUp genPopUp = new FilePopUp();
+    JFrame genFrame = genPopUp.getJFrame();
     JPanel savePanel = new JPanel(new GridLayout(0, 1));
     JButton saveButton = new JButton("Confirm name");
-    saveButton.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
-        try {
-          fields = getFromFile(genPopUp.getFileName());
-        } catch (IOException e1) {
-          System.out.println("Something is wrong");
+      saveButton.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+          try {
+            fields = getFromFile(genPopUp.getFileName());
+            if (isTemplate) {
+              // Sean report code
+              for (int i = 0; i < fields.length; i++) {
+                System.out.println(fields[i]);
+              }
+            } else {
+              // Form necessary code
+            }
+          } catch (IOException e1) {
+            System.out.println("Something is wrong");
+          }
+          genFrame.dispose();
         }
-        genFrame.dispose();
-      }
-    });
+      });
     savePanel.add(saveButton);
     genFrame.add(savePanel, BorderLayout.PAGE_END);
-    return fields;
   }
-  private static void createFile(String name, String[] fields) throws IOException {
-    BufferedWriter temp = new BufferedWriter(new FileWriter(name));
-    temp.write(fields.length + "\n");
-    for(int i = 0; i < fields.length; i++) {
-      temp.write(fields[i]+"\n");
-    }
-    temp.flush();
-    temp.close();
-  }
+
 }
