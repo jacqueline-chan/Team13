@@ -84,7 +84,6 @@ public class ReportTemplates {
             }
           }
           FileManager.saveFile(fields);
-          FileManager.getFile(true);
         }
         templateFrame.dispose();
       }

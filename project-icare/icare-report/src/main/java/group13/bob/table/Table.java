@@ -1,5 +1,6 @@
 package group13.bob.table;
 
+import group13.bob.files.FileManager;
 import group13.bob.sqlite.SqlConnect;
 import group13.bob.sqlite.SqlQuery;
 import group13.bob.templates.ReportTemplates;
@@ -129,6 +130,13 @@ public class Table extends JFrame {
         ReportTemplates.CreateTemplatePopUp();
       }
     });
+    /*JButton getTemplate = new JButton("Get an existing template");
+    getTemplate.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        FileManager.getFile(true);
+      }
+    });
+    templatePanel.add(getTemplate);*/
     templatePanel.add(createTemplate);
     add(templatePanel, BorderLayout.PAGE_END);
   }

@@ -84,9 +84,6 @@ public class FileManager {
             fields = getFromFile(genPopUp.getFileName());
             if (isTemplate) {
               // Sean report code
-              for (int i = 0; i < fields.length; i++) {
-                System.out.println(fields[i]);
-              }
             } else {
               // Form necessary code
             }
