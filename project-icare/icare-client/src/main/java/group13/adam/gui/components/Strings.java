@@ -9,7 +9,7 @@ public class Strings {
 			      "Start Date of Service (YYYY-MM-DD)", "Language of Service",
 			      "Official Language of Preference",
 			      "Type of Institution/Organization Where Client Received Services",
-			      "Referred By", "Services Received", "Total Length of Orientation",
+			      "Referred By", "Services Received",
 			      "Total Length of Orientation: Hours",
 			      "Total Length of Orientation: Minutes", "Number of Clients in Group",
 			      "Directed at a specific Target Group ",

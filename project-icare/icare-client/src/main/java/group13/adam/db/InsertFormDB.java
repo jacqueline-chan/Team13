@@ -38,7 +38,7 @@ public class InsertFormDB {
     public void insert(String[] fields) {
         String sql = "INSERT INTO InfoForum(unique_identifier,date_of_birth,postal_code,start_date_of_service,"
         		+ "language_of_service,official_language_of_preference,type_of_institution,referred_by,"
-        		+ "services_received,total_length_of_orientation,total_length_of_orientation_hours,"
+        		+ "services_received,total_length_of_orientation_hours,"
         		+ "total_length_of_orientation_minutes,number_of_clients_in_group,directed_at_a_specific,children,"
         		+ "youth,seniors,gender_specific,refugees,ethnic,deaf_or_hard_of_hearing,blind_or_partially_sighted,lgbtq,"
         		+ "families,clients_with_other_impairments,clients_with_international_training_in_a_regulated_profession,"
@@ -60,13 +60,19 @@ public class InsertFormDB {
         		+ "child_5_type_of_care,transportation_2,provisions_for_disabilities,translation,between_1,and_1,"
         		+ "interpretation,between_2,and_2,crisis_counselling,end_date_of_service,reason_for_update) "
         		+ "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,"
-        		+ "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        		+ "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
  
         try (Connection conn = this.connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
         	for (int i = 0; i < fields.length; i++){
         		pstmt.setString(i+1, fields[i]);
         	}
             pstmt.executeUpdate();
+            
+            
+            //pstmt.close();
+            //conn.close();
+            
+            
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
