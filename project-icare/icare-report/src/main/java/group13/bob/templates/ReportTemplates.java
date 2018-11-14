@@ -73,7 +73,7 @@ public class ReportTemplates {
     submitButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         if (fieldsSelected) {
-          FileManager.saveFilePopUp(columns);
+          FileManager.saveFile(columns);
         } else {
           String[] fields = new String[templateColumnNum];
           int index = 0;
@@ -83,7 +83,11 @@ public class ReportTemplates {
               index++;
             }
           }
-          FileManager.saveFilePopUp(fields);
+          FileManager.saveFile(fields);
+          String[] test = FileManager.getFile();
+          for (int i = 0; i < test.length; i++) {
+            System.out.println("Gucci" + test[i]);
+          }
         }
         templateFrame.dispose();
       }
