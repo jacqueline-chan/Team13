@@ -1,0 +1,38 @@
+﻿Backlog column name
+* Task 3: Calls CheckIfFieldsAreValid and if not display which fields are not valid (Go to specific spot and highlight it)  2 story point (Jacq)
+* Task 24:  Saving task 23 as a file and retrieve it 2 story points  (Alex)
+
+User Story 8: As Bob, a TEQ Data Analyst, I would like to be able to filter information based on a set date range so I can analyze trends and patterns
+Frontend
+* Task 18: Popup that lets you select date range and returns in format "YYYY-MM-DD" in function 1 story points (Sean)
+
+User Story 12: As Bob, a TEQ Data Analyst, I would like to be able to generate a report based on the aggregated submitted data from the agencies by selecting premade template or custom templates.
+Frontend:
+Task 25: After clicking the custom or premade template it should output the data with appropriate column and date range 4 story points (Sean)
+
+User Story 13: Bobbafet, The ICare system owner, I would like some of my workers to have limited access to the database to ensure some form of privacy (i.e. different level of worker can only generate certain reports):
+Frontend:
+Task 27: Login interface with signup 5 story points (Jacq)
+Task 28: Different interface based on level of user access after login
+Backend:
+Task 29: Database for user login and their respective level of access 1 story (Ray)
+
+User Story 14: Bobbafet, The ICare system owner, I would like to be able to add new ICare forms with new data fields.
+Frontend:
+Task 30: Create new form based on existing form by adding or modifying
+Task 31: Creating a brand new form with all customizable fields
+Backend:
+Task 32: Saving custom/modified forms and storing it in a file retrievable from agency submission software 3 story points (Alex)
+Task 33: Creating a new database for the new custom forms 4 story points (Ray)
+Task 34*: modifying existing database and merging if modified
+
+User Story 15: Adam, an Agency Clerk, I would like to be able to switch which template form I’m submitting.
+Frontend:
+Task 35: Select down menu for which form to use
+Task 36: Select button to access new form file
+Backend:
+Task 37: Parse new form files
+
+Note:
+Jamie wasn't assigned to any tasks due to his time and effort needed to create and ensure a working test environment for this deliverable.
+Therefore, for the heavy undertaking we have assigned Jamie no formal story points for this sprint.
