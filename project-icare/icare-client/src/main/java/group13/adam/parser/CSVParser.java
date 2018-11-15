@@ -3,7 +3,6 @@ package group13.adam.parser;
 import com.opencsv.*;
 
 import group13.adam.db.InsertFormDB;
-import group13.adam.gui.ApplicationForm;
 import group13.adam.headermap.HeaderMap;
 import group13.cscc01.forms.InfoForm;
 
@@ -11,6 +10,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.util.HashMap;
 
 public class CSVParser {
@@ -19,13 +19,15 @@ public class CSVParser {
 	
 	HashMap<String, String> headerMap = hm.getHeaderMap();
 	
-	private final static String SAMPLECSVFILEPATH = "/home/jamie/Desktop/infoforum.csv";
+	//private final static String SAMPLECSVFILEPATH = "/home/jamie/Desktop/infoforum.csv";
 
-	public InfoForm parseFile(String fileName) throws IOException{
+	// returns the last infoForm to be inserted from the file (1 per row)
+	public InfoForm parseFile(String fileName) throws IOException, SQLException{
 		InsertFormDB db = new InsertFormDB();
     	InfoForm form = new InfoForm();
     	
 		try {
+			// open the csv file
 			Reader reader;
 			reader = Files.newBufferedReader(Paths.get(fileName));
 			CSVReader headerReader = new CSVReader(reader);
@@ -35,11 +37,10 @@ public class CSVParser {
 	        while((nextRecord = csvReader.readNext()) != null){
 	        	// insert into DB
 	        	db.insert(nextRecord);
-	        	//
+	        	// update the info form
 	        	for (int i = 0; i < nextRecord.length; i++){
 	        		form.updateInfoMap(headerMap.get(headers[i]), nextRecord[i]);
 	        	}
-	        	//printInfoMap(form);
 	        }
 	        csvReader.close();
 	        headerReader.close();
@@ -49,20 +50,5 @@ public class CSVParser {
 		
 		return form;
     }
-	// print out the csv contents
-	/**
-    public void printInfoMap(InfoForm form){
-    	System.out.println(form.getInfoMap());
-    }
-    */
-    
-    /**
-    public static void main(String[] args) throws IOException{
-    	CSVParser test = new CSVParser();
-    	//test.parseFile(SAMPLECSVFILEPATH);
-    	test.parseFile("/home/jamie/Desktop/CSCC01/Project/Team13/project-icare/icare-client/src/test/java/group13/adam/parser/Test1User.csv");
-    }
-    */
-    
     
 }

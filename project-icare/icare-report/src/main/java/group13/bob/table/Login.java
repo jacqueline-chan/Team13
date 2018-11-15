@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import group13.bob.tab.ReportTab;
 import group13.bob.table.logincomponents.Buttons;
 import group13.bob.table.logincomponents.Labels;
 
@@ -61,7 +62,7 @@ public class Login extends JFrame{
 	        public void actionPerformed(ActionEvent e) {
 	        	getCredentials();
 	        	verifyCredentials();
-	        	lauchTableGui();
+	        	lauchTabGui();
 	        }
 	      });
 		
@@ -91,10 +92,10 @@ public class Login extends JFrame{
 		
 	}
 	
-	protected void lauchTableGui() {
+	protected void lauchTabGui() {
 		try {
-			Table frame = new Table();
-			frame.setVisible(true);
+	        ReportTab frame = new ReportTab();
+	        frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
