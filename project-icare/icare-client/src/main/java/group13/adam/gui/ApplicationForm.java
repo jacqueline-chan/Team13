@@ -11,7 +11,8 @@ import group13.adam.draganddrop.DragAndDrop;
 import group13.adam.gui.components.Buttons;
 import group13.adam.gui.components.Labels;
 import group13.adam.gui.components.Strings;
-
+import group13.adam.files.*;
+import group13.adam.formmodifier.FormModifierPopUp;
 import group13.adam.validation.ErrorPrevention;
 import group13.cscc01.forms.InfoForm;
 
@@ -57,7 +58,12 @@ public class ApplicationForm extends JPanel {
         submitForm();
       }
     });
-
+    JButton changeFormButton = ButtonsObject.changeFormButton(submitPane);
+    changeFormButton.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        FormModifierPopUp popUp = new FormModifierPopUp();
+      }
+    });
     // Put the panels in this panel, labels on left,
     // text fields on right.
     setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
