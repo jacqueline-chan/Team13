@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -25,23 +26,29 @@ public class FormModifierPopUp {
   private JFrame modifierFrame;
   private ArrayList<Boolean> includedInTemplate;
   private boolean fieldsSelected;
-  private String[] columns;
+  private ArrayList<String> columns;
+  private JPanel combinePanel;
   private static final ArrayList<JButton> buttons = new ArrayList<JButton>();
   // A counter that keeps track of the amount of fields selected.
-  private static int templateColumnNum;
+  private static int fieldsNum;
 
   public FormModifierPopUp() {
-    this.columns = (new InfoForm()).getInfoArray();
+    columns = new ArrayList<String>();
+    String[] temp = (new InfoForm()).getInfoArray();
+    for (int i = 0; i < temp.length; i++) {
+      this.columns.add(temp[i]);
+    }
+    this.combinePanel = new JPanel(/* new GridLayout(columns.length, 1) */);
+    BoxLayout bl = new BoxLayout(combinePanel, BoxLayout.Y_AXIS);
+    combinePanel.setLayout(bl);
     includedInTemplate = new ArrayList<Boolean>();
-    templateColumnNum = 0;
+    fieldsNum = 0;
     fieldsSelected = false;
-    modifierFrame = new JFrame("Create new Template");
+    modifierFrame = new JFrame("Modify the existing form");
     modifierFrame.setPreferredSize(new Dimension(500, 500));
     modifierFrame.pack();
     modifierFrame.setLocationRelativeTo(null);
     modifierFrame.setVisible(true);
-
-    JPanel combinePanel = new JPanel(new GridLayout(columns.length, 1));
     // Create an array of buttons that switch the color upon click.
     choiceButtons(combinePanel, buttons);
     JPanel submitPanel = new JPanel(new GridLayout(0, 1));
@@ -62,10 +69,10 @@ public class FormModifierPopUp {
 
   private void choiceButtons(JPanel combinePanel,
       final ArrayList<JButton> buttons) {
-    for (int i = 0; i < columns.length; i++) {
+    for (int i = 0; i < columns.size(); i++) {
       final int index = i;
       includedInTemplate.add(false);
-      buttons.add(new JButton(columns[i]));
+      buttons.add(new JButton(columns.get(i)));
       buttons.get(i).setBackground(Color.RED);
       buttons.get(i).setPreferredSize(new Dimension(40, 40));
       buttons.get(i).addActionListener(new ActionListener() {
@@ -78,24 +85,20 @@ public class FormModifierPopUp {
   }
 
   private void submitButton(JPanel submitPanel) {
-    JButton submitButton = new JButton("Submit the template");
+    JButton submitButton = new JButton("Submit the new form");
     submitButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        if (fieldsSelected) {
-          FileManager.saveFile(columns);
-        } else {
-          String[] fields = new String[templateColumnNum];
+        modifierFrame.dispose();
+          String[] fields = new String[fieldsNum];
           int index = 0;
-          for (int i = 0; i < columns.length; i++) {
+          for (int i = 0; i < columns.size(); i++) {
             if (includedInTemplate.get(i)) {
-              fields[index] = columns[i];
+              fields[index] = columns.get(i);
               index++;
             }
           }
-          FileManager.saveFile(fields);
+          MandatoryFieldsPopUp popUp = new MandatoryFieldsPopUp(fields);
         }
-        modifierFrame.dispose();
-      }
     });
     submitPanel.add(submitButton);
   }
@@ -104,7 +107,7 @@ public class FormModifierPopUp {
     JCheckBox selectAll = new JCheckBox("Select all fields");
     selectAll.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        for (int i = 0; i < columns.length; i++) {
+        for (int i = 0; i < columns.size(); i++) {
           if (!((fieldsSelected) ^ (includedInTemplate.get(i)))) {
             switchButton(buttons.get(i), i, Color.GREEN);
           }
@@ -114,6 +117,7 @@ public class FormModifierPopUp {
     });
     submitPanel.add(selectAll);
   }
+
 
   private void addFieldButton(JPanel submitPanel) {
     JButton addFieldButton = new JButton("Add a new field to form");
@@ -125,26 +129,31 @@ public class FormModifierPopUp {
     submitPanel.add(addFieldButton);
   }
 
-  public void newFieldButton(String regex, JPanel buttonPanel) {
-    final JButton newButton = new JButton();
+  public void newFieldButton(String regex, String name) {
+    final JButton newButton = new JButton(name);
     newButton.setBackground(Color.YELLOW);
     newButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        switchButton(newButton, includedInTemplate.size(), Color.YELLOW);
+        final int thisIndex = includedInTemplate.size() - 1;
+        switchButton(newButton, thisIndex, Color.YELLOW);
       }
     });
-    buttonPanel.add(newButton);
-    buttonPanel.repaint();
+    fieldsNum++;
+    columns.add(name);
+    buttons.add(newButton);
+    includedInTemplate.add(true);
+    combinePanel.add(newButton);
+    // modifierFrame.add(combinePanel);
   }
 
   private void switchButton(JButton button, int index, Color color) {
     includedInTemplate.set(index, !(includedInTemplate.get(index)));
     if (includedInTemplate.get(index)) {
       button.setBackground(color);
-      templateColumnNum++;
+      fieldsNum++;
     } else {
       button.setBackground(Color.RED);
-      templateColumnNum--;
+      fieldsNum--;
     }
   }
 
@@ -170,16 +179,17 @@ public class FormModifierPopUp {
     savePanel.add(saveButton);
     nameFrame.add(savePanel, BorderLayout.PAGE_END);
   }
-  
-  private void chooseRegex(String fieldName) {
+
+  private void chooseRegex(final String fieldName) {
     final HashMap<String, String> regexMap = new HashMap<String, String>();
-    regexMap.put("A date","(19|20)[0-9]{2}-((0[1-9])|(1[0-2]))-((0[1-9])|([1-2][0-9])|(3[0-1]))");
+    regexMap.put("A date",
+        "(19|20)[0-9]{2}-((0[1-9])|(1[0-2]))-((0[1-9])|([1-2][0-9])|(3[0-1]))");
     regexMap.put("A number", "[0-9]+");
     regexMap.put("A word", "[(A-Z)|(a-z)]+");
     regexMap.put("Multiple words", "[(A-Z)|(a-z)| ]+");
     regexMap.put("Yes or No", "(Yes)|(No)");
     regexMap.put("Other", ".*");
-    
+
     final JFrame regexFrame = new JFrame("Choose the option for field");
     regexFrame.setPreferredSize(new Dimension(400, 200));
     regexFrame.pack();
@@ -199,16 +209,16 @@ public class FormModifierPopUp {
     choices[5] = new JRadioButton("Other");
     final JPanel buttonPanel = new JPanel();
     ButtonGroup group = new ButtonGroup();
-    for(int i = 0; i < choices.length; i++) {
+    for (int i = 0; i < choices.length; i++) {
       final int index = i;
       group.add(choices[i]);
       buttonPanel.add(choices[i]);
       choices[i].addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(ActionEvent e) {
           regexFrame.dispose();
-          newFieldButton(regexMap.get(choices[index].getText()), buttonPanel);
-      }
-    });
+          newFieldButton(regexMap.get(choices[index].getText()), fieldName);
+        }
+      });
     }
     regexFrame.add(buttonPanel, BorderLayout.CENTER);
   }
