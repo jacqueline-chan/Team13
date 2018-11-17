@@ -2,14 +2,19 @@ package group13.adam.draganddrop;
 
 import javax.swing.*;
 
+import group13.adam.parser.CSVParser;
+
 import java.awt.datatransfer.DataFlavor;
 import java.awt.dnd.*;
 import java.io.File;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 public class DragAndDrop implements DropTargetListener {
 	
 		private JTextArea textArea;
+		private CSVParser csvparser = new CSVParser();
 		
 		private boolean status = false;
 		
@@ -52,9 +57,21 @@ public class DragAndDrop implements DropTargetListener {
 						StringBuilder filePaths = new StringBuilder();
 						for (File file : files) {
 							filePaths.append("file: " + file.getAbsolutePath() + "\n");
+							//JOptionPane.showConfirmDialog(null, "Would you like to submit data from " + file.getName() + "?");
+							try{
+							csvparser.parseFile(file.getAbsolutePath());
+							} catch(SQLException e){
+								textArea.append("Unable to add " + file.getAbsolutePath() + " due to an error with the field values \n");
+							} catch(IOException e){
+								textArea.append("Unable to add " + file.getAbsolutePath() + " due to an error with the file \n");
+							}
 						}
 						
 						textArea.append(filePaths.toString());
+						
+						
+						// test
+						
 					}
 				}
 			} catch (Exception e) {
@@ -68,12 +85,13 @@ public class DragAndDrop implements DropTargetListener {
 		
 	public static void ShowDragAndDrop() {
 		JFrame jf = new JFrame("Drag and Drop");
-		jf.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		jf.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
 		
         JTextArea textArea = new JTextArea(10, 40);
-        textArea.setLineWrap(true);                
+        textArea.setLineWrap(true);
+        textArea.setEditable(false);
         panel.add(new JScrollPane(textArea)); 
         
         DragAndDrop listener = new DragAndDrop(textArea);
