@@ -1,6 +1,7 @@
 package group13.adam.formmodifier;
 
 import group13.cscc01.forms.*;
+import group13.adam.validation.*;
 import group13.adam.files.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -10,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.regex.Pattern;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
@@ -27,14 +29,22 @@ public class FormModifierPopUp {
   private ArrayList<Boolean> includedInTemplate;
   private boolean fieldsSelected;
   private ArrayList<String> columns;
+  final private HashMap<String, Pattern> mandFields;
+  final private HashMap<String, Pattern> optFields;
+  private HashMap<String, String> newFields;
+  
   private JPanel combinePanel;
   private static final ArrayList<JButton> buttons = new ArrayList<JButton>();
+  
   // A counter that keeps track of the amount of fields selected.
   private static int fieldsNum;
 
   public FormModifierPopUp() {
     columns = new ArrayList<String>();
     String[] temp = (new InfoForm()).getInfoArray();
+    newFields = new HashMap<String, String>();
+    mandFields = ErrorForms.getCompulsoryParam();
+    optFields = ErrorForms.getOptionalParam();
     for (int i = 0; i < temp.length; i++) {
       this.columns.add(temp[i]);
     }
@@ -85,6 +95,7 @@ public class FormModifierPopUp {
   }
 
   private void submitButton(JPanel submitPanel) {
+    final HashMap<String, String> newFormFields = new HashMap<String, String>();
     JButton submitButton = new JButton("Submit the new form");
     submitButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
@@ -93,11 +104,21 @@ public class FormModifierPopUp {
           int index = 0;
           for (int i = 0; i < columns.size(); i++) {
             if (includedInTemplate.get(i)) {
+              if (mandFields.containsKey(columns.get(i))) {
+                System.out.println(mandFields.get(columns.get(i)).toString());
+                newFormFields.put(columns.get(i), mandFields.get(columns.get(i)).pattern());
+              }
+              else if (optFields.containsKey(columns.get(i))) {
+                newFormFields.put(columns.get(i), optFields.get(columns.get(i)).pattern());
+              }
+              else if (newFields.containsKey(columns.get(i))) {
+                newFormFields.put(columns.get(i), newFields.get(columns.get(i)));
+              }
               fields[index] = columns.get(i);
               index++;
             }
           }
-          MandatoryFieldsPopUp popUp = new MandatoryFieldsPopUp(fields);
+          MandatoryFieldsPopUp popUp = new MandatoryFieldsPopUp(newFormFields, fields);
         }
     });
     submitPanel.add(submitButton);
@@ -141,6 +162,7 @@ public class FormModifierPopUp {
     fieldsNum++;
     columns.add(name);
     buttons.add(newButton);
+    newFields.put(name, regex);
     includedInTemplate.add(true);
     combinePanel.add(newButton);
     // modifierFrame.add(combinePanel);

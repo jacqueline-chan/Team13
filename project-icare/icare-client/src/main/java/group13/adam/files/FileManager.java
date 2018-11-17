@@ -13,6 +13,8 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -40,11 +42,18 @@ public class FileManager {
     }
   }
   
-  private static void createFile(String name, String[] fields) throws IOException {
+  private static void createFile(String name, HashMap<String, String> mandFields, 
+      HashMap<String, String> optFields) throws IOException {
     BufferedWriter temp = new BufferedWriter(new FileWriter(name));
-    temp.write(fields.length + "\n");
-    for(int i = 0; i < fields.length; i++) {
-      temp.write(fields[i]+"\n");
+    temp.write(mandFields.size() + "\n");
+    for(Map.Entry<String, String> entry : mandFields.entrySet()) {
+      temp.write(entry.getKey() + "\n");
+      temp.write(entry.getValue() + "\n");
+    }
+    temp.write(optFields.size() + "\n");
+    for(Map.Entry<String, String> entry : optFields.entrySet()) {
+      temp.write(entry.getKey() + "\n");
+      temp.write(entry.getValue() + "\n");
     }
     temp.flush();
     temp.close();
@@ -53,7 +62,8 @@ public class FileManager {
 
   //Methods for the pop-up windows
   
-  public static void saveFile(final String[] fields) {
+  public static void saveFile(final HashMap<String, String> mandFields,
+      final HashMap<String, String> optFields) {
     final FilePopUp genPopUp = new FilePopUp();
     final JFrame genFrame = genPopUp.getJFrame();
     JPanel savePanel = new JPanel(new GridLayout(0, 1));
@@ -61,7 +71,7 @@ public class FileManager {
     saveButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         try {
-          createFile(genPopUp.getFileName(), fields);
+          createFile(genPopUp.getFileName(), mandFields, optFields);
         } catch (IOException e1) {
           System.out.println("Something is wrong");
         }

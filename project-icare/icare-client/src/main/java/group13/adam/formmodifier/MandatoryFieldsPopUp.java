@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -23,18 +24,25 @@ public class MandatoryFieldsPopUp {
   private ArrayList<Boolean> isMandatory;
   private boolean fieldsSelected;
   private String[] columns;
+  private final HashMap<String, String> hashFields;
+  private final HashMap<String, String> mandHashFields;
+  private final HashMap<String, String> optHashFields;
   private JPanel combinePanel;
   private static final ArrayList<JButton> buttons = new ArrayList<JButton>();
   // A counter that keeps track of the amount of fields selected.
   private static int templateColumnNum;
   
 
-  public MandatoryFieldsPopUp(String[] fields) {
+  public MandatoryFieldsPopUp(HashMap<String, String> map, String[] fields) {
     this.columns = fields;
+    this.hashFields = map;
+    this.mandHashFields = new HashMap<String, String>();
+    this.optHashFields = new HashMap<String, String>();
     this.combinePanel = new JPanel(new GridLayout(columns.length, 1));
     isMandatory = new ArrayList<Boolean>();
     templateColumnNum = 0;
     fieldsSelected = false;
+    
     mandFrame = new JFrame("Choose the mandatory fields");
     mandFrame.setPreferredSize(new Dimension(500, 500));
     mandFrame.pack();
@@ -96,17 +104,19 @@ public class MandatoryFieldsPopUp {
         }
         mandFrame.dispose();
         if (fieldsSelected) {
-          FileManager.saveFile(columns);
+          FileManager.saveFile(hashFields, new HashMap<String, String>());
         } else {
-          String[] fields = new String[templateColumnNum];
-          int index = 0;
+          String[] mandFields = new String[templateColumnNum];
+          String[] optFields = new String[columns.length-templateColumnNum];
           for (int i = 0; i < columns.length; i++) {
             if (isMandatory.get(i)) {
-              fields[index] = columns[i];
-              index++;
+              mandHashFields.put(columns[i], hashFields.get(columns[i]));
             }
-            FileManager.saveFile(fields);
+            else {
+              optHashFields.put(columns[i], hashFields.get(columns[i]));
+            }
           }
+          FileManager.saveFile(mandHashFields, optHashFields);
         }
       }
     });

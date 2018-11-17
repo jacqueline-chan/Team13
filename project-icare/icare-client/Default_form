@@ -1,0 +1,184 @@
+13
+End Date of Service (YYYY-MM-DD)
+(19|20)[0-9]{2}-((0[1-9])|(1[0-2]))-((0[1-9])|([1-2][0-9])|(3[0-1]))
+Was Essential Skills and Aptitude Training Received as Part of this Service?
+(Yes)|(No)
+Referred By
+[(A-Z)|(a-z)| ]+
+Support Services Received
+(Yes)|(No)
+Language of Service
+[(A-Z)|(a-z)]+
+Official Language of Preference
+[(A-Z)|(a-z)]+
+Date of Birth (YYYY-MM-DD)
+(19|20)[0-9]{2}-((0[1-9])|(1[0-2]))-((0[1-9])|([1-2][0-9])|(3[0-1]))
+Start Date of Service (YYYY-MM-DD)
+(19|20)[0-9]{2}-((0[1-9])|(1[0-2]))-((0[1-9])|([1-2][0-9])|(3[0-1]))
+Services Received
+[(A-Z)|(a-z)| ]+
+Type of Institution/Organization Where Client Received Services
+[(A-Z)|(a-z)| ]+
+Postal Code where the service was received
+([A-Z][0-9]){3}
+Unique Identifier
+\d+
+Was Life Skills or Responsibilities of Citizenship Information Received as Part of this Service?
+(Yes)|(No)
+78
+Target Group: Seniors
+(Yes)|(No)
+Computer skills
+.+
+Community Engagement
+.+
+Target Group: Deaf or Hard of Hearing
+(Yes)|(No)
+Important Documents
+.+
+Child 1: Age
+[0-9]{1,2}
+Becoming a Canadian Citizen
+.+
+Overview of Canada Referrals
+.+
+Education
+.+
+Child 3: Type of Care
+.*
+Target Group: Official Language minorities
+(Yes)|(No)
+Improving English or French Referrals
+.+
+Target Group: Families/Parents
+(Yes)|(No)
+Target Group: Gender-specific
+(Yes)|(No)
+Education Referrals
+.+
+Child 2: Age
+[0-9]{1,2}
+Child 3: Age
+[0-9]{1,2}
+Employment and Income
+.+
+Child 4: Type of Care
+.*
+Money and Finances Referrals
+.+
+Translation
+.*
+Interpersonal Conflict
+.+
+Transportation Referrals
+.+
+Between
+.*
+Interpersonal Skills and Workplace Culture
+.+
+Communications and Media Referrals
+.+
+Crisis Counselling
+.*
+Sources of Information Referrals
+.+
+Money and Finances
+.+
+Interpretation
+.*
+Total Length of Orientation: Hours
+[0-9]*
+Target Group: Clients with other impairments (physical, mental)
+(Yes)|(No)
+Total Length of Orientation
+null
+Target Group: Blind or Partially Sighted
+(Yes)|(No)
+Housing Referrals
+.+
+And
+.*
+Overview of Canada
+.+
+Target Group: Ethnic/cultural/linguistic group
+(Yes)|(No)
+Target Group: Clients with international training in a regulated profession
+(Yes)|(No)
+Becoming a Canadian Citizen Referrals
+.+
+Numeracy
+.+
+Improving English or French
+.+
+Rights and Freedoms Referrals
+.+
+Canadian Law and Justice
+.+
+Transportation
+.+
+Target Group: Youth (15-24 yrs)
+null
+Child 5: Type of Care
+.*
+And 2
+.*
+Reason for update
+.*
+Interpersonal Conflict Referrals
+.+
+Communications and Media
+.+
+Community Engagement Referrals
+.+
+Transportation 2
+.*
+Rights and Freedoms
+.+
+Target Group: Lesbian, Gay, Bisexual, Transgender, Queer (LGBTQ)
+(Yes)|(No)
+Child 5: Age
+[0-9]{1,2}
+Child 1: Type of Care
+.*
+Provisions for Disabilities
+.*
+Total Length of Orientation: Minutes
+[0-9]*
+Important Documents Referrals
+.+
+Document Use
+.+
+Health Referrals
+.+
+Care for Newcomer Children
+(Yes)|(No)
+Between 1
+.*
+Health
+.+
+Leadership Training
+.+
+Rights and Responsibilities of Citizenship (based on discover Canada)
+.+
+Directed at a specific Target Group 
+(Yes)|(No)
+Housing
+.+
+Sources of Information
+.+
+Employment and Income Referrals
+.+
+Child 4: Age
+[0-9]{1,2}
+Target Group: Children (0-14 yrs)
+(Yes)|(No)
+Life Skills
+.+
+Target Group: Clients with international training in a regulated trade
+(Yes)|(No)
+Number of Clients in Group
+[0-9]*
+Child 2: Type of Care
+.*
+Target Group: Refugees
+(Yes)|(No)
