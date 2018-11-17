@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,6 +17,10 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
@@ -32,18 +37,18 @@ public class ReportTab extends JFrame{
 	private String topLanguages = "Top 10 Language of Service:";
 	private String perferredOfficialLanguage = "Perferred Official Language:";
 	private String referredBy = "Referred By";
-	private String totalCounts = "                                                                               Total Counts(all clients)";
+	private String totalCounts = "                          Total Counts(all clients)";
 	
 	
 	// this is how the data should look like when extract data from database
-	private String[] dateRange = new String[] {" ", "2018", "2019", "2020"};
-	private String[][] topLanguagesTestValues = {{"English", "10", "20", "30"}, {"English", "10", "20", "30"},{"English", "10", "20", "30"},{"English", "10", "20", "30"},{"English", "10", "20", "30"},
-			{"English", "10", "20", "30"},{"English", "10", "20", "30"},{"English", "10", "20", "30"},{"English", "10", "20", "30"}};
-	private String[][] perferredLanguageTestValues = {{"English", "10", "20", "30"}, {"French", "10", "20", "30"},{"Unknown", "10", "20", "30"}};
-	private String[][] referredByTestValues = {{"English", "10", "20", "30"}, {"French", "10", "20", "30"},{"Unknown", "10", "20", "30"}};
-	private String[][] totalCountsTestValues = {{"500", "600", "700", "800"}};
+	private String[] dateRange = new String[] {" ", "2018", "2019", "2020", "2021", "2022","2023"};
+	private String[][] topLanguagesTestValues = {{"English", "10", "20", "30", "40", "50", "60"}, {"English", "10", "20", "30", "40", "50", "60"},{"English", "10", "20", "30", "40", "50", "60"},{"English", "10", "20", "30", "40", "50", "60"},{"English", "10", "20", "30", "40", "50", "60"},
+			{"English", "10", "20", "30", "40", "50", "60"},{"English", "10", "20", "30", "40", "50", "60"},{"English", "10", "20", "30", "40", "50", "60"},{"English", "10", "20", "30", "40", "50", "60"},{"English", "10", "20", "30", "40", "50", "60"},{"English", "10", "20", "30", "40", "50", "60"}};
+	private String[][] perferredLanguageTestValues = {{"English", "10", "20", "30", "40", "50", "60"}, {"French", "10", "20", "30", "40", "50", "60"},{"Unknown", "10", "20", "30", "40", "50", "60"}};
+	private String[][] referredByTestValues = {{"English", "10", "20", "30", "40", "50", "60"}, {"French", "10", "20", "30", "40", "50", "60"},{"Unknown", "10", "20", "30", "40", "50", "60"}};
+	private String[][] totalCountsTestValues = {{"500", "600", "700", "800", "40", "50", "60"}};
 	
-	public ReportTab() {
+	public void runReportTab() {
 		
     	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     	setTitle("Report Tabs");
@@ -96,35 +101,17 @@ public class ReportTab extends JFrame{
 	    // Initialize total counts of top languages
 	    reportTable.setValueAt(totalCounts, topLanguageRow, 0);
 	    addTotalCountsData(topLanguageRow);
-	    
-	    
+	        
 	    // Initialize the second part of the report which is preferred official languages
 	    reportTable.setValueAt(perferredOfficialLanguage, topLanguageRow + 1, 0);
-	    int perferredLanguageIndex = 0;
-	    // Set the number of the last row of data about preferred official languages part
-	    int indexOfPerferedLanguageRows = topLanguageRow + 2 + perferredLanguageTestValues.length;
-	    // Same way to insert data to this part as top languages 
-	    for (perferredLanguageRow = topLanguageRow + 2; perferredLanguageRow < indexOfPerferedLanguageRows; perferredLanguageRow++) {
-	    	for (col = 0; col < dateRange.length; col++) {
-	    		reportTable.setValueAt(perferredLanguageTestValues[perferredLanguageIndex][col], perferredLanguageRow, col);
-	    	}
-	    	perferredLanguageIndex++;
-	    }
-	    // Initialize total counts of preferred languages
+	    perferredLanguageRow = setReportValue(topLanguageRow, perferredLanguageTestValues); 
+	    // Initialize total counts of preferred official languages
 	    reportTable.setValueAt(totalCounts, perferredLanguageRow, 0);
 	    addTotalCountsData(perferredLanguageRow);
 	    
- 
-	    // The last part is also the same as the first two
+	    // Initialize refer by part
 	    reportTable.setValueAt(referredBy, perferredLanguageRow + 1, 0);
-	    int referredIndex = 0;
-	    int indexOfReferredBy = perferredLanguageRow + 2 + referredByTestValues.length;
-	    for (referRow = perferredLanguageRow + 2; referRow < indexOfReferredBy; referRow++) {
-	    	for (col = 0; col < dateRange.length; col++) {
-	    		reportTable.setValueAt(perferredLanguageTestValues[referredIndex][col], referRow, col);
-	    	}
-	    	referredIndex++;
-	    }
+	    referRow = setReportValue(perferredLanguageRow, perferredLanguageTestValues);
 	    
 	    scrollPane.setViewportView(reportTable);
 	    report1.add(scrollPane, BorderLayout.CENTER);
@@ -164,6 +151,21 @@ public class ReportTab extends JFrame{
 		}
 	}
 	
+	public int setReportValue(int start, String[][] inputData) {
+		int startRowNumber, endRowNumber, col, index = 0;
+		int upTo = start + inputData.length + 2;
+		// plus 2 because there is a title for each part and there is a total count from last part of report
+		start += 2;
+		for (startRowNumber = start; startRowNumber < upTo; startRowNumber++) {
+			for (col = 0; col < dateRange.length; col++) {
+				reportTable.setValueAt(inputData[index][col], startRowNumber, col);
+			}
+			index++;
+		}
+		endRowNumber = startRowNumber;
+		return endRowNumber;
+	}
+	
 	protected void lauchTableGui() {
 		try {
 			Table frame = new Table();
@@ -175,6 +177,7 @@ public class ReportTab extends JFrame{
 	
     public static void main(String[] args) {
         ReportTab frame = new ReportTab();
+        frame.runReportTab();
         frame.setVisible(true);
     }
 }
