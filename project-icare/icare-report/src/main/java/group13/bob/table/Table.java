@@ -3,6 +3,8 @@ package group13.bob.table;
 import group13.bob.files.FileManager;
 import group13.bob.sqlite.SqlConnect;
 import group13.bob.sqlite.SqlQuery;
+import group13.bob.tab.ReportTab;
+import group13.bob.templates.ModifyReportTemplate;
 import group13.bob.templates.ReportTemplates;
 import java.awt.*;
 import java.awt.event.*;
@@ -83,7 +85,7 @@ public class Table extends JFrame {
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     setBounds(0, 0, (int) screenSize.getWidth(), (int) screenSize.getHeight());
     setBounds(200, 100, 1518, 878);
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     setTitle("Table");
 
     contentPane = new JPanel();
@@ -130,7 +132,7 @@ public class Table extends JFrame {
     JPanel templatePanel = new JPanel(new GridLayout(0, 1));
     createTemplate = new JButton("Create a new template");
     modifyTemplate = new JButton("Modify an existing template");
-    JButton backButton = new JButton("Back");
+    JButton backButton = new JButton("Close");
     
     createTemplate.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
@@ -140,7 +142,12 @@ public class Table extends JFrame {
     
     modifyTemplate.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-          // calls the modify function
+    		try {
+    	        ModifyReportTemplate modify = new ModifyReportTemplate();
+    	        modify.setVisible(true);
+    		} catch (Exception error) {
+    			error.printStackTrace();
+    		}
         }
       });
     
@@ -173,8 +180,7 @@ public class Table extends JFrame {
 			  "Select user level:\n",
 	                      "Customized Dialog",
 	                      JOptionPane.PLAIN_MESSAGE,
-	                      null, possibilities,
-	                      "ham");
+	                      null, possibilities,null);
 
 	  //If a string was returned, say so.
 	  if ((s != null) && (s.length() > 0)) {
