@@ -1,7 +1,6 @@
 package group13.bob.main;
 
 import group13.bob.table.Login;
-import group13.bob.table.Table;
 
 import java.awt.*;
 
