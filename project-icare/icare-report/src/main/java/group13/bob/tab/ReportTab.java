@@ -41,7 +41,8 @@ public class ReportTab extends JFrame{
 			{"English", "10", "20", "30", "40", "50", "60"},{"English", "10", "20", "30", "40", "50", "60"},{"English", "10", "20", "30", "40", "50", "60"},{"English", "10", "20", "30", "40", "50", "60"},{"English", "10", "20", "30", "40", "50", "60"},{"English", "10", "20", "30", "40", "50", "60"}};
 	private String[][] perferredLanguageTestValues = {{"English", "10", "20", "30", "40", "50", "60"}, {"French", "10", "20", "30", "40", "50", "60"},{"Unknown", "10", "20", "30", "40", "50", "60"}};
 	private String[][] referredByTestValues = {{"English", "10", "20", "30", "40", "50", "60"}, {"French", "10", "20", "30", "40", "50", "60"},{"Unknown", "10", "20", "30", "40", "50", "60"}};
-	private String[][] totalCountsTestValues = {{"500", "600", "700", "800", "40", "50", "60"}};
+	private String[][] totalCountsTestForTopLanguagesValues = {{"500", "600", "700", "800", "40", "50", "60"}};
+	private String[][] totalCountsTestForPerferredLanguagesValues = {{"5000", "6000", "7000", "8000", "400", "500", "600"}};
 	
 	public void runReportTab() {
 		
@@ -49,7 +50,7 @@ public class ReportTab extends JFrame{
     	setTitle("Report Tabs");
     	setBounds(0, 0, (int) screenSize.getWidth(), (int)screenSize.getHeight());
     	setBounds(200, 100, 1518, 878);
-		setLayout(null);
+    	setLayout(null);
 		
 		JPanel report1 = new JPanel();
 		report1.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -95,14 +96,14 @@ public class ReportTab extends JFrame{
 	    }
 	    // Initialize total counts of top languages
 	    reportTable.setValueAt(totalCounts, topLanguageRow, 0);
-	    addTotalCountsData(topLanguageRow);
+	    addTotalCountsData(topLanguageRow, totalCountsTestForTopLanguagesValues);
 	        
 	    // Initialize the second part of the report which is preferred official languages
 	    reportTable.setValueAt(perferredOfficialLanguage, topLanguageRow + 1, 0);
 	    perferredLanguageRow = setReportValue(topLanguageRow, perferredLanguageTestValues); 
 	    // Initialize total counts of preferred official languages
 	    reportTable.setValueAt(totalCounts, perferredLanguageRow, 0);
-	    addTotalCountsData(perferredLanguageRow);
+	    addTotalCountsData(perferredLanguageRow, totalCountsTestForPerferredLanguagesValues);
 	    
 	    // Initialize refer by part
 	    reportTable.setValueAt(referredBy, perferredLanguageRow + 1, 0);
@@ -140,9 +141,9 @@ public class ReportTab extends JFrame{
 		add(tab);
 	}
 	
-	private void addTotalCountsData(int rowNumber) {
+	private void addTotalCountsData(int rowNumber, String[][] data) {
 		for (int column = 1; column < dateRange.length; column++) {
-			reportTable.setValueAt(totalCountsTestValues[0][column], rowNumber, column);
+			reportTable.setValueAt(data[0][column], rowNumber, column);
 		}
 	}
 	
