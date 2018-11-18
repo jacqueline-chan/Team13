@@ -50,11 +50,8 @@ public class ReportTab extends JFrame{
     	setTitle("Report Tabs");
     	setBounds(0, 0, (int) screenSize.getWidth(), (int)screenSize.getHeight());
     	setBounds(200, 100, 1518, 878);
-<<<<<<< HEAD
-    	setLayout(null);
-=======
 	setLayout(null);
->>>>>>> 6d0d72e7c80dab1f297b9746dc4a5d5137570dd6
+
 		
 	JPanel report1 = new JPanel();
 	report1.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -89,7 +86,6 @@ public class ReportTab extends JFrame{
 	reportTable.getTableHeader().setReorderingAllowed(false);
 	reportTable.setFillsViewportHeight(true);
 
-<<<<<<< HEAD
 	    // Initialize the tile of first part of the report (Top 10 Languages)
 	    reportTable.setValueAt(topLanguages, 0, 0);
 	    // Put related data into the table by given a range of number of rows
@@ -108,26 +104,6 @@ public class ReportTab extends JFrame{
 	    // Initialize total counts of preferred official languages
 	    reportTable.setValueAt(totalCounts, perferredLanguageRow, 0);
 	    addTotalCountsData(perferredLanguageRow, totalCountsTestForPerferredLanguagesValues);
-=======
-	// Initialize the tile of first part of the report (Top 10 Languages)
-	reportTable.setValueAt(topLanguages, 0, 0);
-	// Put related data into the table by given a range of number of rows
-	for (topLanguageRow = 1; topLanguageRow <= topLanguagesTestValues.length; topLanguageRow++) {
-		for (col = 0; col < dateRange.length; col++) {
-			reportTable.setValueAt(topLanguagesTestValues[topLanguageRow-1][col], topLanguageRow, col);
-		}
-	}
-	// Initialize total counts of top languages
-	reportTable.setValueAt(totalCounts, topLanguageRow, 0);
-	addTotalCountsData(topLanguageRow);
-	        
-	// Initialize the second part of the report which is preferred official languages
-	reportTable.setValueAt(perferredOfficialLanguage, topLanguageRow + 1, 0);
-	perferredLanguageRow = setReportValue(topLanguageRow, perferredLanguageTestValues); 
-	// Initialize total counts of preferred official languages
-	reportTable.setValueAt(totalCounts, perferredLanguageRow, 0);
-	addTotalCountsData(perferredLanguageRow);
->>>>>>> 6d0d72e7c80dab1f297b9746dc4a5d5137570dd6
 	    
 	// Initialize refer by part
 	reportTable.setValueAt(referredBy, perferredLanguageRow + 1, 0);
