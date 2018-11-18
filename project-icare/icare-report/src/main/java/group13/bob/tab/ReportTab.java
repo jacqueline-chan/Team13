@@ -50,42 +50,46 @@ public class ReportTab extends JFrame{
     	setTitle("Report Tabs");
     	setBounds(0, 0, (int) screenSize.getWidth(), (int)screenSize.getHeight());
     	setBounds(200, 100, 1518, 878);
+<<<<<<< HEAD
     	setLayout(null);
+=======
+	setLayout(null);
+>>>>>>> 6d0d72e7c80dab1f297b9746dc4a5d5137570dd6
 		
-		JPanel report1 = new JPanel();
-		report1.setBorder(new EmptyBorder(5, 5, 5, 5));
-		report1.setLayout(new BorderLayout());
-		tab.addTab("report1", null, report1, "first");
-		JScrollPane scrollPane = new JScrollPane();
+	JPanel report1 = new JPanel();
+	report1.setBorder(new EmptyBorder(5, 5, 5, 5));
+	report1.setLayout(new BorderLayout());
+	tab.addTab("report1", null, report1, "first");
+	JScrollPane scrollPane = new JScrollPane();
 		
-		int totalNumberOfRows = topLanguagesTestValues.length + perferredLanguageTestValues.length + referredByTestValues.length + 5;
-		int topLanguageRow, col, perferredLanguageRow, referRow;
+	int totalNumberOfRows = topLanguagesTestValues.length + perferredLanguageTestValues.length + referredByTestValues.length + 5;
+	int topLanguageRow, col, perferredLanguageRow, referRow;
 		
-	    // Let table be not editable
-	    DefaultTableModel reportTableModel =
-	        new DefaultTableModel(null, dateRange) {
-	          @Override
-	          public boolean isCellEditable(int row, int column) {
-	            return false;
-	          }
-	        };
-	    reportTable = new JTable(reportTableModel);
-	    // First initialize the table with all empty values so that later can override those values by row and column
-	    for (int c = 0; c < totalNumberOfRows; c++) {
-	    	reportTableModel.addRow(emptyValue);	
+	// Let table be not editable
+	DefaultTableModel reportTableModel =
+	new DefaultTableModel(null, dateRange) {
+	    @Override
+	    public boolean isCellEditable(int row, int column) {
+		    return false;
 	    }
+	};
+	reportTable = new JTable(reportTableModel);
+	// First initialize the table with all empty values so that later can override those values by row and column
+	for (int c = 0; c < totalNumberOfRows; c++) {
+		reportTableModel.addRow(emptyValue);	
+	}
+	// Set width of each column
+	reportTable.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+	for (int i = 0; i < dateRange.length; i++) {
+		column = reportTable.getColumnModel().getColumn(i);
+	        column.setPreferredWidth(200);
+	}
 	    
-	    // Set width of each column
-	    reportTable.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
-	    for (int i = 0; i < dateRange.length; i++) {
-	      column = reportTable.getColumnModel().getColumn(i);
-	      column.setPreferredWidth(200);
-	    }
-	    
-	    // Let the order of each column cannot be changed
-	    reportTable.getTableHeader().setReorderingAllowed(false);
-	    reportTable.setFillsViewportHeight(true);
+	// Let the order of each column cannot be changed
+	reportTable.getTableHeader().setReorderingAllowed(false);
+	reportTable.setFillsViewportHeight(true);
 
+<<<<<<< HEAD
 	    // Initialize the tile of first part of the report (Top 10 Languages)
 	    reportTable.setValueAt(topLanguages, 0, 0);
 	    // Put related data into the table by given a range of number of rows
@@ -104,41 +108,60 @@ public class ReportTab extends JFrame{
 	    // Initialize total counts of preferred official languages
 	    reportTable.setValueAt(totalCounts, perferredLanguageRow, 0);
 	    addTotalCountsData(perferredLanguageRow, totalCountsTestForPerferredLanguagesValues);
+=======
+	// Initialize the tile of first part of the report (Top 10 Languages)
+	reportTable.setValueAt(topLanguages, 0, 0);
+	// Put related data into the table by given a range of number of rows
+	for (topLanguageRow = 1; topLanguageRow <= topLanguagesTestValues.length; topLanguageRow++) {
+		for (col = 0; col < dateRange.length; col++) {
+			reportTable.setValueAt(topLanguagesTestValues[topLanguageRow-1][col], topLanguageRow, col);
+		}
+	}
+	// Initialize total counts of top languages
+	reportTable.setValueAt(totalCounts, topLanguageRow, 0);
+	addTotalCountsData(topLanguageRow);
+	        
+	// Initialize the second part of the report which is preferred official languages
+	reportTable.setValueAt(perferredOfficialLanguage, topLanguageRow + 1, 0);
+	perferredLanguageRow = setReportValue(topLanguageRow, perferredLanguageTestValues); 
+	// Initialize total counts of preferred official languages
+	reportTable.setValueAt(totalCounts, perferredLanguageRow, 0);
+	addTotalCountsData(perferredLanguageRow);
+>>>>>>> 6d0d72e7c80dab1f297b9746dc4a5d5137570dd6
 	    
-	    // Initialize refer by part
-	    reportTable.setValueAt(referredBy, perferredLanguageRow + 1, 0);
-	    referRow = setReportValue(perferredLanguageRow, perferredLanguageTestValues);
+	// Initialize refer by part
+	reportTable.setValueAt(referredBy, perferredLanguageRow + 1, 0);
+	referRow = setReportValue(perferredLanguageRow, perferredLanguageTestValues);
 	    
-	    scrollPane.setViewportView(reportTable);
-	    report1.add(scrollPane, BorderLayout.CENTER);
+	scrollPane.setViewportView(reportTable);
+	report1.add(scrollPane, BorderLayout.CENTER);
 		
-		JButton showTable = new JButton("Show Table");
-		showTable.addActionListener(new ActionListener() {
+	JButton showTable = new JButton("Show Table");
+	showTable.addActionListener(new ActionListener() {
 			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				lauchTableGui();
-			}
-		});;
-		report1.add(showTable, BorderLayout.SOUTH);
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			lauchTableGui();
+		}
+	});;
+	report1.add(showTable, BorderLayout.SOUTH);
 		
-
-		JLabel label = new JLabel("This is Report1");
-		label.setHorizontalAlignment(SwingConstants.CENTER);
+	JLabel label = new JLabel("This is Report1");
+	label.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		JPanel report2 = new JPanel();
-		tab.addTab("report2", null, report2, "second");
+	JPanel report2 = new JPanel();
+	tab.addTab("report2", null, report2, "second");
 		
-		JPanel report3 = new JPanel();
-		tab.addTab("report3", null, report3, "third");
+	JPanel report3 = new JPanel();
+	tab.addTab("report3", null, report3, "third");
 		
-		JPanel plus = new JPanel();
-		tab.addTab("+", null, plus, "plus");
+	JPanel plus = new JPanel();
+	tab.addTab("+", null, plus, "plus");
 		
-		tab.setSelectedIndex(0);
-		setLayout(new GridLayout(1, 1));
-		add(tab);
+	tab.setSelectedIndex(0);
+	setLayout(new GridLayout(1, 1));
+	add(tab);
 	}
 	
 	private void addTotalCountsData(int rowNumber, String[][] data) {
@@ -171,10 +194,10 @@ public class ReportTab extends JFrame{
 		}
 	}
 	
-    public static void main(String[] args) {
-        ReportTab frame = new ReportTab();
-        frame.runReportTab();
-        frame.setVisible(true);
-    }
+	public static void main(String[] args) {
+		ReportTab frame = new ReportTab();
+        	frame.runReportTab();
+        	frame.setVisible(true);
+    	}
 }
 
