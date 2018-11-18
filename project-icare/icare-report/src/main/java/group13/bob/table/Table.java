@@ -130,6 +130,7 @@ public class Table extends JFrame {
     JPanel templatePanel = new JPanel(new GridLayout(0, 1));
     createTemplate = new JButton("Create a new template");
     modifyTemplate = new JButton("Modify an existing template");
+    JButton backButton = new JButton("Back");
     
     createTemplate.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
@@ -143,6 +144,12 @@ public class Table extends JFrame {
         }
       });
     
+    backButton.addActionListener(new ActionListener() {
+    	public void actionPerformed(ActionEvent e){
+    		dispose();
+    	}
+    });
+    
     /*JButton getTemplate = new JButton("Get an existing template");
     getTemplate.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
@@ -152,6 +159,7 @@ public class Table extends JFrame {
     templatePanel.add(getTemplate);*/
     templatePanel.add(createTemplate);
     templatePanel.add(modifyTemplate);
+    templatePanel.add(backButton);
     checklevel(contentPane);
     setlevel();
     add(templatePanel, BorderLayout.PAGE_END);
@@ -170,8 +178,7 @@ public class Table extends JFrame {
 
 	  //If a string was returned, say so.
 	  if ((s != null) && (s.length() > 0)) {
-		  System.out.print(s);
-		  
+		  System.out.println("user level: " + s);
 		  if (s.equals("admin")) {
 			  level=1;
 		  } else if (s.equals("intermediate")){
