@@ -20,25 +20,36 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import group13.adam.gui.ApplicationForm;
+import group13.cscc01.forms.FormManager;
 
 public class FileManager {
-  private static String[] fields;
   
-  private static String[] getFromFile(String name) throws IOException {
-    System.out.println(name);
+  public static void getFromFile(String name, FormManager fm) throws IOException {
     try {
+      HashMap<String, String> mandFields = new HashMap<String, String>();
+      HashMap<String, String> optFields = new HashMap<String, String>();
       FileReader fr = new FileReader(name);
       BufferedReader br = new BufferedReader(fr);
+      String key;
+      String value;
       int numFields = Integer.parseInt(br.readLine());
-      String[] fields = new String[numFields];
       for(int i = 0; i < numFields; i++) {
-        fields[i] = br.readLine();
+        key = br.readLine();
+        value = br.readLine();
+        mandFields.put(key, value);
       }
+      numFields = Integer.parseInt(br.readLine());
+      for(int i = 0; i < numFields; i++) {
+        key = br.readLine();
+        value = br.readLine();
+        optFields.put(key, value);
+      }
+      fm.setMandFields(mandFields);
+      fm.setOptFields(optFields);
       fr.close();
       br.close();
-      return fields;
     } catch (IOException e) {
-      return new String[] {"Something is wrong"};
     }
   }
   
@@ -83,7 +94,7 @@ public class FileManager {
   }
   
   
-  public static void getFile() {
+  public static void getFile(final FormManager fm) {
     final FilePopUp genPopUp = new FilePopUp();
     final JFrame genFrame = genPopUp.getJFrame();
     JPanel savePanel = new JPanel(new GridLayout(0, 1));
@@ -91,8 +102,8 @@ public class FileManager {
       saveButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
           try {
-            fields = getFromFile(genPopUp.getFileName());
-            
+            getFromFile(genPopUp.getFileName(), fm);
+            ApplicationForm.launchGui(fm.getMandFields(), fm.getOptFields());
           } catch (IOException e1) {
             System.out.println("Something is wrong");
           }

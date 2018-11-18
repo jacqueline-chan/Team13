@@ -1,9 +1,10 @@
 package group13.adam.gui;
 
+
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.SQLException;
-
+import java.util.HashMap;
 import javax.swing.*;
 
 import group13.adam.db.InsertFormDB;
@@ -14,11 +15,13 @@ import group13.adam.gui.components.Strings;
 import group13.adam.files.*;
 import group13.adam.formmodifier.FormModifierPopUp;
 import group13.adam.validation.ErrorPrevention;
-import group13.cscc01.forms.InfoForm;
+import group13.cscc01.forms.FormManager;
+//import group13.cscc01.forms.InfoForm;
 
 public class ApplicationForm extends JPanel {
 
-  InfoForm record = new InfoForm();
+  FormManager record;
+  private static JFrame frame;
   JLabel[] labels = new JLabel[100];
   JFormattedTextField[] fields = new JFormattedTextField[100];
   String[] fieldNames = new String[200];
@@ -37,12 +40,20 @@ public class ApplicationForm extends JPanel {
 
   public ApplicationForm() {
     super(new BorderLayout());
-    
-    Strings StringsObject = new Strings();
+    record =  new FormManager("Default_form");
+    commonConstructor();
+  }
+  public ApplicationForm(HashMap<String, String> mand, HashMap<String, String> opt) {
+    super(new BorderLayout());
+    record = new FormManager(mand, opt);
+    commonConstructor();
+  }
+  private void commonConstructor() {
+    //Strings StringsObject = new Strings();
     Buttons ButtonsObject = new Buttons();
     Labels LabelsObject = new Labels();
    
-    fieldNames = StringsObject.headerstring();
+    fieldNames = record.getInfoArray(); //StringsObject.headerstring();
     fields = LabelsObject.initializeJFormattedTextField(fieldNames, fieldPane, combinePanel);
     labels = LabelsObject.initializeJLabels(fieldNames, labelPane, fields, combinePanel);
     
@@ -58,12 +69,20 @@ public class ApplicationForm extends JPanel {
         submitForm();
       }
     });
+    final ApplicationForm tempForm = this;
     JButton changeFormButton = ButtonsObject.changeFormButton(submitPane);
     changeFormButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        FormModifierPopUp popUp = new FormModifierPopUp();
+        FormModifierPopUp popUp = new FormModifierPopUp(tempForm);
       }
     });
+    JButton importFormButton = ButtonsObject.importFormButton(submitPane);
+    importFormButton.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        FileManager.getFile(record);
+        tempForm.deleteFrame();
+      }
+    });    
     // Put the panels in this panel, labels on left,
     // text fields on right.
     setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -72,9 +91,8 @@ public class ApplicationForm extends JPanel {
     add(selectFiles, BorderLayout.LINE_END);
     add(submitPane, BorderLayout.PAGE_END);
   }
-
   private void submitForm() {
-	ErrorPrevention error = new ErrorPrevention();
+    ErrorPrevention error = new ErrorPrevention(record);
     int fieldIndex = error.CheckIfFieldsAreValid(fieldNames, fields);
     // if true, display a single message
     if (fieldIndex > -1) {
@@ -87,7 +105,10 @@ public class ApplicationForm extends JPanel {
     }
 
   }
-  
+
+  public void deleteFrame() {
+    frame.dispose();
+  }
   private void storeInfoForm(){
      for (int i = 0; i < fieldNames.length; i++) {
 	 record.updateInfoMap(labels[i].getText(), fields[i].getText());
@@ -119,7 +140,7 @@ public class ApplicationForm extends JPanel {
    */
   private static void createAndShowGUI() {
     // Create and set up the window.
-    JFrame frame = new JFrame("ApplicationForm");
+    frame = new JFrame("ApplicationForm");
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     // Add contents to the window.
     frame.add(new ApplicationForm());
@@ -127,9 +148,18 @@ public class ApplicationForm extends JPanel {
     frame.pack();
     frame.setVisible(true);
   }
+  private static void createAndShowGUI(HashMap<String, String> mand, HashMap<String, String> opt) {
+    // Create and set up the window.
+    frame = new JFrame("ApplicationForm");
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    // Add contents to the window.
+    frame.add(new ApplicationForm(mand, opt));
+    // Display the window.
+    frame.pack();
+    frame.setVisible(true);
+  }
 
-
-  public InfoForm returnSubmission() {
+  public FormManager returnSubmission() {
     return record;
   }
   
@@ -141,11 +171,11 @@ public class ApplicationForm extends JPanel {
 	  return fields;
   }
   
-  public InfoForm submittodb() {
+  public FormManager submittodb() {
 	  String [] fieldsString = new String [fieldNames.length];
 	  for (int i = 0; i < fieldNames.length; i++) {
 		  String value = record.getInfoMap().get(fieldNames[i]);
-		  fieldsString[i] = value ;
+		  fieldsString[i] = value;
 	  }
 	  InsertFormDB insertform = new InsertFormDB();
 	  try {
@@ -168,6 +198,17 @@ public class ApplicationForm extends JPanel {
         // Turn off metal's use of bold fonts
         UIManager.put("swing.boldMetal", Boolean.FALSE);
         createAndShowGUI();
+      }
+    });
+  }
+  public static void launchGui(final HashMap<String, String> mand, final HashMap<String, String> opt) {
+    // Schedule a job for the event dispatch thread:
+    // creating and showing this application's GUI.
+    SwingUtilities.invokeLater(new Runnable() {
+      public void run() {
+        // Turn off metal's use of bold fonts
+        UIManager.put("swing.boldMetal", Boolean.FALSE);
+        createAndShowGUI(mand, opt);
       }
     });
   }

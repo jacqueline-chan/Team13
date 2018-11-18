@@ -36,9 +36,14 @@ public class Buttons {
 	}
 	
 	public JButton changeFormButton(JPanel submitPane) {
-	     JButton changeButton = new JButton("Import a new form");
+	     JButton changeButton = new JButton("Create a form by modifying the current one");
 	        submitPane.add(changeButton);
 	        return changeButton;
 	}
+	public JButton importFormButton(JPanel submitPane) {
+         JButton importButton = new JButton("Import a form from file");
+            submitPane.add(importButton);
+            return importButton;
+    }
 
 }

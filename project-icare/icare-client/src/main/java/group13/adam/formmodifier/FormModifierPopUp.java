@@ -3,6 +3,7 @@ package group13.adam.formmodifier;
 import group13.cscc01.forms.*;
 import group13.adam.validation.*;
 import group13.adam.files.*;
+import group13.adam.gui.ApplicationForm;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -26,25 +27,29 @@ import javax.swing.JTextField;
 
 public class FormModifierPopUp {
   private JFrame modifierFrame;
+  private ApplicationForm form;
   private ArrayList<Boolean> includedInTemplate;
   private boolean fieldsSelected;
   private ArrayList<String> columns;
-  final private HashMap<String, Pattern> mandFields;
-  final private HashMap<String, Pattern> optFields;
+  final private HashMap<String, String> mandFields;
+  final private HashMap<String, String> optFields;
   private HashMap<String, String> newFields;
   
   private JPanel combinePanel;
-  private static final ArrayList<JButton> buttons = new ArrayList<JButton>();
+  private final ArrayList<JButton> buttons;
   
   // A counter that keeps track of the amount of fields selected.
   private static int fieldsNum;
 
-  public FormModifierPopUp() {
+  public FormModifierPopUp(ApplicationForm form) {
+    buttons = new ArrayList<JButton>();
+    this.form = form;
     columns = new ArrayList<String>();
-    String[] temp = (new InfoForm()).getInfoArray();
+    FormManager fm = form.returnSubmission();
+    String[] temp = form.getfieldNames();
     newFields = new HashMap<String, String>();
-    mandFields = ErrorForms.getCompulsoryParam();
-    optFields = ErrorForms.getOptionalParam();
+    mandFields = fm.getMandFields();
+    optFields = fm.getOptFields();
     for (int i = 0; i < temp.length; i++) {
       this.columns.add(temp[i]);
     }
@@ -82,7 +87,10 @@ public class FormModifierPopUp {
     for (int i = 0; i < columns.size(); i++) {
       final int index = i;
       includedInTemplate.add(false);
-      buttons.add(new JButton(columns.get(i)));
+      String temp = columns.get(i);
+      buttons.add(new JButton(temp));
+      System.out.println(temp);
+      //System.out.println(buttons.get(i).getText());
       buttons.get(i).setBackground(Color.RED);
       buttons.get(i).setPreferredSize(new Dimension(40, 40));
       buttons.get(i).addActionListener(new ActionListener() {
@@ -105,11 +113,10 @@ public class FormModifierPopUp {
           for (int i = 0; i < columns.size(); i++) {
             if (includedInTemplate.get(i)) {
               if (mandFields.containsKey(columns.get(i))) {
-                System.out.println(mandFields.get(columns.get(i)).toString());
-                newFormFields.put(columns.get(i), mandFields.get(columns.get(i)).pattern());
+                newFormFields.put(columns.get(i), mandFields.get(columns.get(i)));
               }
               else if (optFields.containsKey(columns.get(i))) {
-                newFormFields.put(columns.get(i), optFields.get(columns.get(i)).pattern());
+                newFormFields.put(columns.get(i), optFields.get(columns.get(i)));
               }
               else if (newFields.containsKey(columns.get(i))) {
                 newFormFields.put(columns.get(i), newFields.get(columns.get(i)));
@@ -118,7 +125,7 @@ public class FormModifierPopUp {
               index++;
             }
           }
-          MandatoryFieldsPopUp popUp = new MandatoryFieldsPopUp(newFormFields, fields);
+          MandatoryFieldsPopUp popUp = new MandatoryFieldsPopUp(newFormFields, fields, form);
         }
     });
     submitPanel.add(submitButton);

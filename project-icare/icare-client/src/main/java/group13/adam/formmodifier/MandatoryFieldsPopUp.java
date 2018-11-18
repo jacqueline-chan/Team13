@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import group13.adam.files.FileManager;
+import group13.adam.gui.ApplicationForm;
 import group13.cscc01.forms.InfoForm;
 
 public class MandatoryFieldsPopUp {
@@ -29,11 +30,13 @@ public class MandatoryFieldsPopUp {
   private final HashMap<String, String> optHashFields;
   private JPanel combinePanel;
   private static final ArrayList<JButton> buttons = new ArrayList<JButton>();
+  private ApplicationForm form;
   // A counter that keeps track of the amount of fields selected.
   private static int templateColumnNum;
   
 
-  public MandatoryFieldsPopUp(HashMap<String, String> map, String[] fields) {
+  public MandatoryFieldsPopUp(HashMap<String, String> map, String[] fields, ApplicationForm form) {
+    this.form = form;
     this.columns = fields;
     this.hashFields = map;
     this.mandHashFields = new HashMap<String, String>();
@@ -100,7 +103,8 @@ public class MandatoryFieldsPopUp {
         int dialogButton = JOptionPane.YES_NO_OPTION;
         int dialogResult = JOptionPane.showConfirmDialog (null, "Would You Like to Set This Form Right Now?","Note",dialogButton);
         if(dialogResult == JOptionPane.YES_OPTION){
-          // Saving code here
+          form.deleteFrame();
+          ApplicationForm.launchGui(mandHashFields, optHashFields);// Saving code here
         }
         mandFrame.dispose();
         if (fieldsSelected) {
