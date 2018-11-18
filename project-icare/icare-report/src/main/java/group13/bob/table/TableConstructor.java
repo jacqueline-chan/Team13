@@ -18,14 +18,19 @@ public class TableConstructor {
         Connection conn = SqlConnect.connect();
         String[][] top10Table;
         String startDateRange = dateRange[0] + "-01-01";
-        String endDateRange = dateRange[dateRange.length - 1] + "-12-31"; ;
+        String endDateRange = dateRange[dateRange.length - 1] + "-12-31";
 
         String[][] rawTable = (SqlQuery.queryTemplate(conn, formName, Table, startDateRange, endDateRange)).get(0);
 
         //String sqlQuery = "SELECT COUNT(unique_identifier) FROM InfoForum WHERE Start_Date_of_Service BETWEEN \""+startDateRange+"\" AND \""+endDateRange+"\"";
         //String topTable[][] = SqlQuery.queryStatement(conn, sqlQuery);
-
+        System.out.print("rawTable.length: " + rawTable.length);
+        if (rawTable.length < topNum){
+            topNum = rawTable.length;
+            System.out.print("top Num: " + topNum);
+        }
         constructedTable = constructTopTable(topNum, dateRange.length + 1, rawTable);
+
         int coloumnNum = 1;
         for (String dateRangeYear : dateRange) {
             String startDate = dateRangeYear + "-01-01";

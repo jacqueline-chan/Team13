@@ -57,8 +57,9 @@ public class ReportTab extends JFrame {
         String[] sampleRange=new String[n];
         System.arraycopy(dateRange,1,sampleRange,0,n);
 
-        topLanguagesTestValues = TableConstructor.getTopTableFromRanges(sampleRange,"InfoForum", "language_of_service",5);
-
+        topLanguagesTestValues = TableConstructor.getTopTableFromRanges(sampleRange,"InfoForum", "language_of_service",10);
+        perferredLanguageTestValues = TableConstructor.getTopTableFromRanges(sampleRange,"InfoForum", "official_language_of_preference",4);
+        referredByTestValues = TableConstructor.getTopTableFromRanges(sampleRange,"InfoForum", "referred_by",3);
         JPanel report1 = new JPanel();
         report1.setBorder(new EmptyBorder(5, 5, 5, 5));
         report1.setLayout(new BorderLayout());
