@@ -96,6 +96,7 @@ public class Login extends JFrame{
 		try {
 	        ReportTab frame = new ReportTab();
 	        frame.setVisible(true);
+	        dispose();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
