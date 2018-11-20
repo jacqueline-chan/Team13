@@ -30,7 +30,7 @@ public class Table extends JFrame {
   private JButton modifyTemplate;
 
   private static final String[] columnNames = {"Unique Identifier",
-      "Date of Birth (YYYY-MM-DD)",
+      "Date of Birth    (YYYY-MM-DD)",
       "Postal Code where the service was received",
       "Start Date of Service (YYYY-MM-DD)", "Language of Service",
       "Official Language of Preference",
