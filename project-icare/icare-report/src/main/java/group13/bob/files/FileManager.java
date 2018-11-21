@@ -18,6 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import group13.bob.tab.ReportTab;
 
 public class FileManager {
   private static String[] fields;
@@ -53,7 +54,7 @@ public class FileManager {
 
   //Methods for the pop-up windows
   
-  public static void saveFile(String[] fields) {
+  public static void saveFile(String[] fields, ReportTab tab) {
     FilePopUp genPopUp = new FilePopUp();
     JFrame genFrame = genPopUp.getJFrame();
     JPanel savePanel = new JPanel(new GridLayout(0, 1));
@@ -62,6 +63,7 @@ public class FileManager {
       public void actionPerformed(ActionEvent e) {
         try {
           createFile(genPopUp.getFileName(), fields);
+          tab.setNewTab(genPopUp.getFileName(), fields);
         } catch (IOException e1) {
           System.out.println("Something is wrong");
         }

@@ -1,6 +1,7 @@
 package group13.bob.templates;
 
 import group13.bob.files.FileManager;
+import group13.bob.tab.ReportTab;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.*;
@@ -22,7 +23,7 @@ public class ReportTemplates {
   // A counter that keeps track of the amount of fields selected.
   private static int templateColumnNum;
 
-  public static void CreateTemplatePopUp() {
+  public static void CreateTemplatePopUp(ReportTab tab) {
     includedInTemplate = new boolean[columns.length];
     templateColumnNum = 0;
     fieldsSelected = false;
@@ -73,7 +74,7 @@ public class ReportTemplates {
     submitButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         if (fieldsSelected) {
-          FileManager.saveFile(columns);
+          FileManager.saveFile(columns, tab);
         } else {
           String[] fields = new String[templateColumnNum];
           int index = 0;
@@ -83,7 +84,7 @@ public class ReportTemplates {
               index++;
             }
           }
-          FileManager.saveFile(fields);
+          FileManager.saveFile(fields, tab);
         }
         templateFrame.dispose();
       }

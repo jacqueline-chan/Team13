@@ -123,13 +123,13 @@ public class Table extends JFrame {
     setContentPane(contentPane);
     
     // Add the button for template.
-    JPanel templatePanel = new JPanel(new GridLayout(0, 1));
+    /*JPanel templatePanel = new JPanel(new GridLayout(0, 1));
     JButton createTemplate = new JButton("Create a new template");
     createTemplate.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         ReportTemplates.CreateTemplatePopUp();
       }
-    });
+    });*/
     /*JButton getTemplate = new JButton("Get an existing template");
     getTemplate.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
@@ -137,8 +137,8 @@ public class Table extends JFrame {
       }
     });
     templatePanel.add(getTemplate);*/
-    templatePanel.add(createTemplate);
-    add(templatePanel, BorderLayout.PAGE_END);
+    /*templatePanel.add(createTemplate);
+    add(templatePanel, BorderLayout.PAGE_END);*/
   }
 
 }

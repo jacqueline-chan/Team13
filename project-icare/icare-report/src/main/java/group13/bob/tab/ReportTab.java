@@ -1,5 +1,6 @@
 package group13.bob.tab;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
@@ -10,18 +11,25 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import group13.bob.templates.*;
 import group13.bob.table.Table;
 
 
 public class ReportTab extends JFrame{
-	
+	private JButton plus;
 	private JTabbedPane tab = new JTabbedPane();
-
+	private int lastTab;
 	public ReportTab() {
-		
+	    lastTab = 2;
+		plus = new JButton("+");
     	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     	setTitle("Report Tabs");
     	setBounds(0, 0, (int) screenSize.getWidth(), (int)screenSize.getHeight());
@@ -49,16 +57,14 @@ public class ReportTab extends JFrame{
 		
 		JPanel report3 = new JPanel();
 		tab.addTab("report3", null, report3, "third");
-		
-		tab.addTab("", null, null, null);
-	      JButton plus = new JButton("+");
+		final ReportTab temp = this;
 	        plus.addActionListener(new ActionListener() {
 	            @Override
 	            public void actionPerformed(ActionEvent e) {
-	               ReportTemplates.CreateTemplatePopUp();        
+	               ReportTemplates.CreateTemplatePopUp(temp);        
 	            }
 	        });
-	        tab.setTabComponentAt(3, plus);
+	    setPlus();
 		tab.setSelectedIndex(0);
 		setLayout(new GridLayout(1, 1));
 		add(tab);
@@ -72,7 +78,44 @@ public class ReportTab extends JFrame{
 			e.printStackTrace();
 		}
 	}
-	
+	public void setNewTab(String name, String[] template) {
+	  JPanel newReport = new JPanel();
+	  newReport.setLayout(new BorderLayout());
+	  newReport.setBorder(new EmptyBorder(5, 5, 5, 5));
+	  setPlus();
+	  tab.setTitleAt(lastTab - 1, name);
+	  tab.setToolTipTextAt(lastTab - 1, "The report for " + name);
+	    // Let table be not editable
+      tab.setComponentAt(lastTab - 1, newReport);
+	    DefaultTableModel tableModel =
+	        new DefaultTableModel(new String[][] {}, template) {
+	          @Override
+	          public boolean isCellEditable(int row, int column) {
+	            return false;
+	          }
+	        };
+	    JTable table = new JTable(tableModel);
+	    table.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+	    TableColumn column;
+	    for (int i = 0; i < template.length ; i++) {
+	      column = table.getColumnModel().getColumn(i);
+	      column.setPreferredWidth(200);
+	    }
+	    table.getTableHeader().setReorderingAllowed(false);
+	    table.setFillsViewportHeight(true);
+	    table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+	    // Set scroll pane always shows up
+	    JScrollPane scrollPane =
+	        new JScrollPane(table, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+	            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+	    newReport.add(scrollPane, BorderLayout.CENTER);
+
+	}
+	private void setPlus() {
+	  tab.addTab(null, null, null, "Click to add another report");
+	  lastTab++;
+      tab.setTabComponentAt(lastTab, plus);
+	}
     public static void main(String[] args) {
         ReportTab frame = new ReportTab();
         frame.setVisible(true);
