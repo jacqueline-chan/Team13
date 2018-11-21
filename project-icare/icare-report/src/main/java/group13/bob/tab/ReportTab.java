@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
-
+import group13.bob.templates.*;
 import group13.bob.table.Table;
 
 
@@ -41,8 +41,6 @@ public class ReportTab extends JFrame{
 			}
 		});;
 		report1.add(showTable);
-		
-
 		JLabel label = new JLabel("This is Report1");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		
@@ -52,9 +50,15 @@ public class ReportTab extends JFrame{
 		JPanel report3 = new JPanel();
 		tab.addTab("report3", null, report3, "third");
 		
-		JPanel plus = new JPanel();
-		tab.addTab("+", null, plus, "plus");
-		
+		tab.addTab("", null, null, null);
+	      JButton plus = new JButton("+");
+	        plus.addActionListener(new ActionListener() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	               ReportTemplates.CreateTemplatePopUp();        
+	            }
+	        });
+	        tab.setTabComponentAt(3, plus);
 		tab.setSelectedIndex(0);
 		setLayout(new GridLayout(1, 1));
 		add(tab);
