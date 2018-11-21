@@ -27,13 +27,15 @@ public class ReportTab extends JFrame{
 	private JButton plus;
 	private JTabbedPane tab = new JTabbedPane();
 	private int lastTab;
+	private final int WIDTH = 1518;
+	private final int defaultWidth = 200;
 	public ReportTab() {
 	    lastTab = 2;
 		plus = new JButton("+");
     	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     	setTitle("Report Tabs");
     	setBounds(0, 0, (int) screenSize.getWidth(), (int)screenSize.getHeight());
-    	setBounds(200, 100, 1518, 878);
+    	setBounds(200, 100, WIDTH, 878);
 		setLayout(null);
 		
 		JPanel report1 = new JPanel();
@@ -99,7 +101,14 @@ public class ReportTab extends JFrame{
 	    TableColumn column;
 	    for (int i = 0; i < template.length ; i++) {
 	      column = table.getColumnModel().getColumn(i);
-	      column.setPreferredWidth(200);
+	      // splits the width between cells such that the entire panel is
+	      // covered.
+	      int tempWidth = WIDTH/(template.length);
+	      if (tempWidth > defaultWidth) {
+	        column.setPreferredWidth(WIDTH/(template.length));
+	      } else {
+	        column.setPreferredWidth(defaultWidth);
+	      }
 	    }
 	    table.getTableHeader().setReorderingAllowed(false);
 	    table.setFillsViewportHeight(true);
@@ -110,6 +119,10 @@ public class ReportTab extends JFrame{
 	            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 	    newReport.add(scrollPane, BorderLayout.CENTER);
 
+	}
+	
+	private void createTable(JPanel panel) {
+	  
 	}
 	private void setPlus() {
 	  tab.addTab(null, null, null, "Click to add another report");
