@@ -24,7 +24,10 @@ public class ReportTab extends JFrame {
     private String perferredOfficialLanguage = "Perferred Official Language:";
     private String referredBy = "Referred By";
     private String totalCounts = "                          Total Counts(all clients)";
-
+    
+    private int level; // 1 is admin, 2 is intermediate, 3 is basic
+    JPanel plus;
+    JButton showTable;
 
     // this is how the data should look like when extract data from database
     private String[] dateRange = new String[]{"", "2013","2014", "2015", "2016", "2017", "2018"};
@@ -120,7 +123,7 @@ public class ReportTab extends JFrame {
         scrollPane.setViewportView(reportTable);
         report1.add(scrollPane, BorderLayout.CENTER);
 
-        JButton showTable = new JButton("Show Table");
+        showTable = new JButton("Show Table");
         showTable.addActionListener(new ActionListener() {
 
             @Override
@@ -140,11 +143,14 @@ public class ReportTab extends JFrame {
         JPanel report3 = new JPanel();
         tab.addTab("report3", null, report3, "third");
 
-        JPanel plus = new JPanel();
+        plus = new JPanel();
         tab.addTab("+", null, plus, "plus");
 
         tab.setSelectedIndex(0);
         setLayout(new GridLayout(1, 1));
+        
+        checklevel(this);
+        setlevel();
         add(tab);
     }
 
@@ -168,6 +174,43 @@ public class ReportTab extends JFrame {
         endRowNumber = startRowNumber;
         return endRowNumber;
     }
+    
+    public void checklevel(Component contentPane){ // TEMPORARY FUNCTION TO MAKE USER LEVELS WORK, SHOULD call a function that changes the level of the user
+  	  //else if (function returns level == 2){
+  	  //} else {function retusn  (level == 3) default
+  	  Object[] possibilities = {"admin", "intermediate", "basic"};
+  	  String s = (String)JOptionPane.showInputDialog(contentPane,
+  			  "Select user level:\n",
+  	                      "Customized Dialog",
+  	                      JOptionPane.PLAIN_MESSAGE,
+  	                      null, possibilities,null);
+
+  	  //If a string was returned, say so.
+  	  if ((s != null) && (s.length() > 0)) {
+  		  System.out.println("user level: " + s);
+  		  if (s.equals("admin")) {
+  			  level=1;
+  		  } else if (s.equals("intermediate")){
+  			  level=2;
+  		  } else { // default to basic
+  			  level=3;
+  		  }
+  	  } else { 	  //If you're here, the return value was null/empty.
+  		  level=3; //default to basic
+  	  }
+    }
+    
+    public void setlevel(){
+  	  if (level==1){
+  		  showTable.setVisible(true);
+  	  }
+  	  else if (level == 2){
+  		  showTable.setVisible(false);
+  	  } else { // (level == 3) default
+  		  tab.remove(plus);
+  		  showTable.setVisible(false);
+  	  }
+    }
 
     protected void lauchTableGui() {
         try {
@@ -177,11 +220,11 @@ public class ReportTab extends JFrame {
             e.printStackTrace();
         }
     }
-
-    public static void main(String[] args) {
-        ReportTab frame = new ReportTab();
-        frame.runReportTab();
-        frame.setVisible(true);
-    }
+//
+//    public static void main(String[] args) {
+//        ReportTab frame = new ReportTab();
+//        frame.runReportTab();
+//        frame.setVisible(true);
+//    }
 }
 
