@@ -44,6 +44,16 @@ public class Login extends JFrame {
         passwordtextfield = labels.passwordLabelTextfield(panel);
 
         JButton createSignUpButton = button.createSignUpButton(panel);
+        createSignUpButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    SignUp frame = new SignUp();
+                    frame.setVisible(true);
+                } catch (Exception error) {
+                    error.printStackTrace();
+                }
+            }
+        });
 
         JButton cancelButton = button.createCancelButton(panel);
         cancelButton.addActionListener(new ActionListener() {
