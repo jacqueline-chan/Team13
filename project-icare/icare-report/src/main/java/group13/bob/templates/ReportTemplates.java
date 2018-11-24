@@ -20,10 +20,12 @@ public class ReportTemplates {
   private static boolean[] includedInTemplate;
   private static JFrame templateFrame;
   private static boolean fieldsSelected;
+  private static ReportTab tab;
   // A counter that keeps track of the amount of fields selected.
   private static int templateColumnNum;
 
-  public static void CreateTemplatePopUp(ReportTab tab) {
+  public static void CreateTemplatePopUp(ReportTab loctab) {
+    tab = loctab;
     includedInTemplate = new boolean[columns.length];
     templateColumnNum = 0;
     fieldsSelected = false;
@@ -70,6 +72,10 @@ public class ReportTemplates {
     submitPanel.add(selectAll);
 
     // Add the button for submit.
+    submitButton(submitPanel);
+
+  }
+  private static void submitButton(JPanel submitPanel) {
     JButton submitButton = new JButton("Submit the template");
     submitButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
@@ -91,9 +97,7 @@ public class ReportTemplates {
     });
     submitPanel.add(submitButton);
     templateFrame.add(submitPanel, BorderLayout.PAGE_END);
-
   }
-
   private static void switchButton(JButton button, int index) {
     includedInTemplate[index] = !(includedInTemplate[index]);
     if (includedInTemplate[index]) {

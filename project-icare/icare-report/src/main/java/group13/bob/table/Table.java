@@ -136,7 +136,7 @@ public class Table extends JFrame {
     
     createTemplate.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        ReportTemplates.CreateTemplatePopUp();
+        // ReportTemplates.CreateTemplatePopUp();
       }
     });
     
