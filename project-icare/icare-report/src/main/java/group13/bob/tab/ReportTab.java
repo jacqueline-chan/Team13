@@ -18,6 +18,7 @@ public class ReportTab extends JFrame {
     private JTabbedPane tab = new JTabbedPane();
     private JTable reportTable;
     private TableColumn column;
+    private String accessLevel = "";
 
     private String[] emptyValue = {"", "", "", ""};
     private String topLanguages = "Top 10 Language of Service:";
@@ -177,21 +178,13 @@ public class ReportTab extends JFrame {
     }
     
     public void checklevel(Component contentPane){ // TEMPORARY FUNCTION TO MAKE USER LEVELS WORK, SHOULD call a function that changes the level of the user
-  	  //else if (function returns level == 2){
-  	  //} else {function retusn  (level == 3) default
-  	  Object[] possibilities = {"admin", "intermediate", "basic"};
-  	  String s = (String)JOptionPane.showInputDialog(contentPane,
-  			  "Select user level:\n",
-  	                      "Customized Dialog",
-  	                      JOptionPane.PLAIN_MESSAGE,
-  	                      null, possibilities,null);
-
+  	  String s = this.accessLevel;
   	  //If a string was returned, say so.
   	  if ((s != null) && (s.length() > 0)) {
   		  System.out.println("user level: " + s);
-  		  if (s.equals("admin")) {
+  		  if (s.equals("ADMIN")) {
   			  level=1;
-  		  } else if (s.equals("intermediate")){
+  		  } else if (s.equals("MODERATOR")){
   			  level=2;
   		  } else { // default to basic
   			  level=3;
@@ -212,6 +205,10 @@ public class ReportTab extends JFrame {
   		  showTable.setVisible(false);
   		  tab.remove(plus);;
   	  }
+    }
+
+    public void setAccessLevel(String accessLevel) {
+        this.accessLevel = accessLevel;
     }
 
     protected void lauchTableGui() {

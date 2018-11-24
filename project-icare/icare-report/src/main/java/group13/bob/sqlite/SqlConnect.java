@@ -24,5 +24,19 @@ public class SqlConnect {
         return conn;
     }
 
+    public static Connection connect(String dbLocation) {
+        // SQLite connection string
+        Path currentDir = Paths.get(".");
+        System.out.println(currentDir.toAbsolutePath());
+        String url = "jdbc:sqlite:" + dbLocation;
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(url);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return conn;
+    }
+
 
 }
