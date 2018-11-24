@@ -38,8 +38,8 @@ public class SignUp extends JFrame{
         logintextfield = labels.usernameLabeTextfield(panel);
         passwordtextfield = labels.passwordLabelTextfield(panel);
 
-        JButton createSignUpButton = button.createSubmitButton(panel);
-        createSignUpButton.addActionListener(new ActionListener() {
+        JButton createSubmitButton = button.createSubmitButton(panel);
+        createSubmitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             }
         });
