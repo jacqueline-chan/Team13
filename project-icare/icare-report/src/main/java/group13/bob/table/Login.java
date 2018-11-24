@@ -74,7 +74,7 @@ public class Login extends JFrame {
         if (loginInfo.length == 0) {
             unsuccessfulLoginDialog();
         } else {
-            if (password == loginInfo[0][1]) {
+            if (password.equals(loginInfo[0][1])) {
                 this.accessLevel = loginInfo[0][2];
                 lauchTabGui();
             } else {
