@@ -4,7 +4,6 @@ import group13.bob.files.FileManager;
 import group13.bob.sqlite.SqlConnect;
 import group13.bob.sqlite.SqlQuery;
 import group13.bob.tab.ReportTab;
-import group13.bob.templates.ModifyReportTemplate;
 import group13.bob.templates.ReportTemplates;
 import java.awt.*;
 import java.awt.event.*;
@@ -27,7 +26,7 @@ public class Table extends JFrame {
   
 //  private int level; // 1 is admin, 2 is intermediate, 3 is basic
   private JButton createTemplate;
-  private JButton modifyTemplate;
+  //private JButton modifyTemplate;
 
   private static final String[] columnNames = {"Unique Identifier",
       "Date of Birth    (YYYY-MM-DD)",
@@ -131,7 +130,6 @@ public class Table extends JFrame {
     // Add the button for template.
     JPanel templatePanel = new JPanel(new GridLayout(0, 1));
     createTemplate = new JButton("Create a new template");
-    modifyTemplate = new JButton("Modify an existing template");
     JButton backButton = new JButton("Close");
     
     createTemplate.addActionListener(new ActionListener() {
@@ -139,17 +137,6 @@ public class Table extends JFrame {
         ReportTemplates.CreateTemplatePopUp();
       }
     });
-    
-    modifyTemplate.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-    		try {
-    	        ModifyReportTemplate modify = new ModifyReportTemplate();
-    	        modify.setVisible(true);
-    		} catch (Exception error) {
-    			error.printStackTrace();
-    		}
-        }
-      });
     
     backButton.addActionListener(new ActionListener() {
     	public void actionPerformed(ActionEvent e){
@@ -165,7 +152,6 @@ public class Table extends JFrame {
     });
     templatePanel.add(getTemplate);*/
     templatePanel.add(createTemplate);
-    templatePanel.add(modifyTemplate);
     templatePanel.add(backButton);
 //    checklevel(contentPane);
 //    setlevel();
