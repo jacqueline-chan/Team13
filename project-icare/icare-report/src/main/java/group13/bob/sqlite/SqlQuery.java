@@ -39,7 +39,7 @@ public class SqlQuery {
                     "  FROM " + formName +
                     " WHERE Start_Date_of_Service BETWEEN \'" + startDate +
                     "\' AND \'" + endDate + "\'" +
-                    " GROUP BY" + groupByTable +
+                    " GROUP BY " + groupByTable +
                     " ORDER BY COUNT(unique_identifier) DESC";
             groupByTables.add(queryStatement(conn, sqlQuery));
         }
@@ -47,7 +47,7 @@ public class SqlQuery {
         return groupByTables;
     }
 
-    private static String[][] queryStatement(Connection conn, String sqlQuery) {
+    public static String[][] queryStatement(Connection conn, String sqlQuery) {
         ArrayList<String[]> table = new ArrayList();
         try (Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sqlQuery)
@@ -60,7 +60,7 @@ public class SqlQuery {
                     ArrayList<String> currentRow = new ArrayList();
 
                     for (int columnNum = 1; columnNum <= numOfCol; columnNum++) {
-                        String columnData = (String) rs.getObject(columnNum);
+                        String columnData = String.valueOf (rs.getObject(columnNum));
                         currentRow.add(columnData);
                     }
                     table.add(toStringArray(currentRow));

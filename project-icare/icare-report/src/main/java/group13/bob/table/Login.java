@@ -95,7 +95,9 @@ public class Login extends JFrame{
 	protected void lauchTabGui() {
 		try {
 	        ReportTab frame = new ReportTab();
+	        frame.runReportTab();
 	        frame.setVisible(true);
+	        dispose();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

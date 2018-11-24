@@ -3,6 +3,8 @@ package group13.bob.table;
 import group13.bob.files.FileManager;
 import group13.bob.sqlite.SqlConnect;
 import group13.bob.sqlite.SqlQuery;
+import group13.bob.tab.ReportTab;
+import group13.bob.templates.ModifyReportTemplate;
 import group13.bob.templates.ReportTemplates;
 import java.awt.*;
 import java.awt.event.*;
@@ -22,9 +24,13 @@ public class Table extends JFrame {
   private JPanel contentPane;
   private JTable table;
   private TableColumn column;
+  
+  private int level; // 1 is admin, 2 is intermediate, 3 is basic
+  private JButton createTemplate;
+  private JButton modifyTemplate;
 
   private static final String[] columnNames = {"Unique Identifier",
-      "Date of Birth (YYYY-MM-DD)",
+      "Date of Birth    (YYYY-MM-DD)",
       "Postal Code where the service was received",
       "Start Date of Service (YYYY-MM-DD)", "Language of Service",
       "Official Language of Preference",
@@ -79,7 +85,7 @@ public class Table extends JFrame {
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     setBounds(0, 0, (int) screenSize.getWidth(), (int) screenSize.getHeight());
     setBounds(200, 100, 1518, 878);
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     setTitle("Table");
 
     contentPane = new JPanel();
@@ -123,13 +129,34 @@ public class Table extends JFrame {
     setContentPane(contentPane);
     
     // Add the button for template.
-    /*JPanel templatePanel = new JPanel(new GridLayout(0, 1));
-    JButton createTemplate = new JButton("Create a new template");
+    JPanel templatePanel = new JPanel(new GridLayout(0, 1));
+    createTemplate = new JButton("Create a new template");
+    modifyTemplate = new JButton("Modify an existing template");
+    JButton backButton = new JButton("Close");
+    
     createTemplate.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         ReportTemplates.CreateTemplatePopUp();
       }
-    });*/
+    });
+    
+    modifyTemplate.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+    		try {
+    	        ModifyReportTemplate modify = new ModifyReportTemplate();
+    	        modify.setVisible(true);
+    		} catch (Exception error) {
+    			error.printStackTrace();
+    		}
+        }
+      });
+    
+    backButton.addActionListener(new ActionListener() {
+    	public void actionPerformed(ActionEvent e){
+    		dispose();
+    	}
+    });
+    
     /*JButton getTemplate = new JButton("Get an existing template");
     getTemplate.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
@@ -137,8 +164,53 @@ public class Table extends JFrame {
       }
     });
     templatePanel.add(getTemplate);*/
-    /*templatePanel.add(createTemplate);
-    add(templatePanel, BorderLayout.PAGE_END);*/
+    templatePanel.add(createTemplate);
+    templatePanel.add(modifyTemplate);
+    templatePanel.add(backButton);
+    checklevel(contentPane);
+    setlevel();
+    add(templatePanel, BorderLayout.PAGE_END);
   }
+  
+  public void checklevel(Component contentPane){ // TEMPORARY FUNCTION TO MAKE USER LEVELS WORK, SHOULD call a function that changes the level of the user
+	  //else if (function returns level == 2){
+	  //} else {function retusn  (level == 3) default
+	  Object[] possibilities = {"admin", "intermediate", "basic"};
+	  String s = (String)JOptionPane.showInputDialog(contentPane,
+			  "Select user level:\n",
+	                      "Customized Dialog",
+	                      JOptionPane.PLAIN_MESSAGE,
+	                      null, possibilities,null);
+
+	  //If a string was returned, say so.
+	  if ((s != null) && (s.length() > 0)) {
+		  System.out.println("user level: " + s);
+		  if (s.equals("admin")) {
+			  level=1;
+		  } else if (s.equals("intermediate")){
+			  level=2;
+		  } else { // default to basic
+			  level=3;
+		  }
+	  } else { 	  //If you're here, the return value was null/empty.
+		  level=3; //default to basic
+	  }
+  }
+
+  
+  public void setlevel(){
+	  if (level==1){
+		  createTemplate.setVisible(true);
+		  modifyTemplate.setVisible(true);
+	  }
+	  else if (level == 2){
+		  createTemplate.setVisible(false);
+		  modifyTemplate.setVisible(true);
+	  } else { // (level == 3) default
+		  createTemplate.setVisible(false);
+		  modifyTemplate.setVisible(false);
+	  }
+  }
+  
 
 }
