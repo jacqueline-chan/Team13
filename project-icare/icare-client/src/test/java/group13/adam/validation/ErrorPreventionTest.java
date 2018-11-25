@@ -1,12 +1,10 @@
 package group13.adam.validation;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import group13.adam.gui.ApplicationForm;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import javax.swing.JFormattedTextField;
 
@@ -15,7 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ErrorPreventionTest {
 	ErrorPrevention testError = new ErrorPrevention();
 	ApplicationForm testForm = new ApplicationForm();
-
 	
 	@Test
 	@DisplayName("Testing input with all fields filled in with appropriate values")
@@ -181,5 +178,5 @@ public class ErrorPreventionTest {
 		result = testError.CheckIfFieldsAreValid(testForm.getfieldNames(), fields);
 		assertEquals(result, 6);
 	}
-
+	
 }
