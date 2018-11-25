@@ -75,7 +75,7 @@ public class FileManager {
   }
   
   
-  public static void getFile(boolean isTemplate) {
+  public static void getFile(ReportTab tab) {
     FilePopUp genPopUp = new FilePopUp();
     JFrame genFrame = genPopUp.getJFrame();
     JPanel savePanel = new JPanel(new GridLayout(0, 1));
@@ -84,11 +84,7 @@ public class FileManager {
         public void actionPerformed(ActionEvent e) {
           try {
             fields = getFromFile(genPopUp.getFileName());
-            if (isTemplate) {
-              // Sean report code
-            } else {
-              // Form necessary code
-            }
+            tab.setNewTab(genPopUp.getFileName(), fields);
           } catch (IOException e1) {
             System.out.println("Something is wrong");
           }

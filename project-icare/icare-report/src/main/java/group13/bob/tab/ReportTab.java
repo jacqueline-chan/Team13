@@ -11,9 +11,8 @@ import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
 import java.util.HashMap;
-
+import group13.bob.files.*;
 
 public class ReportTab extends JFrame {
 
@@ -30,42 +29,17 @@ public class ReportTab extends JFrame {
   // this is how the data should look like when extract data from database
   private String[] dateRange =
       new String[] {"", "2013", "2014", "2015", "2016", "2017", "2018"};
-  private String[][] topLanguagesTestValues =
-      {{"English", "10", "20", "30", "40", "50", "60"},
-          {"English", "10", "20", "30", "40", "50", "60"},
-          {"English", "10", "20", "30", "40", "50", "60"},
-          {"English", "10", "20", "30", "40", "50", "60"},
-          {"English", "10", "20", "30", "40", "50", "60"},
-          {"English", "10", "20", "30", "40", "50", "60"},
-          {"English", "10", "20", "30", "40", "50", "60"},
-          {"English", "10", "20", "30", "40", "50", "60"},
-          {"English", "10", "20", "30", "40", "50", "60"},
-          {"English", "10", "20", "30", "40", "50", "60"},
-          {"English", "10", "20", "30", "40", "50", "60"}};
-  private String[][] perferredLanguageTestValues =
-      {{"English", "10", "20", "30", "40", "50", "60"},
-          {"French", "10", "20", "30", "40", "50", "60"},
-          {"Unknown", "10", "20", "30", "40", "50", "60"}};
-  private String[][] referredByTestValues =
-      {{"English", "10", "20", "30", "40", "50", "60"},
-          {"French", "10", "20", "30", "40", "50", "60"},
-          {"Unknown", "10", "20", "30", "40", "50", "60"}};
-  private String[][] totalCountsTestForTopLanguagesValues =
-      {{"500", "600", "700", "800", "40", "50", "60"}};
-  private String[][] totalCountsTestForPerferredLanguagesValues =
-      {{"5000", "6000", "7000", "8000", "400", "500", "600"}};
 
   public void runReportTab() {
     importButton = new JButton("Import a template");
+    ReportTab temp = this;
     importButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        
+        FileManager.getFile(temp);
       }
     });
-    tab.addTab(null, null, null, "Click to import an existing template");
-    tab.setTabComponentAt(0, importButton);
-    lastTab = 3;
+    lastTab = 2;
     plus = new JButton("+");
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     setTitle("Report Tabs");
@@ -95,8 +69,6 @@ public class ReportTab extends JFrame {
     JPanel report3 = new JPanel();
     tab.addTab("report3", null, report3, "third");
 
-    final ReportTab temp = this;
-
     // Add the plus button to the tabs.
     plus.addActionListener(new ActionListener() {
       @Override
@@ -104,6 +76,8 @@ public class ReportTab extends JFrame {
         ReportTemplates.CreateTemplatePopUp(temp);
       }
     });
+    tab.addTab(null, null, null, null);
+    lastTab++;
     setPlus();
 
     tab.setSelectedIndex(0);
@@ -116,10 +90,10 @@ public class ReportTab extends JFrame {
     newReport.setLayout(new BorderLayout());
     newReport.setBorder(new EmptyBorder(5, 5, 5, 5));
     setPlus();
-    tab.setTitleAt(lastTab - 1, name);
-    tab.setToolTipTextAt(lastTab - 1, "The report for " + name);
+    tab.setTitleAt(lastTab - 2, name);
+    tab.setToolTipTextAt(lastTab - 2, "The report for " + name);
     // Let table be not editable
-    tab.setComponentAt(lastTab - 1, newReport);
+    tab.setComponentAt(lastTab - 2, newReport);
     populateTable(template, name, newReport);
   }
 
@@ -159,16 +133,14 @@ public class ReportTab extends JFrame {
      // System.out.println(fieldNames[index]);
       this.fields[index] = TableConstructor.getTopTableFromRanges(sampleRange,
           "InfoForum", infoMap.get(fieldNames[index]), 5);
-      //System.out.println("Number: "+this.fields[index].length);
-      totalNumberOfRows = totalNumberOfRows + this.fields[index].length + 3;
+      // Adds additional 2 rows for total numbers and an empty row
+      totalNumberOfRows = totalNumberOfRows + this.fields[index].length + 2;
     }
     totalNumberOfRows--;
     createTable(totalNumberOfRows);
-    //System.out.println("Number:" + totalNumberOfRows);
+
 
     JScrollPane scrollPane = new JScrollPane();
-
-    // int topLanguageRow, col, perferredLanguageRow, referRow;
 
     // Let table be not editable
 
@@ -177,7 +149,7 @@ public class ReportTab extends JFrame {
     System.out.println(fieldNames.length);
     while (numFields < fieldNames.length) {
       // Initialize the tile of first part of the report (Top 10 Languages)
-      reportTable.setValueAt("Top " + fieldNames[numFields] + " results", totRow, 0);
+      reportTable.setValueAt("Top " + fieldNames[numFields] + " Results", totRow, 0);
       totRow++;
       // Put related data into the table by given a range of number of rows
       for (int row = 0; row < fields[numFields].length; row++) {
@@ -187,9 +159,7 @@ public class ReportTab extends JFrame {
         totRow++;
       }
       // Initialize total counts of top languages
-      reportTable.setValueAt(totalCounts, totRow, 0);
-      addTotalCountsData(totRow, totalCountsTestForTopLanguagesValues);
-      totRow = totRow + 2;
+      totRow = totRow + 1;
       numFields++;
     }
     scrollPane.setViewportView(reportTable);
@@ -231,15 +201,13 @@ public class ReportTab extends JFrame {
   }
 
   private void setPlus() {
+    tab.setTitleAt(lastTab, "");
+    tab.setToolTipTextAt(lastTab, "Click to import an existing template");
+    tab.setTabComponentAt(lastTab, importButton);
     tab.addTab(null, null, null, "Click to add another report");
     lastTab++;
     tab.setTabComponentAt(lastTab, plus);
   }
 
-  public static void main(String[] args) {
-    ReportTab frame = new ReportTab();
-    frame.runReportTab();
-    frame.setVisible(true);
-  }
 }
 
