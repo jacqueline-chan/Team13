@@ -82,15 +82,15 @@ public class ErrorForms {
         "Rights and Responsibilities of Citizenship (based on discover Canada)",
         Pattern.compile(".+"));
     regex.put("Care for Newcomer Children", Pattern.compile("(Yes)|(No)"));
-    regex.put("Child 1: Age", Pattern.compile("[0-9]{1,2}"));
+    regex.put("Child 1: Age", Pattern.compile("[(A-Z)|(a-z)]+"));
     regex.put("Child 1: Type of Care", Pattern.compile(".*"));
-    regex.put("Child 2: Age", Pattern.compile("[0-9]{1,2}"));
+    regex.put("Child 2: Age", Pattern.compile("[(A-Z)|(a-z)]+"));
     regex.put("Child 2: Type of Care", Pattern.compile(".*"));
-    regex.put("Child 3: Age", Pattern.compile("[0-9]{1,2}"));
+    regex.put("Child 3: Age", Pattern.compile("[(A-Z)|(a-z)]+"));
     regex.put("Child 3: Type of Care", Pattern.compile(".*"));
-    regex.put("Child 4: Age", Pattern.compile("[0-9]{1,2}"));
+    regex.put("Child 4: Age", Pattern.compile("[(A-Z)|(a-z)]+"));
     regex.put("Child 4: Type of Care", Pattern.compile(".*"));
-    regex.put("Child 5: Age", Pattern.compile("[0-9]{1,2}"));
+    regex.put("Child 5: Age", Pattern.compile("[(A-Z)|(a-z)]+"));
     regex.put("Child 5: Type of Care", Pattern.compile(".*"));
     regex.put("Transportation 2", Pattern.compile(".*"));
     regex.put("Provisions for Disabilities", Pattern.compile(".*"));
