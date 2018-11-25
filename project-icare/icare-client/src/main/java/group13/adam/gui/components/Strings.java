@@ -1,5 +1,9 @@
 package group13.adam.gui.components;
 
+import java.awt.Font;
+
+import javax.swing.JLabel;
+
 public class Strings {
 	
 	public String[] headerstring(){
@@ -54,6 +58,22 @@ public class Strings {
 			      "Crisis Counselling", "End Date of Service (YYYY-MM-DD)",
 			      "Reason for update"};
 		return fieldNames;
+	}
+	
+	public void setfondBold(JLabel[] labels){
+		labels[0].setFont(labels[0].getFont().deriveFont(Font.BOLD, 16f)); // unique identifier
+		labels[1].setFont(labels[0].getFont().deriveFont(Font.BOLD, 16f)); // birthdate
+		labels[2].setFont(labels[0].getFont().deriveFont(Font.BOLD, 16f)); // postalcode
+		labels[3].setFont(labels[0].getFont().deriveFont(Font.BOLD, 16f)); // startdate
+		labels[4].setFont(labels[0].getFont().deriveFont(Font.BOLD, 16f)); // language
+		labels[5].setFont(labels[0].getFont().deriveFont(Font.BOLD, 16f)); // official language
+		labels[6].setFont(labels[0].getFont().deriveFont(Font.BOLD, 16f)); // type of orgainization
+		labels[7].setFont(labels[0].getFont().deriveFont(Font.BOLD, 16f)); // referred by
+		labels[8].setFont(labels[0].getFont().deriveFont(Font.BOLD, 16f)); // services received
+		labels[58].setFont(labels[0].getFont().deriveFont(Font.BOLD, 16f)); // was essential skills recieved
+		labels[64].setFont(labels[0].getFont().deriveFont(Font.BOLD, 16f)); // was lifeskills recieved
+		labels[67].setFont(labels[0].getFont().deriveFont(Font.BOLD, 16f)); // was support services recieved
+		labels[88].setFont(labels[0].getFont().deriveFont(Font.BOLD, 16f)); // was lifeskills recieved
 	}
 
 }

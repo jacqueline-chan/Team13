@@ -45,6 +45,9 @@ public class ApplicationForm extends JPanel {
     fields = LabelsObject.initializeJFormattedTextField(fieldNames, fieldPane, combinePanel);
     labels = LabelsObject.initializeJLabels(fieldNames, labelPane, fields, combinePanel);
     
+    //set mandatory fields to bold
+    StringsObject.setfondBold(labels);
+    
     // create error message and its panel
     LabelsObject.createErrorLabel(errorMessagePanel);
     // select button, JPanel selectFiles
