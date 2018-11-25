@@ -40,6 +40,7 @@ public class ReportTab extends JFrame {
       new String[] {"", "2013", "2014", "2015", "2016", "2017", "2018"};
 
   public void runReportTab() {
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     importButton = new JButton("Import a template");
     ReportTab temp = this;
     importButton.addActionListener(new ActionListener() {
