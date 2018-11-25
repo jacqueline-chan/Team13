@@ -67,7 +67,7 @@ public class DragAndDrop implements DropTargetListener {
 							System.out.println(result);
 							if (result == 0){	// 0 = yes
 								try{
-									csvparser.parseFile(file.getAbsolutePath());
+									csvparser.parseFile(file.getAbsolutePath(), "test.db");
 								} catch(SQLException e){
 									textArea.append("Unable to add " + file.getName() + " due to an error updating the database \n");
 									error = true;

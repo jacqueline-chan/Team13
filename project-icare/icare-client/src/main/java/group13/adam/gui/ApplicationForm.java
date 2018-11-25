@@ -143,7 +143,7 @@ public class ApplicationForm extends JPanel {
 	  }
 	  InsertFormDB insertform = new InsertFormDB();
 	  try {
-		insertform.insert(fieldsString);
+		insertform.insert(fieldsString, "test.db");
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();

@@ -65,7 +65,7 @@ public class CSVParserTest {
 	@DisplayName("testing a CSV file that does not exist")
 	void testNoMessage() {
 		assertThrows(IOException.class, ()->{
-			testParser.parseFile("doesnotexist.txt");
+			testParser.parseFile("doesnotexist.txt", "testdb.db");
 		}, "exception was thrown for a non-existant CSV file");
 	}
 	
