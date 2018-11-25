@@ -6,6 +6,14 @@ To setup the empty Database
 1. navigate to ~/Team13/project-icare/icare-db
 2. run sqlite3 test.db < sql/SetupTableBlank.sql
 
+To setup the demo Login Database
+1. navigate to ~/Team13/project-icare/icare-db
+2. run sqlite3 login.db < sql/SetupLoginTable.sql
+
+To setup the empty Login Database
+1. navigate to ~/Team13/project-icare/icare-db
+2. run sqlite3 login.db < sql/SetupLoginTableBlank.sql
+
 To run the client GUI (for submitting info to the DB)
 
 1. clone the git repository
