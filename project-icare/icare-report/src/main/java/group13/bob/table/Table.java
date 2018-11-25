@@ -138,79 +138,17 @@ public class Table extends JFrame {
       }
     });
     
-//    signUpTemplate = new JButton("Create Other User Accounts");
-//    signUpTemplate.addActionListener(new ActionListener() {
-//        public void actionPerformed(ActionEvent e) {
-//    		try {
-//    	        SignUp signup = new SignUp();
-//    	        signup.showlevels();
-//    	        signup.setVisible(true);
-//    		} catch (Exception error) {
-//    			error.printStackTrace();
-//    		}
-//        }
-//      });
-    
     backButton.addActionListener(new ActionListener() {
     	public void actionPerformed(ActionEvent e){
     		dispose();
     	}
     });
-    
-    /*JButton getTemplate = new JButton("Get an existing template");
-    getTemplate.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
-        FileManager.getFile(true);
-      }
-    });
-    templatePanel.add(getTemplate);*/
+
     templatePanel.add(createTemplate);
-    //templatePanel.add(signUpTemplate);
     templatePanel.add(backButton);
-//    checklevel(contentPane);
-//    setlevel();
+
     add(templatePanel, BorderLayout.PAGE_END);
   }
-  
-//  public void checklevel(Component contentPane){ // TEMPORARY FUNCTION TO MAKE USER LEVELS WORK, SHOULD call a function that changes the level of the user
-//	  //else if (function returns level == 2){
-//	  //} else {function retusn  (level == 3) default
-//	  Object[] possibilities = {"admin", "intermediate", "basic"};
-//	  String s = (String)JOptionPane.showInputDialog(contentPane,
-//			  "Select user level:\n",
-//	                      "Customized Dialog",
-//	                      JOptionPane.PLAIN_MESSAGE,
-//	                      null, possibilities,null);
-//
-//	  //If a string was returned, say so.
-//	  if ((s != null) && (s.length() > 0)) {
-//		  System.out.println("user level: " + s);
-//		  if (s.equals("admin")) {
-//			  level=1;
-//		  } else if (s.equals("intermediate")){
-//			  level=2;
-//		  } else { // default to basic
-//			  level=3;
-//		  }
-//	  } else { 	  //If you're here, the return value was null/empty.
-//		  level=3; //default to basic
-//	  }
-//  }
-//
-//  
-//  public void setlevel(){
-//	  if (level==1){
-//		  createTemplate.setVisible(true);
-//		  modifyTemplate.setVisible(true);
-//	  }
-//	  else if (level == 2){
-//		  createTemplate.setVisible(false);
-//		  modifyTemplate.setVisible(true);
-//	  } else { // (level == 3) default
-//		  createTemplate.setVisible(false);
-//		  modifyTemplate.setVisible(false);
-//	  }
-//  }
   
 
 }
