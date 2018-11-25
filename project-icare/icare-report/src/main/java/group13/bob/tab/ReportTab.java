@@ -11,7 +11,6 @@ import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
 import java.util.HashMap;
 
 
@@ -25,40 +24,11 @@ public class ReportTab extends JFrame {
   private final int defaultWidth = 200;
   private String[] emptyValue = {"", "", "", ""};
   private String[][][] fields;
-  private String topLanguages = "Top 10 Language of Service:";
-  private String perferredOfficialLanguage = "Perferred Official Language:";
-  private String referredBy = "Referred By";
-  private String totalCounts =
-      "                          Total Counts(all clients)";
   private JButton plus;
 
   // this is how the data should look like when extract data from database
   private String[] dateRange =
       new String[] {"", "2013", "2014", "2015", "2016", "2017", "2018"};
-  private String[][] topLanguagesTestValues =
-      {{"English", "10", "20", "30", "40", "50", "60"},
-          {"English", "10", "20", "30", "40", "50", "60"},
-          {"English", "10", "20", "30", "40", "50", "60"},
-          {"English", "10", "20", "30", "40", "50", "60"},
-          {"English", "10", "20", "30", "40", "50", "60"},
-          {"English", "10", "20", "30", "40", "50", "60"},
-          {"English", "10", "20", "30", "40", "50", "60"},
-          {"English", "10", "20", "30", "40", "50", "60"},
-          {"English", "10", "20", "30", "40", "50", "60"},
-          {"English", "10", "20", "30", "40", "50", "60"},
-          {"English", "10", "20", "30", "40", "50", "60"}};
-  private String[][] perferredLanguageTestValues =
-      {{"English", "10", "20", "30", "40", "50", "60"},
-          {"French", "10", "20", "30", "40", "50", "60"},
-          {"Unknown", "10", "20", "30", "40", "50", "60"}};
-  private String[][] referredByTestValues =
-      {{"English", "10", "20", "30", "40", "50", "60"},
-          {"French", "10", "20", "30", "40", "50", "60"},
-          {"Unknown", "10", "20", "30", "40", "50", "60"}};
-  private String[][] totalCountsTestForTopLanguagesValues =
-      {{"500", "600", "700", "800", "40", "50", "60"}};
-  private String[][] totalCountsTestForPerferredLanguagesValues =
-      {{"5000", "6000", "7000", "8000", "400", "500", "600"}};
 
   public void runReportTab() {
     lastTab = 2;
@@ -68,28 +38,6 @@ public class ReportTab extends JFrame {
     setBounds(0, 0, (int) screenSize.getWidth(), (int) screenSize.getHeight());
     setBounds(200, 100, 1518, 878);
     setLayout(null);
-
-  /*  int n = dateRange.length - 1;
-    String[] sampleRange = new String[n];
-    System.arraycopy(dateRange, 1, sampleRange, 0, n);
-
-    topLanguagesTestValues = TableConstructor.getTopTableFromRanges(sampleRange,
-        "InfoForum", "language_of_service", 10);
-    perferredLanguageTestValues = TableConstructor.getTopTableFromRanges(
-        sampleRange, "InfoForum", "official_language_of_preference", 4);
-    referredByTestValues = TableConstructor.getTopTableFromRanges(sampleRange,
-        "InfoForum", "referred_by", 3);
-
-    JButton showTable = new JButton("Show Table");
-    showTable.addActionListener(new ActionListener() {
-
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
-        lauchTableGui();
-      }
-    });*/
-
 
     JLabel label = new JLabel("This is Report1");
     label.setHorizontalAlignment(SwingConstants.CENTER);
@@ -174,19 +122,17 @@ public class ReportTab extends JFrame {
     fields = new String[fieldNames.length][][];
     HashMap<String, String> infoMap = (new FormArray()).getInfoMap();
     for (int index = 0; index < fieldNames.length; index++) {
-     // System.out.println(fieldNames[index]);
+
       this.fields[index] = TableConstructor.getTopTableFromRanges(sampleRange,
           "InfoForum", infoMap.get(fieldNames[index]), 5);
-      //System.out.println("Number: "+this.fields[index].length);
-      totalNumberOfRows = totalNumberOfRows + this.fields[index].length + 3;
+
+      totalNumberOfRows = totalNumberOfRows + this.fields[index].length + 2;
     }
     totalNumberOfRows--;
     createTable(totalNumberOfRows);
-    //System.out.println("Number:" + totalNumberOfRows);
+
 
     JScrollPane scrollPane = new JScrollPane();
-
-    // int topLanguageRow, col, perferredLanguageRow, referRow;
 
     // Let table be not editable
 
@@ -195,7 +141,7 @@ public class ReportTab extends JFrame {
     System.out.println(fieldNames.length);
     while (numFields < fieldNames.length) {
       // Initialize the tile of first part of the report (Top 10 Languages)
-      reportTable.setValueAt("Top " + fieldNames[numFields] + " results", totRow, 0);
+      reportTable.setValueAt("Top " + fieldNames[numFields] + " Results", totRow, 0);
       totRow++;
       // Put related data into the table by given a range of number of rows
       for (int row = 0; row < fields[numFields].length; row++) {
@@ -205,9 +151,7 @@ public class ReportTab extends JFrame {
         totRow++;
       }
       // Initialize total counts of top languages
-      reportTable.setValueAt(totalCounts, totRow, 0);
-      addTotalCountsData(totRow, totalCountsTestForTopLanguagesValues);
-      totRow = totRow + 2;
+      totRow = totRow + 1;
       numFields++;
     }
     scrollPane.setViewportView(reportTable);
@@ -254,10 +198,5 @@ public class ReportTab extends JFrame {
     tab.setTabComponentAt(lastTab, plus);
   }
 
-  public static void main(String[] args) {
-    ReportTab frame = new ReportTab();
-    frame.runReportTab();
-    frame.setVisible(true);
-  }
 }
 

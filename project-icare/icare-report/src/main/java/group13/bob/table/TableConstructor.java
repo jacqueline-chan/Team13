@@ -16,16 +16,14 @@ public class TableConstructor {
         String[][] constructedTable;
         String[] Table = {tableColumn};
         Connection conn = SqlConnect.connect();
-        String[][] top10Table;
+
         String startDateRange = dateRange[0] + "-01-01";
         String endDateRange = dateRange[dateRange.length - 1] + "-12-31";
 
         String[][] rawTable = (SqlQuery.queryTemplate(conn, formName, Table, startDateRange, endDateRange)).get(0);
 
-        //String sqlQuery = "SELECT COUNT(unique_identifier) FROM InfoForum WHERE Start_Date_of_Service BETWEEN \""+startDateRange+"\" AND \""+endDateRange+"\"";
-        //String topTable[][] = SqlQuery.queryStatement(conn, sqlQuery);
         System.out.print("rawTable.length: " + rawTable.length);
-        if (rawTable.length < topNum){
+        if (rawTable.length < topNum) {
             topNum = rawTable.length;
             System.out.print("top Num: " + topNum);
         }
@@ -37,17 +35,26 @@ public class TableConstructor {
             String endDate = dateRangeYear + "-12-31";
             String[][] yearTable = (SqlQuery.queryTemplate(conn, formName, Table, startDate, endDate)).get(0);
 
-            if (yearTable.length > 1){
+            if (yearTable.length > 1) {
                 for (int i = 0; i < yearTable.length; i++) {
 
                     int rowNum = languageHashMap.get(yearTable[i][1]);
-                    if (rowNum < topNum){
+                    if (rowNum < topNum) {
                         constructedTable[rowNum][coloumnNum] = yearTable[i][0];
-                    } else{
-                        int otherInteger = Integer.parseInt(constructedTable[topNum][coloumnNum]);
-                        otherInteger += Integer.parseInt(yearTable[i][0]);
-                        constructedTable[topNum][coloumnNum] = String.valueOf(otherInteger);
+                    } else {
+                        if (rawTable.length > topNum) {
+                            int otherInteger = Integer.parseInt(constructedTable[topNum][coloumnNum]);
+                            otherInteger += Integer.parseInt(yearTable[i][0]);
+                            constructedTable[topNum][coloumnNum] = String.valueOf(otherInteger);
+                        }
                     }
+                    int otherColumn = 0;
+                    if (rawTable.length > topNum) {
+                        otherColumn = 1;
+                    }
+                    int totalInteger = Integer.parseInt(constructedTable[topNum + otherColumn][coloumnNum]);
+                    totalInteger += Integer.parseInt(yearTable[i][0]);
+                    constructedTable[topNum + otherColumn][coloumnNum] = String.valueOf(totalInteger);
                 }
             }
             coloumnNum++;
@@ -57,22 +64,32 @@ public class TableConstructor {
     }
 
     private static String[][] constructTopTable(int topNum, int columnNum, String[][] rawTable) {
-        String[][] topTable = new String[topNum + 1][columnNum];
+        int includeOthers = 1;
+        int topAmount = 0;
+
+        if (rawTable.length > topNum) {
+            includeOthers = 2;
+        }
+        String[][] topTable = new String[topNum + includeOthers][columnNum];
         for (String[] row : topTable) {
             Arrays.fill(row, "0");
         }
-        int topAmount = 0;
-        int otherAmount = 0;
+
         for (int i = 0; i < topNum; i++) {
             topTable[i][0] = rawTable[i][1];
             languageHashMap.put(rawTable[i][1], i);
             topAmount += Integer.parseInt(rawTable[i][0]);
         }
         for (int i = topNum; i < rawTable.length; i++) {
-            //otherAmount += Integer.parseInt(rawTable[i][1]);
             languageHashMap.put(rawTable[i][1], i);
         }
-        topTable[topNum][0] = "Others";
+
+        if (rawTable.length > topNum) {
+            topTable[topNum][0] = "Others";
+            topTable[topNum + 1][0] = "Total";
+        } else {
+            topTable[topNum][0] = "Total";
+        }
         return topTable;
     }
 }
