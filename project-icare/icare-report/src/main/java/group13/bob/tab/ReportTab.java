@@ -21,17 +21,12 @@ public class ReportTab extends JFrame {
   private JTable reportTable;
   private TableColumn column;
   private int lastTab;
-  private final int WIDTH = 1518;
-  private final int defaultWidth = 200;
   private String[] emptyValue = {"", "", "", ""};
   private String[][][] fields;
-  private String topLanguages = "Top 10 Language of Service:";
-  private String perferredOfficialLanguage = "Perferred Official Language:";
-  private String referredBy = "Referred By";
   private String totalCounts =
       "                          Total Counts(all clients)";
   private JButton plus;
-
+  private JButton importButton;
   // this is how the data should look like when extract data from database
   private String[] dateRange =
       new String[] {"", "2013", "2014", "2015", "2016", "2017", "2018"};
@@ -61,35 +56,22 @@ public class ReportTab extends JFrame {
       {{"5000", "6000", "7000", "8000", "400", "500", "600"}};
 
   public void runReportTab() {
-    lastTab = 2;
+    importButton = new JButton("Import a template");
+    importButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        
+      }
+    });
+    tab.addTab(null, null, null, "Click to import an existing template");
+    tab.setTabComponentAt(0, importButton);
+    lastTab = 3;
     plus = new JButton("+");
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     setTitle("Report Tabs");
     setBounds(0, 0, (int) screenSize.getWidth(), (int) screenSize.getHeight());
     setBounds(200, 100, 1518, 878);
     setLayout(null);
-
-  /*  int n = dateRange.length - 1;
-    String[] sampleRange = new String[n];
-    System.arraycopy(dateRange, 1, sampleRange, 0, n);
-
-    topLanguagesTestValues = TableConstructor.getTopTableFromRanges(sampleRange,
-        "InfoForum", "language_of_service", 10);
-    perferredLanguageTestValues = TableConstructor.getTopTableFromRanges(
-        sampleRange, "InfoForum", "official_language_of_preference", 4);
-    referredByTestValues = TableConstructor.getTopTableFromRanges(sampleRange,
-        "InfoForum", "referred_by", 3);
-
-    JButton showTable = new JButton("Show Table");
-    showTable.addActionListener(new ActionListener() {
-
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
-        lauchTableGui();
-      }
-    });*/
-
 
     JLabel label = new JLabel("This is Report1");
     label.setHorizontalAlignment(SwingConstants.CENTER);
