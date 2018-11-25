@@ -1,6 +1,7 @@
 package group13.bob.sqlite;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,6 +11,7 @@ import java.sql.Statement;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -57,4 +59,11 @@ public class SqlQueryTest {
 		String[][] result = SqlQuery.selectAll(conn, "InfoForum");
 		assertEquals(result.length, 0);
 	}
+	
+	@AfterAll
+	static void deletedb(){
+		File file = new File("../icare-db/testdb.db");
+		file.delete();
+	}
+	
 }
