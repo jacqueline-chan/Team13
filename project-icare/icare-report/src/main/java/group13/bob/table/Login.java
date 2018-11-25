@@ -95,6 +95,16 @@ public class Login extends JFrame {
         }
     }
 
+    public boolean checkIfUserExists(String username){
+        boolean userExists = false;
+        Connection conn = SqlConnect.connect(DBLOGINLOCATION);
+        String[][] loginInfo = SqlQuery.queryStatement(conn, "SELECT * FROM Login WHERE username=\'" + username + "\'");
+        if (loginInfo.length == 0) {
+            userExists = true;
+        }
+        return userExists;
+    }
+
     protected void unsuccessfulLoginDialog() {
         JOptionPane.showMessageDialog(panel, "Login Not Found");
 
