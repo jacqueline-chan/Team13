@@ -128,48 +128,8 @@ public class Table extends JFrame {
     contentPane.add(scrollPane, BorderLayout.CENTER);
     setContentPane(contentPane);
     
-    // Add the button for template.
-    JPanel templatePanel = new JPanel(new GridLayout(0, 1));
-    createTemplate = new JButton("Create a new template");
-    modifyTemplate = new JButton("Modify an existing template");
-    JButton backButton = new JButton("Close");
-    
-    createTemplate.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
-        // ReportTemplates.CreateTemplatePopUp();
-      }
-    });
-    
-    modifyTemplate.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-    		try {
-    	        ModifyReportTemplate modify = new ModifyReportTemplate();
-    	        modify.setVisible(true);
-    		} catch (Exception error) {
-    			error.printStackTrace();
-    		}
-        }
-      });
-    
-    backButton.addActionListener(new ActionListener() {
-    	public void actionPerformed(ActionEvent e){
-    		dispose();
-    	}
-    });
-    
-    /*JButton getTemplate = new JButton("Get an existing template");
-    getTemplate.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
-        FileManager.getFile(true);
-      }
-    });
-    templatePanel.add(getTemplate);*/
-    templatePanel.add(createTemplate);
-    templatePanel.add(modifyTemplate);
-    templatePanel.add(backButton);
-    checklevel(contentPane);
-    setlevel();
-    add(templatePanel, BorderLayout.PAGE_END);
+//    checklevel(contentPane);
+//    setlevel();
   }
   
   public void checklevel(Component contentPane){ // TEMPORARY FUNCTION TO MAKE USER LEVELS WORK, SHOULD call a function that changes the level of the user

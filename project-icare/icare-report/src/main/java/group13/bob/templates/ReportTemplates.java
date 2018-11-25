@@ -16,7 +16,8 @@ import java.io.IOException;
 import javax.swing.*;
 
 public class ReportTemplates {
-  private static String[] columns = FormArray.getColumnNames();
+  
+  private static String[] columns = (new FormArray()).getColumnNames();
   private static boolean[] includedInTemplate;
   private static JFrame templateFrame;
   private static boolean fieldsSelected;

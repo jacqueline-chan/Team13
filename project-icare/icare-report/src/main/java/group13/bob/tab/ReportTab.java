@@ -2,6 +2,7 @@ package group13.bob.tab;
 
 import group13.bob.table.Table;
 import group13.bob.table.TableConstructor;
+import group13.bob.templates.FormArray;
 import group13.bob.templates.ReportTemplates;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -11,6 +12,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
+import java.util.HashMap;
 
 
 public class ReportTab extends JFrame {
@@ -67,7 +69,7 @@ public class ReportTab extends JFrame {
     setBounds(200, 100, 1518, 878);
     setLayout(null);
 
-    int n = dateRange.length - 1;
+  /*  int n = dateRange.length - 1;
     String[] sampleRange = new String[n];
     System.arraycopy(dateRange, 1, sampleRange, 0, n);
 
@@ -86,7 +88,7 @@ public class ReportTab extends JFrame {
         // TODO Auto-generated method stub
         lauchTableGui();
       }
-    });;
+    });*/
 
 
     JLabel label = new JLabel("This is Report1");
@@ -95,8 +97,16 @@ public class ReportTab extends JFrame {
     report.setBorder(new EmptyBorder(5, 5, 5, 5));
     report.setLayout(new BorderLayout());
     tab.addTab("report1", null, report, "First");
-    populateTable(new String[] {"language_of_service", "official_language_of_preference", "referred_by"}
+    populateTable(new String[] {"Language of Service", "Official Language of Preference", "Referred By"}
     , "report1", report);
+    JButton tableButton = new JButton("show table");
+    tableButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        launchTableGui();
+      }
+    });
+    report.add(tableButton, BorderLayout.PAGE_END);
     JPanel report2 = new JPanel();
     tab.addTab("report2", null, report2, "second");
 
@@ -162,10 +172,11 @@ public class ReportTab extends JFrame {
     System.arraycopy(dateRange, 1, sampleRange, 0, n);
     int totalNumberOfRows = 0;
     fields = new String[fieldNames.length][][];
+    HashMap<String, String> infoMap = (new FormArray()).getInfoMap();
     for (int index = 0; index < fieldNames.length; index++) {
      // System.out.println(fieldNames[index]);
       this.fields[index] = TableConstructor.getTopTableFromRanges(sampleRange,
-          "InfoForum", fieldNames[index], 5);
+          "InfoForum", infoMap.get(fieldNames[index]), 5);
       //System.out.println("Number: "+this.fields[index].length);
       totalNumberOfRows = totalNumberOfRows + this.fields[index].length + 3;
     }
@@ -199,20 +210,6 @@ public class ReportTab extends JFrame {
       totRow = totRow + 2;
       numFields++;
     }
-    /*
-     * // Initialize the second part of the report which is preferred official
-     * languages reportTable.setValueAt(perferredOfficialLanguage,
-     * topLanguageRow + 1, 0); perferredLanguageRow =
-     * setReportValue(topLanguageRow, perferredLanguageTestValues); //
-     * Initialize total counts of preferred official languages
-     * reportTable.setValueAt(totalCounts, perferredLanguageRow, 0);
-     * addTotalCountsData(perferredLanguageRow,
-     * totalCountsTestForPerferredLanguagesValues);
-     * 
-     * // Initialize refer by part reportTable.setValueAt(referredBy,
-     * perferredLanguageRow + 1, 0); referRow =
-     * setReportValue(perferredLanguageRow, perferredLanguageTestValues); }
-     */
     scrollPane.setViewportView(reportTable);
     report.add(scrollPane, BorderLayout.CENTER);
     numFields++;
@@ -242,7 +239,7 @@ public class ReportTab extends JFrame {
     return endRowNumber;
   }
 
-  protected void lauchTableGui() {
+  protected void launchTableGui() {
     try {
       Table frame = new Table();
       frame.setVisible(true);
