@@ -103,8 +103,8 @@ public class SqlQuery {
         }
     }
 
-    public void deleteLoginUser(Connection conn, String username) {
-        String sql = "DELETE FROM warehouses WHERE id = ?";
+    public static void deleteLoginUser(Connection conn, String username) {
+        String sql = "DELETE FROM Login WHERE username = ?";
 
         try (
              PreparedStatement pstmt = conn.prepareStatement(sql)
