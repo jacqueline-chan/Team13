@@ -24,7 +24,7 @@ public class Buttons {
 	
 	public JButton createSignUpButton(JPanel container){
 	    JButton signUpButton=new JButton("SIGN UP");
-	    signUpButton.setBounds(200,500,100,30);
+	    signUpButton.setBounds(200,490,100,30);
 	    container.add(signUpButton);
 	    return signUpButton;
 
@@ -32,15 +32,15 @@ public class Buttons {
 	
 	public JButton createSubmitButton(JPanel container){
 	    JButton submitButton=new JButton("SUBMIT");
-	    submitButton.setBounds(200,500,100,30);
+	    submitButton.setBounds(75,490,100,30);
 	    container.add(submitButton);
 	    return submitButton;
 
 	}
 	
 	public JButton createBackButton(JPanel container){
-	    JButton backButton=new JButton("BACK TO LOGIN");
-	    backButton.setBounds(185,450,130,30);
+	    JButton backButton=new JButton("CANCEL");
+	    backButton.setBounds(200,490,100,30);
 	    container.add(backButton);
 	    return backButton;
 

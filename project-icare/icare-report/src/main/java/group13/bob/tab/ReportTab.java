@@ -1,5 +1,7 @@
 package group13.bob.tab;
 
+import group13.bob.table.DeleteUser;
+import group13.bob.table.SignUp;
 import group13.bob.table.Table;
 import group13.bob.table.TableConstructor;
 
@@ -29,6 +31,8 @@ public class ReportTab extends JFrame {
     private int level; // 1 is admin, 2 is intermediate, 3 is basic
     JButton showTable;
     JPanel plus;
+    private JButton signUpTemplate;
+    private JButton deleteUserTemplate;
 
     // this is how the data should look like when extract data from database
     private String[] dateRange = new String[]{"", "2013","2014", "2015", "2016", "2017", "2018"};
@@ -123,6 +127,32 @@ public class ReportTab extends JFrame {
 
         scrollPane.setViewportView(reportTable);
         report1.add(scrollPane, BorderLayout.CENTER);
+        
+        
+        signUpTemplate = new JButton("Create Other User Accounts");
+        signUpTemplate.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+        		try {
+        	        SignUp signup = new SignUp();
+        	        signup.showlevels();
+        	        signup.setVisible(true);
+        		} catch (Exception error) {
+        			error.printStackTrace();
+        		}
+            }
+          });
+        
+        deleteUserTemplate = new JButton("Delete User Accounts");
+        deleteUserTemplate.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+        		try {
+        	        DeleteUser delete = new DeleteUser();
+        	        delete.setVisible(true);
+        		} catch (Exception error) {
+        			error.printStackTrace();
+        		}
+            }
+          });
 
         showTable = new JButton("Show Table");
         showTable.addActionListener(new ActionListener() {
@@ -132,9 +162,18 @@ public class ReportTab extends JFrame {
                 // TODO Auto-generated method stub
                 lauchTableGui();
             }
-        }); ;
-        report1.add(showTable, BorderLayout.SOUTH);
-
+        }); 
+        
+        JPanel templatePanel = new JPanel(new GridLayout(0, 1));
+        templatePanel.add(showTable);
+        templatePanel.add(signUpTemplate);
+        templatePanel.add(deleteUserTemplate);
+        
+        report1.add(templatePanel, BorderLayout.PAGE_END);
+        
+//        report1.add(showTable, BorderLayout.SOUTH);
+//        report1.add(signUpTemplate, BorderLayout.SOUTH);
+        
         JLabel label = new JLabel("This is Report1");
         label.setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -198,11 +237,17 @@ public class ReportTab extends JFrame {
     public void setlevel(){
   	  if (level==1){
   		  showTable.setVisible(true);
+  		  signUpTemplate.setVisible(true);
+  		  deleteUserTemplate.setVisible(true);
   	  }
   	  else if (level == 2){
   		  showTable.setVisible(false);
+  		  signUpTemplate.setVisible(false);
+  		  deleteUserTemplate.setVisible(false);
   	  } else { // (level == 3) default
   		  showTable.setVisible(false);
+  		  signUpTemplate.setVisible(false);
+  		  deleteUserTemplate.setVisible(false); 		  
   		  tab.remove(plus);;
   	  }
     }

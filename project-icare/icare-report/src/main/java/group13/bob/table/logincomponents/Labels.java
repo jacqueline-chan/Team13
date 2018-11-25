@@ -51,5 +51,12 @@ public class Labels {
 		labelpic.setBounds(35,0,300,300);
 		panel.add(labelpic);
 	}
+
+	public JLabel levelLabel(JPanel container) {
+	    JLabel levelLabel=new JLabel("LEVEL");
+	    levelLabel.setBounds(75,450,100,30);
+	    container.add(levelLabel);
+	    return levelLabel;
+	}
 	
 }

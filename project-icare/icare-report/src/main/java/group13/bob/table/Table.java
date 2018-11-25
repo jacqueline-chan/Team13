@@ -26,7 +26,7 @@ public class Table extends JFrame {
   
 //  private int level; // 1 is admin, 2 is intermediate, 3 is basic
   private JButton createTemplate;
-  //private JButton modifyTemplate;
+  //private JButton signUpTemplate;
 
   private static final String[] columnNames = {"Unique Identifier",
       "Date of Birth    (YYYY-MM-DD)",
@@ -138,6 +138,19 @@ public class Table extends JFrame {
       }
     });
     
+//    signUpTemplate = new JButton("Create Other User Accounts");
+//    signUpTemplate.addActionListener(new ActionListener() {
+//        public void actionPerformed(ActionEvent e) {
+//    		try {
+//    	        SignUp signup = new SignUp();
+//    	        signup.showlevels();
+//    	        signup.setVisible(true);
+//    		} catch (Exception error) {
+//    			error.printStackTrace();
+//    		}
+//        }
+//      });
+    
     backButton.addActionListener(new ActionListener() {
     	public void actionPerformed(ActionEvent e){
     		dispose();
@@ -152,6 +165,7 @@ public class Table extends JFrame {
     });
     templatePanel.add(getTemplate);*/
     templatePanel.add(createTemplate);
+    //templatePanel.add(signUpTemplate);
     templatePanel.add(backButton);
 //    checklevel(contentPane);
 //    setlevel();

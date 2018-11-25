@@ -48,6 +48,7 @@ public class Login extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 try {
                     SignUp frame = new SignUp();
+                    frame.hidelevels();
                     frame.setVisible(true);
                 } catch (Exception error) {
                     error.printStackTrace();
