@@ -16,6 +16,7 @@ import java.io.IOException;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import group13.bob.tab.ReportTab;
@@ -24,8 +25,6 @@ public class FileManager {
   private static String[] fields;
   
   private static String[] getFromFile(String name) throws IOException {
-    System.out.println(name);
-    try {
       FileReader fr = new FileReader(name);
       BufferedReader br = new BufferedReader(fr);
       int numFields = Integer.parseInt(br.readLine());
@@ -36,10 +35,7 @@ public class FileManager {
       fr.close();
       br.close();
       return fields;
-    } catch (IOException e) {
-      return new String[] {"Something is wrong"};
     }
-  }
   
   private static void createFile(String name, String[] fields) throws IOException {
     BufferedWriter temp = new BufferedWriter(new FileWriter(name));
@@ -86,7 +82,9 @@ public class FileManager {
             fields = getFromFile(genPopUp.getFileName());
             tab.setNewTab(genPopUp.getFileName(), fields);
           } catch (IOException e1) {
-            System.out.println("Something is wrong");
+            String message = genPopUp.getFileName() + " does not exist";
+            JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",
+                JOptionPane.ERROR_MESSAGE);
           }
           genFrame.dispose();
         }

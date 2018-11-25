@@ -39,7 +39,7 @@ public class ReportTab extends JFrame {
         FileManager.getFile(temp);
       }
     });
-    lastTab = 2;
+    lastTab = 0;
     plus = new JButton("+");
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     setTitle("Report Tabs");
@@ -63,11 +63,6 @@ public class ReportTab extends JFrame {
       }
     });
     report.add(tableButton, BorderLayout.PAGE_END);
-    JPanel report2 = new JPanel();
-    tab.addTab("report2", null, report2, "second");
-
-    JPanel report3 = new JPanel();
-    tab.addTab("report3", null, report3, "third");
 
     // Add the plus button to the tabs.
     plus.addActionListener(new ActionListener() {
