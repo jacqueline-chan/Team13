@@ -1,5 +1,7 @@
 package group13.bob.tab;
 
+import group13.bob.table.DeleteUser;
+import group13.bob.table.SignUp;
 import group13.bob.table.Table;
 import group13.bob.table.TableConstructor;
 import group13.bob.templates.FormArray;
@@ -16,6 +18,9 @@ import group13.bob.files.*;
 
 public class ReportTab extends JFrame {
 
+  private String accessLevel = "";
+  private int level; // 1 is admin, 2 is intermediate, 3 is basic
+
   private JTabbedPane tab = new JTabbedPane();
   private JTable reportTable;
   private TableColumn column;
@@ -26,11 +31,16 @@ public class ReportTab extends JFrame {
       "                          Total Counts(all clients)";
   private JButton plus;
   private JButton importButton;
+  private JButton signUpTemplate;
+  private JButton deleteUserTemplate;
+  JButton tableButton;
+  
   // this is how the data should look like when extract data from database
   private String[] dateRange =
       new String[] {"", "2013", "2014", "2015", "2016", "2017", "2018"};
 
   public void runReportTab() {
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     importButton = new JButton("Import a template");
     ReportTab temp = this;
     importButton.addActionListener(new ActionListener() {
@@ -55,14 +65,45 @@ public class ReportTab extends JFrame {
     tab.addTab("report1", null, report, "First");
     populateTable(new String[] {"Language of Service", "Official Language of Preference", "Referred By"}
     , "report1", report);
-    JButton tableButton = new JButton("show table");
+    tableButton = new JButton("Show Table");
     tableButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
         launchTableGui();
       }
     });
-    report.add(tableButton, BorderLayout.PAGE_END);
+    
+    signUpTemplate = new JButton("Create Other User Accounts");
+    signUpTemplate.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+    		try {
+    	        SignUp signup = new SignUp();
+    	        signup.showlevels();
+    	        signup.setVisible(true);
+    		} catch (Exception error) {
+    			error.printStackTrace();
+    		}
+        }
+      });
+    
+    deleteUserTemplate = new JButton("Delete User Accounts");
+    deleteUserTemplate.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+    		try {
+    	        DeleteUser delete = new DeleteUser();
+    	        delete.setVisible(true);
+    		} catch (Exception error) {
+    			error.printStackTrace();
+    		}
+        }
+      });
+    
+    JPanel templatePanel = new JPanel(new GridLayout(0, 1));
+    templatePanel.add(tableButton);
+    templatePanel.add(signUpTemplate);
+    templatePanel.add(deleteUserTemplate);
+    
+    report.add(templatePanel, BorderLayout.PAGE_END);
 
     // Add the plus button to the tabs.
     plus.addActionListener(new ActionListener() {
@@ -77,6 +118,10 @@ public class ReportTab extends JFrame {
 
     tab.setSelectedIndex(0);
     setLayout(new GridLayout(1, 1));
+    
+    checklevel(this);
+    setlevel();
+
     add(tab);
   }
 
@@ -133,8 +178,7 @@ public class ReportTab extends JFrame {
     }
     totalNumberOfRows--;
     createTable(totalNumberOfRows);
-
-
+    
     JScrollPane scrollPane = new JScrollPane();
 
     // Let table be not editable
@@ -185,6 +229,10 @@ public class ReportTab extends JFrame {
     endRowNumber = startRowNumber;
     return endRowNumber;
   }
+  
+  public void setAccessLevel(String accessLevel) {
+      this.accessLevel = accessLevel;
+  }
 
   protected void launchTableGui() {
     try {
@@ -203,6 +251,46 @@ public class ReportTab extends JFrame {
     lastTab++;
     tab.setTabComponentAt(lastTab, plus);
   }
+  
+  public void checklevel(Component contentPane){ // TEMPORARY FUNCTION TO MAKE USER LEVELS WORK, SHOULD call a function that changes the level of the user
+  	  String s = this.accessLevel;
+  	  //If a string was returned, say so.
+  	  if ((s != null) && (s.length() > 0)) {
+  		  System.out.println("user level: " + s);
+  		  if (s.equals("ADMIN")) {
+  			  level=1;
+  		  } else if (s.equals("MODERATOR")){
+  			  level=2;
+  		  } else { // default to basic
+  			  level=3;
+  		  }
+  	  } else { 	  //If you're here, the return value was null/empty.
+  		  level=3; //default to basic
+  	  }
+    }
+  
+  public void setlevel(){
+  	  if (level==1){
+  		  tableButton.setVisible(true);
+  		  signUpTemplate.setVisible(true);
+  		  deleteUserTemplate.setVisible(true);
+  		  importButton.setVisible(true);
+  	  }
+  	  else if (level == 2){
+  		  tableButton.setVisible(false);
+  		  signUpTemplate.setVisible(false);
+  		  deleteUserTemplate.setVisible(false);
+  		  importButton.setVisible(true);
+
+  	  } else { // (level == 3) default
+  		  tableButton.setVisible(false);
+  		  signUpTemplate.setVisible(false);
+  		  deleteUserTemplate.setVisible(false); 		  
+  		  importButton.setVisible(false);
+  		  plus.setVisible(false);
+
+  	  }
+    }
 
 }
 

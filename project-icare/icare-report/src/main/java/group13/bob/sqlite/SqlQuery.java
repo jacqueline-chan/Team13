@@ -60,7 +60,7 @@ public class SqlQuery {
                     ArrayList<String> currentRow = new ArrayList();
 
                     for (int columnNum = 1; columnNum <= numOfCol; columnNum++) {
-                        String columnData = String.valueOf (rs.getObject(columnNum));
+                        String columnData = String.valueOf(rs.getObject(columnNum));
                         currentRow.add(columnData);
                     }
                     table.add(toStringArray(currentRow));
@@ -85,5 +85,37 @@ public class SqlQuery {
         String[] stringArray = new String[arrayListString.size()];
         stringArray = arrayListString.toArray(stringArray);
         return stringArray;
+    }
+
+    public static void insertLoginUser(Connection conn, String username, String password, String user_access) {
+
+        String sqlQuery =
+                "INSERT INTO Login (username, password, user_access) values (?,?,?)";
+
+        try (
+             PreparedStatement pstmt = conn.prepareStatement(sqlQuery)) {
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
+            pstmt.setString(3, user_access);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void deleteLoginUser(Connection conn, String username) {
+        String sql = "DELETE FROM Login WHERE username = ?";
+
+        try (
+             PreparedStatement pstmt = conn.prepareStatement(sql)
+        ) {
+            // set the corresponding param
+            pstmt.setString(1, username);
+            // execute the delete statement
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
