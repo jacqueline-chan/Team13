@@ -27,8 +27,6 @@ public class ReportTab extends JFrame {
   private int lastTab;
   private String[] emptyValue = {"", "", "", ""};
   private String[][][] fields;
-  private String totalCounts =
-      "                          Total Counts(all clients)";
   private JButton plus;
   private JButton importButton;
   private JButton signUpTemplate;
@@ -65,7 +63,7 @@ public class ReportTab extends JFrame {
     tab.addTab("report1", null, report, "First");
     populateTable(new String[] {"Language of Service", "Official Language of Preference", "Referred By"}
     , "report1", report);
-    tableButton = new JButton("Show Table");
+    tableButton = new JButton("Show Raw Table");
     tableButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
