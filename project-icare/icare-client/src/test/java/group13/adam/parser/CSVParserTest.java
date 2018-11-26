@@ -88,7 +88,7 @@ public class CSVParserTest {
 	}
 	
 	@Test
-	@DisplayName("test Insert 50 lines")
+	@DisplayName("test Insert 49 lines")
 	void testMultipleLines() throws SQLException, IOException{
 		testParser.parseFile("./src/test/java/group13/adam/parser/infoforum.csv", "testdb.db");
 		String url = "jdbc:sqlite:../icare-db/testdb.db";
@@ -96,7 +96,7 @@ public class CSVParserTest {
 		Statement st = conn.createStatement();
 		// want to make sure that we have 50 rows in db now
 		ResultSet rs = st.executeQuery("select COUNT(*) from InfoForum");
-		assertEquals(rs.getInt(1), 50);
+		assertEquals(rs.getInt(1), 49);
 		rs.close();
 		st.close();
 		conn.close();
