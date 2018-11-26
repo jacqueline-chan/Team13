@@ -13,33 +13,33 @@ public class ErrorForms {
         Pattern.compile("[0-9]*"));
     regex.put("Number of Clients in Group", Pattern.compile("[0-9]*"));
     regex.put("Directed at a specific Target Group ",
-        Pattern.compile("(Yes)|(No)"));
+        Pattern.compile("(yes)|(no)"));
     regex.put("Target Group: Children (0-14 yrs)",
-        Pattern.compile("(Yes)|(No)"));
-    regex.put("Target Group: Youth (15-24 yrs", Pattern.compile("(Yes)|(No)"));
-    regex.put("Target Group: Seniors", Pattern.compile("(Yes)|(No)"));
-    regex.put("Target Group: Gender-specific", Pattern.compile("(Yes)|(No)"));
-    regex.put("Target Group: Refugees", Pattern.compile("(Yes)|(No)"));
+        Pattern.compile("(yes)|(no)"));
+    regex.put("Target Group: Youth (15-24 yrs", Pattern.compile("(yes)|(no)"));
+    regex.put("Target Group: Seniors", Pattern.compile("(yes)|(no)"));
+    regex.put("Target Group: Gender-specific", Pattern.compile("(yes)|(no)"));
+    regex.put("Target Group: Refugees", Pattern.compile("(yes)|(no)"));
     regex.put("Target Group: Ethnic/cultural/linguistic group",
-        Pattern.compile("(Yes)|(No)"));
+        Pattern.compile("(yes)|(no)"));
     regex.put("Target Group: Deaf or Hard of Hearing",
-        Pattern.compile("(Yes)|(No)"));
+        Pattern.compile("(yes)|(no)"));
     regex.put("Target Group: Blind or Partially Sighted",
-        Pattern.compile("(Yes)|(No)"));
+        Pattern.compile("(yes)|(no)"));
     regex.put(
         "Target Group: Lesbian, Gay, Bisexual, Transgender, Queer (LGBTQ)",
-        Pattern.compile("(Yes)|(No)"));
-    regex.put("Target Group: Families/Parents", Pattern.compile("(Yes)|(No)"));
+        Pattern.compile("(yes)|(no)"));
+    regex.put("Target Group: Families/Parents", Pattern.compile("(yes)|(no)"));
     regex.put("Target Group: Clients with other impairments (physical, mental)",
-        Pattern.compile("(Yes)|(No)"));
+        Pattern.compile("(yes)|(no)"));
     regex.put(
         "Target Group: Clients with international training in a regulated profession",
-        Pattern.compile("(Yes)|(No)"));
+        Pattern.compile("(yes)|(no)"));
     regex.put(
         "Target Group: Clients with international training in a regulated trade",
-        Pattern.compile("(Yes)|(No)"));
+        Pattern.compile("(yes)|(no)"));
     regex.put("Target Group: Official Language minorities",
-        Pattern.compile("(Yes)|(No)"));
+        Pattern.compile("(yes)|(no)"));
     regex.put("Overview of Canada", Pattern.compile(".+"));
     regex.put("Overview of Canada Referrals", Pattern.compile(".+"));
     regex.put("Sources of Information", Pattern.compile(".+"));
@@ -81,7 +81,7 @@ public class ErrorForms {
     regex.put(
         "Rights and Responsibilities of Citizenship (based on discover Canada)",
         Pattern.compile(".+"));
-    regex.put("Care for Newcomer Children", Pattern.compile("(Yes)|(No)"));
+    regex.put("Care for Newcomer Children", Pattern.compile("(yes)|(no)"));
     regex.put("Child 1: Age", Pattern.compile("[(A-Z)|(a-z)]+"));
     regex.put("Child 1: Type of Care", Pattern.compile(".*"));
     regex.put("Child 2: Age", Pattern.compile("[(A-Z)|(a-z)]+"));
@@ -123,11 +123,11 @@ public class ErrorForms {
     regex.put("Services Received", Pattern.compile("[(A-Z)|(a-z)| ]+"));
     regex.put(
         "Was Essential Skills and Aptitude Training Received as Part of this Service?",
-        Pattern.compile("(Yes)|(No)"));
+        Pattern.compile("(yes)|(no)"));
     regex.put(
         "Was Life Skills or Responsibilities of Citizenship Information Received as Part of this Service?",
-        Pattern.compile("(Yes)|(No)"));
-    regex.put("Support Services Received", Pattern.compile("(Yes)|(No)"));
+        Pattern.compile("(yes)|(no)"));
+    regex.put("Support Services Received", Pattern.compile("(yes)|(no)"));
     regex.put("End Date of Service (YYYY-MM-DD)", Pattern.compile(
         "(19|20)[0-9]{2}-((0[1-9])|(1[0-2]))-((0[1-9])|([1-2][0-9])|(3[0-1]))"));
     return regex;
