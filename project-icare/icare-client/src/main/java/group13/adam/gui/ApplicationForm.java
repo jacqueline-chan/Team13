@@ -92,7 +92,7 @@ public class ApplicationForm extends JPanel {
   }
 
   private void goToField(int index) {
-    labels[index].scrollRectToVisible(labels[index].getBounds());
+    fields[index].scrollRectToVisible(labels[index].getBounds());
     fields[index].requestFocusInWindow(); // moves the cursor to the field
     highlightField(index);
   }
