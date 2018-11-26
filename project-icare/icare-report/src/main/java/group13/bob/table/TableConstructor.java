@@ -35,7 +35,7 @@ public class TableConstructor {
             String endDate = dateRangeYear + "-12-31";
             String[][] yearTable = (SqlQuery.queryTemplate(conn, formName, Table, startDate, endDate)).get(0);
 
-            if (yearTable.length > 1) {
+            if (yearTable.length >= 1) {
                 for (int i = 0; i < yearTable.length; i++) {
 
                     int rowNum = languageHashMap.get(yearTable[i][1]);
