@@ -61,19 +61,19 @@ public class Strings {
 	}
 	
 	public void setfondBold(JLabel[] labels){
-		labels[0].setFont(labels[0].getFont().deriveFont(Font.BOLD, 16f)); // unique identifier
-		labels[1].setFont(labels[0].getFont().deriveFont(Font.BOLD, 16f)); // birthdate
-		labels[2].setFont(labels[0].getFont().deriveFont(Font.BOLD, 16f)); // postalcode
-		labels[3].setFont(labels[0].getFont().deriveFont(Font.BOLD, 16f)); // startdate
-		labels[4].setFont(labels[0].getFont().deriveFont(Font.BOLD, 16f)); // language
-		labels[5].setFont(labels[0].getFont().deriveFont(Font.BOLD, 16f)); // official language
-		labels[6].setFont(labels[0].getFont().deriveFont(Font.BOLD, 16f)); // type of orgainization
-		labels[7].setFont(labels[0].getFont().deriveFont(Font.BOLD, 16f)); // referred by
-		labels[8].setFont(labels[0].getFont().deriveFont(Font.BOLD, 16f)); // services received
-		labels[58].setFont(labels[0].getFont().deriveFont(Font.BOLD, 16f)); // was essential skills recieved
-		labels[64].setFont(labels[0].getFont().deriveFont(Font.BOLD, 16f)); // was lifeskills recieved
-		labels[67].setFont(labels[0].getFont().deriveFont(Font.BOLD, 16f)); // was support services recieved
-		labels[88].setFont(labels[0].getFont().deriveFont(Font.BOLD, 16f)); // was lifeskills recieved
+		labels[0].setFont(labels[0].getFont().deriveFont(Font.BOLD, 14f)); // unique identifier
+		labels[1].setFont(labels[0].getFont().deriveFont(Font.BOLD, 14f)); // birthdate
+		labels[2].setFont(labels[0].getFont().deriveFont(Font.BOLD, 14f)); // postalcode
+		labels[3].setFont(labels[0].getFont().deriveFont(Font.BOLD, 14f)); // startdate
+		labels[4].setFont(labels[0].getFont().deriveFont(Font.BOLD, 14f)); // language
+		labels[5].setFont(labels[0].getFont().deriveFont(Font.BOLD, 14f)); // official language
+		labels[6].setFont(labels[0].getFont().deriveFont(Font.BOLD, 14f)); // type of orgainization
+		labels[7].setFont(labels[0].getFont().deriveFont(Font.BOLD, 14f)); // referred by
+		labels[8].setFont(labels[0].getFont().deriveFont(Font.BOLD, 14f)); // services received
+		labels[58].setFont(labels[0].getFont().deriveFont(Font.BOLD, 14f)); // was essential skills recieved
+		labels[64].setFont(labels[0].getFont().deriveFont(Font.BOLD, 14f)); // was lifeskills recieved
+		labels[67].setFont(labels[0].getFont().deriveFont(Font.BOLD, 14f)); // was support services recieved
+		labels[88].setFont(labels[0].getFont().deriveFont(Font.BOLD, 14f)); // was lifeskills recieved
 	}
 
 }
